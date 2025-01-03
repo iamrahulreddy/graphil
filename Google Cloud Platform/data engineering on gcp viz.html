@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="Muskula Rahul"/>
+	<title>Data Engineering On GCP Viz</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#mindmap {
+			display: block;
+			width: 100vw;
+			height: 100vh;
+		}
+	</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/style.css">
+</head>
+
+<body>
+	<svg id="mindmap"></svg>
+	<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17.3-alpha.1/dist/browser/index.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/index.js"></script>
+	<script>
+		(() => {
+			setTimeout(() => {
+				const {
+					markmap: q,
+					mm: N
+				} = window, j = new q.Toolbar;
+				j.attach(N);
+				const we = j.render();
+				we.setAttribute("style", "position:absolute;bottom:20px;right:20px"), document.body.append(we)
+			})
+		})()
+	</script>
+	<script>
+		((u, d, h, f) => {
+			const g = u();
+			window.mm = g.Markmap.create("svg#mindmap", (d || g.deriveOptions)(f), h)
+		})(() => window.markmap, null, {
+			"content": "🌐 Data Engineering on GCP",
+			"children": [{
+				"content": "📥 Ingestion",
+				"children": [{
+					"content": "<strong>Pub/Sub</strong>: 📨 Real-time messaging",
+					"children": [],
+					"payload": {
+						"lines": "3,4"
+					}
+				}, {
+					"content": "<strong>Cloud Storage</strong>: 🗄️ Batch data storage",
+					"children": [],
+					"payload": {
+						"lines": "4,5"
+					}
+				}, {
+					"content": "<strong>Transfer Service</strong>: 🚚 Data migration",
+					"children": [],
+					"payload": {
+						"lines": "5,7"
+					}
+				}],
+				"payload": {
+					"lines": "2,3"
+				}
+			}, {
+				"content": "🔧 Processing",
+				"children": [{
+					"content": "<strong>Dataflow</strong>: 🌊 Stream and batch processing",
+					"children": [],
+					"payload": {
+						"lines": "8,9"
+					}
+				}, {
+					"content": "<strong>Dataproc</strong>: 🐘 Managed Hadoop and Spark",
+					"children": [],
+					"payload": {
+						"lines": "9,10"
+					}
+				}, {
+					"content": "<strong>BigQuery</strong>: 📊 Data warehousing and analytics",
+					"children": [],
+					"payload": {
+						"lines": "10,12"
+					}
+				}],
+				"payload": {
+					"lines": "7,8"
+				}
+			}, {
+				"content": "🗄️ Storage",
+				"children": [{
+					"content": "<strong>Cloud SQL</strong>: 🛢️ Relational databases",
+					"children": [],
+					"payload": {
+						"lines": "13,14"
+					}
+				}, {
+					"content": "<strong>Cloud Spanner</strong>: 🌍 Globally distributed databases",
+					"children": [],
+					"payload": {
+						"lines": "14,15"
+					}
+				}, {
+					"content": "<strong>Cloud Bigtable</strong>: 📚 NoSQL wide-column store",
+					"children": [],
+					"payload": {
+						"lines": "15,17"
+					}
+				}],
+				"payload": {
+					"lines": "12,13"
+				}
+			}, {
+				"content": "📈 Analysis",
+				"children": [{
+					"content": "<strong>BigQuery</strong>: 🔍 SQL analytics",
+					"children": [],
+					"payload": {
+						"lines": "18,19"
+					}
+				}, {
+					"content": "<strong>Data Studio</strong>: 📊 Visualization and reporting",
+					"children": [],
+					"payload": {
+						"lines": "19,20"
+					}
+				}, {
+					"content": "<strong>AI Platform</strong>: 🤖 Machine learning models",
+					"children": [],
+					"payload": {
+						"lines": "20,22"
+					}
+				}],
+				"payload": {
+					"lines": "17,18"
+				}
+			}, {
+				"content": "🕒 Orchestration",
+				"children": [{
+					"content": "<strong>Cloud Composer</strong>: 🎶 Managed Apache Airflow",
+					"children": [],
+					"payload": {
+						"lines": "23,24"
+					}
+				}, {
+					"content": "<strong>Cloud Scheduler</strong>: ⏰ Job scheduling",
+					"children": [],
+					"payload": {
+						"lines": "24,25"
+					}
+				}, {
+					"content": "<strong>Cloud Functions</strong>: ⚡ Serverless compute",
+					"children": [],
+					"payload": {
+						"lines": "25,27"
+					}
+				}],
+				"payload": {
+					"lines": "22,23"
+				}
+			}, {
+				"content": "🔒 Security",
+				"children": [{
+					"content": "<strong>IAM</strong>: 🔐 Identity and Access Management",
+					"children": [],
+					"payload": {
+						"lines": "28,29"
+					}
+				}, {
+					"content": "<strong>Cloud KMS</strong>: 🔑 Key Management Service",
+					"children": [],
+					"payload": {
+						"lines": "29,30"
+					}
+				}, {
+					"content": "<strong>VPC</strong>: 🌐 Virtual Private Cloud",
+					"children": [],
+					"payload": {
+						"lines": "30,32"
+					}
+				}],
+				"payload": {
+					"lines": "27,28"
+				}
+			}, {
+				"content": "🛡️ Monitoring",
+				"children": [{
+					"content": "<strong>Cloud Audit Logs</strong>: 📜 Audit trails",
+					"children": [],
+					"payload": {
+						"lines": "33,34"
+					}
+				}, {
+					"content": "<strong>Cloud Trace</strong>: 🕵️‍♂️ Distributed tracing",
+					"children": [],
+					"payload": {
+						"lines": "34,35"
+					}
+				}],
+				"payload": {
+					"lines": "32,33"
+				}
+			}],
+			"payload": {
+				"lines": "0,1"
+			}
+		}, null)
+	</script>
+</body>
+
+</html>

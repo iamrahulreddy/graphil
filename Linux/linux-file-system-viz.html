@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="Muskula Rahul"/>
+	<title>Linux File System Viz</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#mindmap {
+			display: block;
+			width: 100vw;
+			height: 100vh;
+		}
+	</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/style.css">
+</head>
+
+<body>
+	<svg id="mindmap"></svg>
+	<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17.3-alpha.1/dist/browser/index.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/index.js"></script>
+	<script>
+		(() => {
+			setTimeout(() => {
+				const {
+					markmap: q,
+					mm: v
+				} = window, j = new q.Toolbar;
+				j.attach(v);
+				const we = j.render();
+				we.setAttribute("style", "position:absolute;bottom:20px;right:20px"), document.body.append(we)
+			})
+		})()
+	</script>
+	<script>
+		((f, d, h, u) => {
+			const g = f();
+			window.mm = g.Markmap.create("svg#mindmap", (d || g.deriveOptions)(u), h)
+		})(() => window.markmap, null, {
+			"content": "🌲 Linux Filesystem Hierarchy",
+			"children": [{
+				"content": "📁 Root Directory (/) - System Foundation",
+				"children": [{
+					"content": "🗂️ /bin - Essential Commands",
+					"children": [{
+						"content": "💻 bash (Bourne Again Shell)",
+						"children": [],
+						"payload": {
+							"lines": "4,5"
+						}
+					}, {
+						"content": "📋 ls (List directory contents)",
+						"children": [],
+						"payload": {
+							"lines": "5,6"
+						}
+					}, {
+						"content": "📝 cp (Copy files/directories)",
+						"children": [],
+						"payload": {
+							"lines": "6,7"
+						}
+					}, {
+						"content": "🔄 mv (Move/rename files)",
+						"children": [],
+						"payload": {
+							"lines": "7,8"
+						}
+					}, {
+						"content": "🗑️ rm (Remove files)",
+						"children": [],
+						"payload": {
+							"lines": "8,9"
+						}
+					}, {
+						"content": "🔍 grep (Search text patterns)",
+						"children": [],
+						"payload": {
+							"lines": "9,10"
+						}
+					}, {
+						"content": "📊 ps (Process status)",
+						"children": [],
+						"payload": {
+							"lines": "10,11"
+						}
+					}, {
+						"content": "🔗 ln (Create links)",
+						"children": [],
+						"payload": {
+							"lines": "11,13"
+						}
+					}],
+					"payload": {
+						"lines": "3,4"
+					}
+				}, {
+					"content": "🛠️ /boot - Boot Configuration",
+					"children": [{
+						"content": "🎯 vmlinuz (Compressed Linux kernel)",
+						"children": [],
+						"payload": {
+							"lines": "14,15"
+						}
+					}, {
+						"content": "🚀 initrd.img (Initial RAM disk)",
+						"children": [],
+						"payload": {
+							"lines": "15,16"
+						}
+					}, {
+						"content": "🔧 grub/ (Boot loader configuration)",
+						"children": [{
+							"content": "grub.cfg",
+							"children": [],
+							"payload": {
+								"lines": "17,18"
+							}
+						}, {
+							"content": "menu.lst",
+							"children": [],
+							"payload": {
+								"lines": "18,19"
+							}
+						}],
+						"payload": {
+							"lines": "16,19"
+						}
+					}, {
+						"content": "💾 config-* (Kernel configurations)",
+						"children": [],
+						"payload": {
+							"lines": "19,20"
+						}
+					}, {
+						"content": "📍 System.map (Kernel symbol mapping)",
+						"children": [],
+						"payload": {
+							"lines": "20,22"
+						}
+					}],
+					"payload": {
+						"lines": "13,14"
+					}
+				}, {
+					"content": "🖥️ /dev - Device Files",
+					"children": [{
+						"content": "💽 /dev/sda (First SATA drive)",
+						"children": [],
+						"payload": {
+							"lines": "23,24"
+						}
+					}, {
+						"content": "🖨️ /dev/lp0 (First printer)",
+						"children": [],
+						"payload": {
+							"lines": "24,25"
+						}
+					}, {
+						"content": "🖱️ /dev/input (Input devices)",
+						"children": [],
+						"payload": {
+							"lines": "25,26"
+						}
+					}, {
+						"content": "🎮 /dev/usb (USB devices)",
+						"children": [],
+						"payload": {
+							"lines": "26,27"
+						}
+					}, {
+						"content": "🔊 /dev/snd (Sound devices)",
+						"children": [],
+						"payload": {
+							"lines": "27,29"
+						}
+					}],
+					"payload": {
+						"lines": "22,23"
+					}
+				}, {
+					"content": "⚙️ /etc - System Configuration",
+					"children": [{
+						"content": "🔐 passwd (User accounts)",
+						"children": [],
+						"payload": {
+							"lines": "30,31"
+						}
+					}, {
+						"content": "🌐 network/",
+						"children": [{
+							"content": "interfaces",
+							"children": [],
+							"payload": {
+								"lines": "32,33"
+							}
+						}, {
+							"content": "hosts",
+							"children": [],
+							"payload": {
+								"lines": "33,34"
+							}
+						}],
+						"payload": {
+							"lines": "31,34"
+						}
+					}, {
+						"content": "🚀 init.d/ (Service scripts)",
+						"children": [],
+						"payload": {
+							"lines": "34,35"
+						}
+					}, {
+						"content": "🔒 ssh/ (SSH configuration)",
+						"children": [],
+						"payload": {
+							"lines": "35,36"
+						}
+					}, {
+						"content": "📝 fstab (Filesystem table)",
+						"children": [],
+						"payload": {
+							"lines": "36,38"
+						}
+					}],
+					"payload": {
+						"lines": "29,30"
+					}
+				}, {
+					"content": "🏠 /home - User Directories",
+					"children": [{
+						"content": "👤 /home/user1/",
+						"children": [{
+							"content": "📂 Documents/",
+							"children": [],
+							"payload": {
+								"lines": "40,41"
+							}
+						}, {
+							"content": "🖼️ Pictures/",
+							"children": [],
+							"payload": {
+								"lines": "41,42"
+							}
+						}, {
+							"content": "🎵 Music/",
+							"children": [],
+							"payload": {
+								"lines": "42,43"
+							}
+						}, {
+							"content": "🎬 Videos/",
+							"children": [],
+							"payload": {
+								"lines": "43,44"
+							}
+						}, {
+							"content": "⚙️ .config/",
+							"children": [],
+							"payload": {
+								"lines": "44,46"
+							}
+						}],
+						"payload": {
+							"lines": "39,46"
+						}
+					}],
+					"payload": {
+						"lines": "38,39"
+					}
+				}, {
+					"content": "📚 /lib - System Libraries",
+					"children": [{
+						"content": "📦 modules/ (Kernel modules)",
+						"children": [],
+						"payload": {
+							"lines": "47,48"
+						}
+					}, {
+						"content": "📚 x86_64-linux-gnu/",
+						"children": [{
+							"content": "🔧 libc.so (C library)",
+							"children": [],
+							"payload": {
+								"lines": "49,50"
+							}
+						}, {
+							"content": "🎨 libgtk.so (GUI toolkit)",
+							"children": [],
+							"payload": {
+								"lines": "50,51"
+							}
+						}],
+						"payload": {
+							"lines": "48,51"
+						}
+					}, {
+						"content": "🔧 systemd/ (System services)",
+						"children": [],
+						"payload": {
+							"lines": "51,53"
+						}
+					}],
+					"payload": {
+						"lines": "46,47"
+					}
+				}, {
+					"content": "💾 /media - External Media",
+					"children": [{
+						"content": "💿 cdrom/",
+						"children": [],
+						"payload": {
+							"lines": "54,55"
+						}
+					}, {
+						"content": "📀 usb/",
+						"children": [],
+						"payload": {
+							"lines": "55,56"
+						}
+					}, {
+						"content": "💽 external_drive/",
+						"children": [],
+						"payload": {
+							"lines": "56,58"
+						}
+					}],
+					"payload": {
+						"lines": "53,54"
+					}
+				}, {
+					"content": "📂 /mnt - Mount Points",
+					"children": [{
+						"content": "💽 backup_drive/",
+						"children": [],
+						"payload": {
+							"lines": "59,60"
+						}
+					}, {
+						"content": "🌐 network_share/",
+						"children": [],
+						"payload": {
+							"lines": "60,61"
+						}
+					}, {
+						"content": "📀 temporary_mounts/",
+						"children": [],
+						"payload": {
+							"lines": "61,63"
+						}
+					}],
+					"payload": {
+						"lines": "58,59"
+					}
+				}, {
+					"content": "🧩 /opt - Optional Software",
+					"children": [{
+						"content": "🎮 games/",
+						"children": [],
+						"payload": {
+							"lines": "64,65"
+						}
+					}, {
+						"content": "👨‍💻 development/",
+						"children": [],
+						"payload": {
+							"lines": "65,66"
+						}
+					}, {
+						"content": "🖥️ applications/",
+						"children": [],
+						"payload": {
+							"lines": "66,68"
+						}
+					}],
+					"payload": {
+						"lines": "63,64"
+					}
+				}, {
+					"content": "🔍 /proc - Process Information",
+					"children": [{
+						"content": "💻 cpuinfo",
+						"children": [],
+						"payload": {
+							"lines": "69,70"
+						}
+					}, {
+						"content": "🧮 meminfo",
+						"children": [],
+						"payload": {
+							"lines": "70,71"
+						}
+					}, {
+						"content": "⏱️ uptime",
+						"children": [],
+						"payload": {
+							"lines": "71,72"
+						}
+					}, {
+						"content": "🔄 sys/",
+						"children": [],
+						"payload": {
+							"lines": "72,73"
+						}
+					}, {
+						"content": "🎯 interrupts",
+						"children": [],
+						"payload": {
+							"lines": "73,75"
+						}
+					}],
+					"payload": {
+						"lines": "68,69"
+					}
+				}, {
+					"content": "👑 /root - Root User Home",
+					"children": [{
+						"content": "🔐 .ssh/",
+						"children": [],
+						"payload": {
+							"lines": "76,77"
+						}
+					}, {
+						"content": "📜 .bashrc",
+						"children": [],
+						"payload": {
+							"lines": "77,78"
+						}
+					}, {
+						"content": "📊 scripts/",
+						"children": [],
+						"payload": {
+							"lines": "78,80"
+						}
+					}],
+					"payload": {
+						"lines": "75,76"
+					}
+				}, {
+					"content": "⚡ /run - Runtime Data",
+					"children": [{
+						"content": "🔄 systemd/",
+						"children": [],
+						"payload": {
+							"lines": "81,82"
+						}
+					}, {
+						"content": "🔌 network/",
+						"children": [],
+						"payload": {
+							"lines": "82,83"
+						}
+					}, {
+						"content": "🔐 lock/",
+						"children": [],
+						"payload": {
+							"lines": "83,85"
+						}
+					}],
+					"payload": {
+						"lines": "80,81"
+					}
+				}, {
+					"content": "🛠️ /sbin - System Binaries",
+					"children": [{
+						"content": "🔄 reboot",
+						"children": [],
+						"payload": {
+							"lines": "86,87"
+						}
+					}, {
+						"content": "⚡ shutdown",
+						"children": [],
+						"payload": {
+							"lines": "87,88"
+						}
+					}, {
+						"content": "🔧 fdisk",
+						"children": [],
+						"payload": {
+							"lines": "88,89"
+						}
+					}, {
+						"content": "🌐 ifconfig",
+						"children": [],
+						"payload": {
+							"lines": "89,90"
+						}
+					}, {
+						"content": "💽 mkfs",
+						"children": [],
+						"payload": {
+							"lines": "90,92"
+						}
+					}],
+					"payload": {
+						"lines": "85,86"
+					}
+				}, {
+					"content": "🌐 /srv - Service Data",
+					"children": [{
+						"content": "🕸️ www/",
+						"children": [],
+						"payload": {
+							"lines": "93,94"
+						}
+					}, {
+						"content": "📨 ftp/",
+						"children": [],
+						"payload": {
+							"lines": "94,95"
+						}
+					}, {
+						"content": "📁 nfs/",
+						"children": [],
+						"payload": {
+							"lines": "95,97"
+						}
+					}],
+					"payload": {
+						"lines": "92,93"
+					}
+				}, {
+					"content": "📊 /sys - System Hardware",
+					"children": [{
+						"content": "💻 devices/",
+						"children": [],
+						"payload": {
+							"lines": "98,99"
+						}
+					}, {
+						"content": "🔌 power/",
+						"children": [],
+						"payload": {
+							"lines": "99,100"
+						}
+					}, {
+						"content": "🎯 kernel/",
+						"children": [],
+						"payload": {
+							"lines": "100,101"
+						}
+					}, {
+						"content": "🚌 bus/",
+						"children": [],
+						"payload": {
+							"lines": "101,102"
+						}
+					}, {
+						"content": "📦 block/",
+						"children": [],
+						"payload": {
+							"lines": "102,104"
+						}
+					}],
+					"payload": {
+						"lines": "97,98"
+					}
+				}, {
+					"content": "🗑️ /tmp - Temporary Files",
+					"children": [{
+						"content": "📝 session_files/",
+						"children": [],
+						"payload": {
+							"lines": "105,106"
+						}
+					}, {
+						"content": "🔄 cache/",
+						"children": [],
+						"payload": {
+							"lines": "106,107"
+						}
+					}, {
+						"content": "💾 downloads/",
+						"children": [],
+						"payload": {
+							"lines": "107,109"
+						}
+					}],
+					"payload": {
+						"lines": "104,105"
+					}
+				}, {
+					"content": "🛒 /usr - User Programs",
+					"children": [{
+						"content": "📂 /usr/bin",
+						"children": [{
+							"content": "🎨 gimp",
+							"children": [],
+							"payload": {
+								"lines": "111,112"
+							}
+						}, {
+							"content": "🎵 vlc",
+							"children": [],
+							"payload": {
+								"lines": "112,113"
+							}
+						}, {
+							"content": "📝 vim",
+							"children": [],
+							"payload": {
+								"lines": "113,114"
+							}
+						}, {
+							"content": "🌐 firefox",
+							"children": [],
+							"payload": {
+								"lines": "114,116"
+							}
+						}],
+						"payload": {
+							"lines": "110,111"
+						}
+					}, {
+						"content": "📚 /usr/lib",
+						"children": [{
+							"content": "🔧 python/",
+							"children": [],
+							"payload": {
+								"lines": "117,118"
+							}
+						}, {
+							"content": "🎮 java/",
+							"children": [],
+							"payload": {
+								"lines": "118,119"
+							}
+						}, {
+							"content": "🖥️ nodejs/",
+							"children": [],
+							"payload": {
+								"lines": "119,121"
+							}
+						}],
+						"payload": {
+							"lines": "116,117"
+						}
+					}, {
+						"content": "🔧 /usr/local",
+						"children": [{
+							"content": "📂 bin/",
+							"children": [],
+							"payload": {
+								"lines": "122,123"
+							}
+						}, {
+							"content": "📚 lib/",
+							"children": [],
+							"payload": {
+								"lines": "123,124"
+							}
+						}, {
+							"content": "💾 share/",
+							"children": [],
+							"payload": {
+								"lines": "124,126"
+							}
+						}],
+						"payload": {
+							"lines": "121,122"
+						}
+					}],
+					"payload": {
+						"lines": "109,110"
+					}
+				}, {
+					"content": "🗄️ /var - Variable Data",
+					"children": [{
+						"content": "📜 /var/log",
+						"children": [{
+							"content": "📊 syslog",
+							"children": [],
+							"payload": {
+								"lines": "128,129"
+							}
+						}, {
+							"content": "🔒 auth.log",
+							"children": [],
+							"payload": {
+								"lines": "129,130"
+							}
+						}, {
+							"content": "🌐 apache2/",
+							"children": [],
+							"payload": {
+								"lines": "130,131"
+							}
+						}, {
+							"content": "📨 mail.log",
+							"children": [],
+							"payload": {
+								"lines": "131,133"
+							}
+						}],
+						"payload": {
+							"lines": "127,128"
+						}
+					}, {
+						"content": "📨 /var/mail",
+						"children": [{
+							"content": "📧 user1",
+							"children": [],
+							"payload": {
+								"lines": "134,135"
+							}
+						}, {
+							"content": "📧 user2",
+							"children": [],
+							"payload": {
+								"lines": "135,137"
+							}
+						}],
+						"payload": {
+							"lines": "133,134"
+						}
+					}, {
+						"content": "📦 /var/spool",
+						"children": [{
+							"content": "🖨️ cups/",
+							"children": [],
+							"payload": {
+								"lines": "138,139"
+							}
+						}, {
+							"content": "📨 postfix/",
+							"children": [],
+							"payload": {
+								"lines": "139,140"
+							}
+						}, {
+							"content": "🔄 cron/",
+							"children": [],
+							"payload": {
+								"lines": "140,142"
+							}
+						}],
+						"payload": {
+							"lines": "137,138"
+						}
+					}],
+					"payload": {
+						"lines": "126,127"
+					}
+				}],
+				"payload": {
+					"lines": "2,3"
+				}
+			}, {
+				"content": "🔐 Security Context",
+				"children": [{
+					"content": "🔒 File Permissions",
+					"children": [{
+						"content": "👑 root (uid=0)",
+						"children": [],
+						"payload": {
+							"lines": "144,145"
+						}
+					}, {
+						"content": "👥 users",
+						"children": [],
+						"payload": {
+							"lines": "145,146"
+						}
+					}, {
+						"content": "🔑 chmod/chown",
+						"children": [],
+						"payload": {
+							"lines": "146,148"
+						}
+					}],
+					"payload": {
+						"lines": "143,144"
+					}
+				}, {
+					"content": "🛡️ Special Permissions",
+					"children": [{
+						"content": "💪 SUID",
+						"children": [],
+						"payload": {
+							"lines": "149,150"
+						}
+					}, {
+						"content": "👥 SGID",
+						"children": [],
+						"payload": {
+							"lines": "150,151"
+						}
+					}, {
+						"content": "📝 Sticky Bit",
+						"children": [],
+						"payload": {
+							"lines": "151,153"
+						}
+					}],
+					"payload": {
+						"lines": "148,149"
+					}
+				}],
+				"payload": {
+					"lines": "142,143"
+				}
+			}, {
+				"content": "🔗 Important Links",
+				"children": [{
+					"content": "🔄 Symbolic Links",
+					"children": [{
+						"content": "/bin ➡️ /usr/bin",
+						"children": [],
+						"payload": {
+							"lines": "155,156"
+						}
+					}, {
+						"content": "/lib ➡️ /usr/lib",
+						"children": [],
+						"payload": {
+							"lines": "156,157"
+						}
+					}, {
+						"content": "/sbin ➡️ /usr/sbin",
+						"children": [],
+						"payload": {
+							"lines": "157,159"
+						}
+					}],
+					"payload": {
+						"lines": "154,155"
+					}
+				}, {
+					"content": "💼 Common Operations",
+					"children": [{
+						"content": "📁 File Management",
+						"children": [],
+						"payload": {
+							"lines": "160,161"
+						}
+					}, {
+						"content": "🔐 Access Control",
+						"children": [],
+						"payload": {
+							"lines": "161,162"
+						}
+					}, {
+						"content": "🔧 System Configuration",
+						"children": [],
+						"payload": {
+							"lines": "162,163"
+						}
+					}, {
+						"content": "📊 Monitoring",
+						"children": [],
+						"payload": {
+							"lines": "163,164"
+						}
+					}],
+					"payload": {
+						"lines": "159,160"
+					}
+				}],
+				"payload": {
+					"lines": "153,154"
+				}
+			}],
+			"payload": {
+				"lines": "0,1"
+			}
+		}, null)
+	</script>
+</body>
+
+</html>

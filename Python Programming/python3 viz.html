@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="Muskula Rahul"/>
+	<title>Python3 Viz</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#mindmap {
+			display: block;
+			width: 100vw;
+			height: 100vh;
+		}
+	</style>
+	<link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.8.0/styles/default.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/markmap-toolbar@0.17.2/dist/style.css">
+</head>
+
+<body>
+	<svg id="mindmap"></svg>
+	<script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js"></script>
+	<script src="https://unpkg.com/markmap-view@0.17.2/dist/browser/index.js"></script>
+	<script src="https://unpkg.com/markmap-toolbar@0.17.2/dist/index.js"></script>
+	<script>
+		(r => {
+			setTimeout(r);
+		})(() => {
+			const {
+				markmap,
+				mm
+			} = window;
+			const {
+				el
+			} = markmap.Toolbar.create(mm);
+			el.setAttribute('style', 'position:absolute;bottom:20px;right:20px');
+			document.body.append(el);
+		})
+	</script>
+	<script>
+		((getMarkmap, getOptions, root2, jsonOptions) => {
+			const markmap = getMarkmap();
+			window.mm = markmap.Markmap.create("svg#mindmap",
+				(getOptions || markmap.deriveOptions)(jsonOptions), root2);
+		})(() => window.markmap, null, {
+			"content": "Python Programming",
+			"children": [{
+				"content": "Introduction",
+				"children": [{
+					"content": "What is Python?",
+					"children": [{
+						"content": "High-level, interpreted, general-purpose programming language.",
+						"children": [],
+						"payload": {
+							"lines": "4,5"
+						}
+					}, {
+						"content": "Emphasizes code readability with its use of significant indentation.",
+						"children": [],
+						"payload": {
+							"lines": "5,6"
+						}
+					}, {
+						"content": "Dynamically typed: Type checking happens at runtime.",
+						"children": [],
+						"payload": {
+							"lines": "6,7"
+						}
+					}, {
+						"content": "Garbage-collected: Automatic memory management.",
+						"children": [],
+						"payload": {
+							"lines": "7,8"
+						}
+					}, {
+						"content": "Large standard library: \"Batteries included\" philosophy.",
+						"children": [],
+						"payload": {
+							"lines": "8,9"
+						}
+					}, {
+						"content": "Cross-platform: Runs on various operating systems.",
+						"children": [],
+						"payload": {
+							"lines": "9,10"
+						}
+					}],
+					"payload": {
+						"lines": "3,10"
+					}
+				}, {
+					"content": "Versions",
+					"children": [{
+						"content": "2.x (legacy): Officially sunsetted, but still encountered in some older projects.",
+						"children": [],
+						"payload": {
+							"lines": "11,12"
+						}
+					}, {
+						"content": "3.x (current): Actively developed and maintained.  Key differences from 2.x include print as a function, integer division, and Unicode handling.",
+						"children": [],
+						"payload": {
+							"lines": "12,13"
+						}
+					}],
+					"payload": {
+						"lines": "10,13"
+					}
+				}, {
+					"content": "Setting up Python",
+					"children": [{
+						"content": "Installation: Download the appropriate installer for your OS from python.org.",
+						"children": [],
+						"payload": {
+							"lines": "14,15"
+						}
+					}, {
+						"content": "IDEs/Text Editors:",
+						"children": [{
+							"content": "PyCharm: Feature-rich IDE specifically designed for Python.",
+							"children": [],
+							"payload": {
+								"lines": "16,17"
+							}
+						}, {
+							"content": "VS Code: Popular code editor with excellent Python support through extensions.",
+							"children": [],
+							"payload": {
+								"lines": "17,18"
+							}
+						}, {
+							"content": "Atom: Another customizable code editor with Python support.",
+							"children": [],
+							"payload": {
+								"lines": "18,19"
+							}
+						}, {
+							"content": "Sublime Text: Lightweight but powerful text editor with Python plugins.",
+							"children": [],
+							"payload": {
+								"lines": "19,20"
+							}
+						}, {
+							"content": "Thonny: IDE geared towards beginners.",
+							"children": [],
+							"payload": {
+								"lines": "20,21"
+							}
+						}],
+						"payload": {
+							"lines": "15,21"
+						}
+					}],
+					"payload": {
+						"lines": "13,21"
+					}
+				}],
+				"payload": {
+					"lines": "2,21"
+				}
+			}, {
+				"content": "Basic Syntax and Data Types",
+				"children": [{
+					"content": "Variables and Data Types",
+					"children": [{
+						"content": "Naming conventions: Use lowercase with underscores (snake_case) for variable and function names.",
+						"children": [],
+						"payload": {
+							"lines": "23,24"
+						}
+					}, {
+						"content": "Numbers:",
+						"children": [{
+							"content": "int: Integers (whole numbers).",
+							"children": [],
+							"payload": {
+								"lines": "25,26"
+							}
+						}, {
+							"content": "float: Floating-point numbers (numbers with decimal points).",
+							"children": [],
+							"payload": {
+								"lines": "26,27"
+							}
+						}, {
+							"content": "complex: Complex numbers (real and imaginary parts).",
+							"children": [],
+							"payload": {
+								"lines": "27,28"
+							}
+						}],
+						"payload": {
+							"lines": "24,28"
+						}
+					}, {
+						"content": "Strings (str): Sequences of characters. Can be enclosed in single, double, or triple quotes.",
+						"children": [],
+						"payload": {
+							"lines": "28,29"
+						}
+					}, {
+						"content": "Booleans (bool): True or False values.",
+						"children": [],
+						"payload": {
+							"lines": "29,30"
+						}
+					}, {
+						"content": "None: Represents the absence of a value.",
+						"children": [],
+						"payload": {
+							"lines": "30,31"
+						}
+					}],
+					"payload": {
+						"lines": "22,31"
+					}
+				}, {
+					"content": "Operators",
+					"children": [{
+						"content": "Arithmetic:",
+						"children": [{
+							"content": "+: Addition",
+							"children": [],
+							"payload": {
+								"lines": "33,34"
+							}
+						}, {
+							"content": "-: Subtraction",
+							"children": [],
+							"payload": {
+								"lines": "34,35"
+							}
+						}, {
+							"content": "*: Multiplication",
+							"children": [],
+							"payload": {
+								"lines": "35,36"
+							}
+						}, {
+							"content": "/: Division (float)",
+							"children": [],
+							"payload": {
+								"lines": "36,37"
+							}
+						}, {
+							"content": "//: Floor division (integer)",
+							"children": [],
+							"payload": {
+								"lines": "37,38"
+							}
+						}, {
+							"content": "%: Modulo (remainder)",
+							"children": [],
+							"payload": {
+								"lines": "38,39"
+							}
+						}, {
+							"content": "**: Exponentiation",
+							"children": [],
+							"payload": {
+								"lines": "39,40"
+							}
+						}],
+						"payload": {
+							"lines": "32,40"
+						}
+					}, {
+						"content": "Comparison:",
+						"children": [{
+							"content": "==: Equal to",
+							"children": [],
+							"payload": {
+								"lines": "41,42"
+							}
+						}, {
+							"content": "!=: Not equal to",
+							"children": [],
+							"payload": {
+								"lines": "42,43"
+							}
+						}, {
+							"content": "&lt;: Less than",
+							"children": [],
+							"payload": {
+								"lines": "43,44"
+							}
+						}, {
+							"content": "\n<blockquote data-lines=\"44,45\">\n<p data-lines=\"44,45\">: Greater than</p>\n</blockquote>",
+							"children": [],
+							"payload": {
+								"lines": "44,45"
+							}
+						}, {
+							"content": "&lt;=: Less than or equal to",
+							"children": [],
+							"payload": {
+								"lines": "45,46"
+							}
+						}, {
+							"content": "\n<blockquote data-lines=\"46,47\">\n<p data-lines=\"46,47\">=: Greater than or equal to</p>\n</blockquote>",
+							"children": [],
+							"payload": {
+								"lines": "46,47"
+							}
+						}],
+						"payload": {
+							"lines": "40,47"
+						}
+					}, {
+						"content": "Logical:",
+						"children": [{
+							"content": "and: Logical AND",
+							"children": [],
+							"payload": {
+								"lines": "48,49"
+							}
+						}, {
+							"content": "or: Logical OR",
+							"children": [],
+							"payload": {
+								"lines": "49,50"
+							}
+						}, {
+							"content": "not: Logical NOT",
+							"children": [],
+							"payload": {
+								"lines": "50,51"
+							}
+						}],
+						"payload": {
+							"lines": "47,51"
+						}
+					}, {
+						"content": "Bitwise (operate on binary representations):",
+						"children": [{
+							"content": "&amp;: Bitwise AND",
+							"children": [],
+							"payload": {
+								"lines": "52,53"
+							}
+						}, {
+							"content": "|: Bitwise OR",
+							"children": [],
+							"payload": {
+								"lines": "53,54"
+							}
+						}, {
+							"content": "^: Bitwise XOR",
+							"children": [],
+							"payload": {
+								"lines": "54,55"
+							}
+						}, {
+							"content": "~: Bitwise NOT",
+							"children": [],
+							"payload": {
+								"lines": "55,56"
+							}
+						}, {
+							"content": "&lt;&lt;: Left shift",
+							"children": [],
+							"payload": {
+								"lines": "56,57"
+							}
+						}, {
+							"content": "\n<blockquote data-lines=\"57,58\">\n<blockquote data-lines=\"57,58\">\n<p data-lines=\"57,58\">: Right shift</p>\n</blockquote>\n</blockquote>",
+							"children": [],
+							"payload": {
+								"lines": "57,58"
+							}
+						}],
+						"payload": {
+							"lines": "51,58"
+						}
+					}, {
+						"content": "Assignment:",
+						"children": [{
+							"content": "=: Assignment",
+							"children": [],
+							"payload": {
+								"lines": "59,60"
+							}
+						}, {
+							"content": "+=: Add and assign",
+							"children": [],
+							"payload": {
+								"lines": "60,61"
+							}
+						}, {
+							"content": "-=: Subtract and assign",
+							"children": [],
+							"payload": {
+								"lines": "61,62"
+							}
+						}, {
+							"content": "*=: Multiply and assign",
+							"children": [],
+							"payload": {
+								"lines": "62,63"
+							}
+						}, {
+							"content": "/=: Divide and assign",
+							"children": [],
+							"payload": {
+								"lines": "63,64"
+							}
+						}, {
+							"content": "//=: Floor divide and assign",
+							"children": [],
+							"payload": {
+								"lines": "64,65"
+							}
+						}, {
+							"content": "%=: Modulo and assign",
+							"children": [],
+							"payload": {
+								"lines": "65,66"
+							}
+						}, {
+							"content": "**=: Exponentiate and assign",
+							"children": [],
+							"payload": {
+								"lines": "66,67"
+							}
+						}],
+						"payload": {
+							"lines": "58,67"
+						}
+					}],
+					"payload": {
+						"lines": "31,67"
+					}
+				}, {
+					"content": "Control Flow",
+					"children": [{
+						"content": "Conditional Statements:",
+						"children": [{
+							"content": "if: Executes a block of code if a condition is true.",
+							"children": [],
+							"payload": {
+								"lines": "69,70"
+							}
+						}, {
+							"content": "elif: (else if) Checks another condition if the previous if condition is false.",
+							"children": [],
+							"payload": {
+								"lines": "70,71"
+							}
+						}, {
+							"content": "else: Executes a block of code if all preceding conditions are false.",
+							"children": [],
+							"payload": {
+								"lines": "71,72"
+							}
+						}],
+						"payload": {
+							"lines": "68,72"
+						}
+					}, {
+						"content": "Loops:",
+						"children": [{
+							"content": "for: Iterates over a sequence (list, tuple, string, etc.).",
+							"children": [],
+							"payload": {
+								"lines": "73,74"
+							}
+						}, {
+							"content": "while: Repeats a block of code as long as a condition is true.",
+							"children": [],
+							"payload": {
+								"lines": "74,75"
+							}
+						}],
+						"payload": {
+							"lines": "72,75"
+						}
+					}, {
+						"content": "Loop Control:",
+						"children": [{
+							"content": "break: Exits the current loop.",
+							"children": [],
+							"payload": {
+								"lines": "76,77"
+							}
+						}, {
+							"content": "continue: Skips the rest of the current iteration and proceeds to the next.",
+							"children": [],
+							"payload": {
+								"lines": "77,78"
+							}
+						}],
+						"payload": {
+							"lines": "75,78"
+						}
+					}],
+					"payload": {
+						"lines": "67,78"
+					}
+				}, {
+					"content": "Data Structures",
+					"children": [{
+						"content": "Lists (list): Mutable, ordered sequences.  Can contain elements of different data types.  Supports indexing, slicing, appending, inserting, removing, etc.",
+						"children": [],
+						"payload": {
+							"lines": "79,80"
+						}
+					}, {
+						"content": "Tuples (tuple): Immutable, ordered sequences. Similar to lists, but cannot be modified after creation. Useful for representing fixed collections of data.",
+						"children": [],
+						"payload": {
+							"lines": "80,81"
+						}
+					}, {
+						"content": "Sets (set): Unordered collections of unique elements. Supports set operations like union, intersection, and difference.",
+						"children": [],
+						"payload": {
+							"lines": "81,82"
+						}
+					}, {
+						"content": "Dictionaries (dict): Collections of key-value pairs. Keys must be immutable (e.g., strings, numbers, tuples).  Values can be of any data type.  Provides efficient lookup of values based on their keys.",
+						"children": [],
+						"payload": {
+							"lines": "82,83"
+						}
+					}],
+					"payload": {
+						"lines": "78,83"
+					}
+				}],
+				"payload": {
+					"lines": "21,83"
+				}
+			}, {
+				"content": "Functions",
+				"children": [{
+					"content": "Defining functions (def keyword):  <code>def function_name(parameters):</code>",
+					"children": [],
+					"payload": {
+						"lines": "84,85"
+					}
+				}, {
+					"content": "Arguments:",
+					"children": [{
+						"content": "Positional:  Passed in the order defined in the function signature.",
+						"children": [],
+						"payload": {
+							"lines": "86,87"
+						}
+					}, {
+						"content": "Keyword: Passed with the parameter name (e.g., <code>func(name=\"Alice\")</code>).",
+						"children": [],
+						"payload": {
+							"lines": "87,88"
+						}
+					}, {
+						"content": "Default:  Provide a default value if the argument is not passed (e.g., <code>def greet(name=\"World\"):</code>).",
+						"children": [],
+						"payload": {
+							"lines": "88,89"
+						}
+					}, {
+						"content": "Variable-length (*args, **kwargs):",
+						"children": [{
+							"content": "*args:  Accepts any number of positional arguments as a tuple.",
+							"children": [],
+							"payload": {
+								"lines": "90,91"
+							}
+						}, {
+							"content": "**kwargs: Accepts any number of keyword arguments as a dictionary.",
+							"children": [],
+							"payload": {
+								"lines": "91,92"
+							}
+						}],
+						"payload": {
+							"lines": "89,92"
+						}
+					}],
+					"payload": {
+						"lines": "85,92"
+					}
+				}, {
+					"content": "Return values:  Use the <code>return</code> keyword to return a value from a function.  If no <code>return</code> statement is present, the function returns <code>None</code>.",
+					"children": [],
+					"payload": {
+						"lines": "92,93"
+					}
+				}, {
+					"content": "Lambda functions (anonymous functions): <code>lambda arguments: expression</code> – Concise way to define small, single-expression functions.",
+					"children": [],
+					"payload": {
+						"lines": "93,94"
+					}
+				}, {
+					"content": "Docstrings:  Document functions using triple quotes (<code>\"\"\"Docstring goes here\"\"\"</code>).  Accessible via <code>help(function_name)</code> or <code>function_name.__doc__</code>.",
+					"children": [],
+					"payload": {
+						"lines": "94,95"
+					}
+				}, {
+					"content": "Inner Functions (Nested Functions): Functions defined inside other functions.  Useful for encapsulation and closures.",
+					"children": [],
+					"payload": {
+						"lines": "95,96"
+					}
+				}, {
+					"content": "Closures: Functions that \"remember\" values from their enclosing scope, even after the outer function has finished executing.",
+					"children": [],
+					"payload": {
+						"lines": "96,97"
+					}
+				}, {
+					"content": "Decorators: Functions that modify the behavior of other functions.  Use the <code>@</code> symbol (e.g., <code>@decorator</code>).",
+					"children": [],
+					"payload": {
+						"lines": "97,98"
+					}
+				}],
+				"payload": {
+					"lines": "83,98"
+				}
+			}, {
+				"content": "Classes and Objects (Object-Oriented Programming)",
+				"children": [{
+					"content": "Defining classes (class keyword): <code>class ClassName:</code>",
+					"children": [],
+					"payload": {
+						"lines": "99,100"
+					}
+				}, {
+					"content": "<code>__init__</code> method (constructor):  Called when an object is created.  Used to initialize object attributes.",
+					"children": [],
+					"payload": {
+						"lines": "100,101"
+					}
+				}, {
+					"content": "Methods: Functions defined within a class.  Operate on the object's data.",
+					"children": [],
+					"payload": {
+						"lines": "101,102"
+					}
+				}, {
+					"content": "Inheritance: Creating new classes (subclasses) that inherit properties and methods from existing classes (superclasses).  Facilitates code reuse and extensibility.",
+					"children": [{
+						"content": "<code>super()</code>: Used to access methods and attributes of the superclass.",
+						"children": [],
+						"payload": {
+							"lines": "103,104"
+						}
+					}],
+					"payload": {
+						"lines": "102,104"
+					}
+				}, {
+					"content": "Polymorphism:  The ability of objects of different classes to respond to the same method call in their own specific way.  Achieved through method overriding.",
+					"children": [],
+					"payload": {
+						"lines": "104,105"
+					}
+				}, {
+					"content": "Encapsulation: Bundling data (attributes) and methods that operate on that data within a class.  Access modifiers (public, protected, private) control access to class members. (Python uses naming conventions like <code>_</code> and <code>__</code> for protected and private members, respectively).",
+					"children": [],
+					"payload": {
+						"lines": "105,106"
+					}
+				}, {
+					"content": "Abstract Classes and Methods: Define a common interface for subclasses without providing concrete implementations.  Uses the <code>abc</code> module (Abstract Base Classes).",
+					"children": [],
+					"payload": {
+						"lines": "106,107"
+					}
+				}],
+				"payload": {
+					"lines": "98,107"
+				}
+			}, {
+				"content": "Modules and Packages",
+				"children": [{
+					"content": "Importing modules (import keyword):  <code>import module_name</code> or <code>from module_name import function_name</code>.",
+					"children": [],
+					"payload": {
+						"lines": "108,109"
+					}
+				}, {
+					"content": "Standard library modules: A rich collection of modules providing various functionalities (e.g., <code>os</code>, <code>sys</code>, <code>math</code>, <code>random</code>, <code>datetime</code>, <code>re</code>).",
+					"children": [],
+					"payload": {
+						"lines": "109,110"
+					}
+				}, {
+					"content": "Creating your own modules:  Save Python code in <code>.py</code> files to create reusable modules.",
+					"children": [],
+					"payload": {
+						"lines": "110,111"
+					}
+				}, {
+					"content": "Packages (organizing modules):  Create a directory containing an <code>__init__.py</code> file to define a package. Packages allow hierarchical organization of modules.",
+					"children": [],
+					"payload": {
+						"lines": "111,112"
+					}
+				}, {
+					"content": "<code>__name__ == \"__main__\":</code>: Used to execute code only when the script is run directly (not imported as a module).",
+					"children": [],
+					"payload": {
+						"lines": "112,113"
+					}
+				}],
+				"payload": {
+					"lines": "107,113"
+				}
+			}, {
+				"content": "Iterators and Generators",
+				"children": [{
+					"content": "Iterators: Objects that implement the iterator protocol (<code>__iter__</code> and <code>__next__</code> methods).  Used for traversing sequences.",
+					"children": [],
+					"payload": {
+						"lines": "114,115"
+					}
+				}, {
+					"content": "Generators: Functions that use the <code>yield</code> keyword.  Produce a sequence of values lazily, one at a time, without storing the entire sequence in memory.",
+					"children": [],
+					"payload": {
+						"lines": "115,116"
+					}
+				}, {
+					"content": "Comprehensions: Concise ways to create lists, sets, and dictionaries:",
+					"children": [{
+						"content": "List comprehension: <code>[expression for item in iterable if condition]</code>",
+						"children": [],
+						"payload": {
+							"lines": "117,118"
+						}
+					}, {
+						"content": "Set comprehension: <code>{expression for item in iterable if condition}</code>",
+						"children": [],
+						"payload": {
+							"lines": "118,119"
+						}
+					}, {
+						"content": "Dictionary comprehension: <code>{key: value for item in iterable if condition}</code>",
+						"children": [],
+						"payload": {
+							"lines": "119,120"
+						}
+					}],
+					"payload": {
+						"lines": "116,120"
+					}
+				}],
+				"payload": {
+					"lines": "113,120"
+				}
+			}, {
+				"content": "File Handling",
+				"children": [{
+					"content": "Opening files (open function): <code>open(filename, mode)</code>",
+					"children": [{
+						"content": "Modes:",
+						"children": [{
+							"content": "<code>'r'</code>: Read (default)",
+							"children": [],
+							"payload": {
+								"lines": "123,124"
+							}
+						}, {
+							"content": "<code>'w'</code>: Write (overwrites existing file)",
+							"children": [],
+							"payload": {
+								"lines": "124,125"
+							}
+						}, {
+							"content": "<code>'a'</code>: Append (adds to the end of the file)",
+							"children": [],
+							"payload": {
+								"lines": "125,126"
+							}
+						}, {
+							"content": "<code>'x'</code>: Create (fails if the file exists)",
+							"children": [],
+							"payload": {
+								"lines": "126,127"
+							}
+						}, {
+							"content": "<code>'b'</code>: Binary mode (for non-text files)",
+							"children": [],
+							"payload": {
+								"lines": "127,128"
+							}
+						}, {
+							"content": "<code>'t'</code>: Text mode (default)",
+							"children": [],
+							"payload": {
+								"lines": "128,129"
+							}
+						}, {
+							"content": "<code>'+'</code>: Read and write",
+							"children": [],
+							"payload": {
+								"lines": "129,130"
+							}
+						}],
+						"payload": {
+							"lines": "122,130"
+						}
+					}],
+					"payload": {
+						"lines": "121,130"
+					}
+				}, {
+					"content": "Reading from files:",
+					"children": [{
+						"content": "<code>read()</code>: Reads the entire file content as a single string.",
+						"children": [],
+						"payload": {
+							"lines": "131,132"
+						}
+					}, {
+						"content": "<code>readline()</code>: Reads a single line from the file.",
+						"children": [],
+						"payload": {
+							"lines": "132,133"
+						}
+					}, {
+						"content": "<code>readlines()</code>: Reads all lines and returns them as a list of strings.",
+						"children": [],
+						"payload": {
+							"lines": "133,134"
+						}
+					}, {
+						"content": "Iteration:  <code>for line in file:</code> – Efficiently reads the file line by line.",
+						"children": [],
+						"payload": {
+							"lines": "134,135"
+						}
+					}],
+					"payload": {
+						"lines": "130,135"
+					}
+				}, {
+					"content": "Writing to files:",
+					"children": [{
+						"content": "<code>write(string)</code>: Writes a string to the file.",
+						"children": [],
+						"payload": {
+							"lines": "136,137"
+						}
+					}, {
+						"content": "<code>writelines(list_of_strings)</code>: Writes a list of strings to the file.",
+						"children": [],
+						"payload": {
+							"lines": "137,138"
+						}
+					}],
+					"payload": {
+						"lines": "135,138"
+					}
+				}, {
+					"content": "Closing files:",
+					"children": [{
+						"content": "<code>file.close()</code>:  Important to close files to release resources.",
+						"children": [],
+						"payload": {
+							"lines": "139,140"
+						}
+					}, {
+						"content": "<code>with open(...) as file:</code>:  The <code>with</code> statement automatically closes the file when the block is exited, even if exceptions occur.",
+						"children": [],
+						"payload": {
+							"lines": "140,141"
+						}
+					}],
+					"payload": {
+						"lines": "138,141"
+					}
+				}],
+				"payload": {
+					"lines": "120,141"
+				}
+			}, {
+				"content": "Exception Handling",
+				"children": [{
+					"content": "<code>try</code>, <code>except</code>, <code>finally</code> blocks:",
+					"children": [{
+						"content": "<code>try</code>:  Contains the code that might raise an exception.",
+						"children": [],
+						"payload": {
+							"lines": "143,144"
+						}
+					}, {
+						"content": "<code>except ExceptionType as e</code>: Handles specific types of exceptions. The <code>as e</code> part assigns the exception instance to a variable.",
+						"children": [],
+						"payload": {
+							"lines": "144,145"
+						}
+					}, {
+						"content": "<code>except</code>: (optional) Handles any exception not caught by previous <code>except</code> blocks.",
+						"children": [],
+						"payload": {
+							"lines": "145,146"
+						}
+					}, {
+						"content": "<code>finally</code>: (optional) Contains code that will always be executed, whether an exception occurred or not.  Useful for cleanup tasks (e.g., closing files, releasing resources).",
+						"children": [],
+						"payload": {
+							"lines": "146,147"
+						}
+					}],
+					"payload": {
+						"lines": "142,147"
+					}
+				}, {
+					"content": "Raising exceptions: <code>raise ExceptionType(\"Error message\")</code> – Explicitly raise an exception.",
+					"children": [],
+					"payload": {
+						"lines": "147,148"
+					}
+				}, {
+					"content": "Custom exceptions: Create your own exception classes by inheriting from <code>Exception</code> or other built-in exception classes.",
+					"children": [],
+					"payload": {
+						"lines": "148,149"
+					}
+				}],
+				"payload": {
+					"lines": "141,149"
+				}
+			}, {
+				"content": "Decorators",
+				"children": [{
+					"content": "Modifying function behavior: Decorators wrap functions to add functionality (e.g., logging, timing, access control) without modifying the original function's code.",
+					"children": [],
+					"payload": {
+						"lines": "150,151"
+					}
+				}, {
+					"content": "Syntax: <code>@decorator_function</code> above the function definition.",
+					"children": [],
+					"payload": {
+						"lines": "151,152"
+					}
+				}, {
+					"content": "Example:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">my_decorator</span>(<span class=\"hljs-params\">func</span>):\n    <span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">wrapper</span>():\n        <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Before function call\"</span>)\n        func()\n        <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"After function call\"</span>)\n    <span class=\"hljs-keyword\">return</span> wrapper\n\n<span class=\"hljs-meta\">@my_decorator</span>\n<span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">say_hello</span>():\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Hello!\"</span>)\n\nsay_hello()  <span class=\"hljs-comment\"># Output: Before function call, Hello!, After function call</span>\n</code></pre>",
+					"children": [],
+					"payload": {
+						"lines": "152,167"
+					}
+				}],
+				"payload": {
+					"lines": "149,167"
+				}
+			}, {
+				"content": "Context Managers (with statement)",
+				"children": [{
+					"content": "Managing resources automatically:  Ensure resources (e.g., files, network connections, database connections) are properly acquired and released, even if exceptions occur.",
+					"children": [],
+					"payload": {
+						"lines": "168,169"
+					}
+				}, {
+					"content": "<code>__enter__</code> and <code>__exit__</code> methods:  Define how resources are acquired and released within a class.",
+					"children": [],
+					"payload": {
+						"lines": "169,170"
+					}
+				}, {
+					"content": "Example: The <code>open()</code> function is a context manager.<pre><code class=\"language-python\"><span class=\"hljs-keyword\">with</span> <span class=\"hljs-built_in\">open</span>(<span class=\"hljs-string\">\"my_file.txt\"</span>, <span class=\"hljs-string\">\"r\"</span>) <span class=\"hljs-keyword\">as</span> file:\n    <span class=\"hljs-comment\"># File is open within this block</span>\n    data = file.read()\n<span class=\"hljs-comment\"># File is automatically closed outside the block</span>\n</code></pre>",
+					"children": [],
+					"payload": {
+						"lines": "170,177"
+					}
+				}],
+				"payload": {
+					"lines": "167,177"
+				}
+			}, {
+				"content": "Metaclasses",
+				"children": [{
+					"content": "Modifying class creation: Metaclasses are classes whose instances are classes. They allow you to intercept and customize class creation.",
+					"children": [],
+					"payload": {
+						"lines": "178,179"
+					}
+				}, {
+					"content": "<code>__metaclass__</code> attribute (Python 2): Used to specify the metaclass for a class.",
+					"children": [],
+					"payload": {
+						"lines": "179,180"
+					}
+				}, {
+					"content": "<code>metaclass</code> keyword argument (Python 3):  The preferred way to specify a metaclass.",
+					"children": [],
+					"payload": {
+						"lines": "180,181"
+					}
+				}, {
+					"content": "Example (Python 3):<pre><code class=\"language-python\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title class_\">MyMeta</span>(<span class=\"hljs-title class_ inherited__\">type</span>):\n    <span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">__new__</span>(<span class=\"hljs-params\">cls, name, bases, attrs</span>):\n        <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">f\"Creating class <span class=\"hljs-subst\">{name}</span>\"</span>)\n        <span class=\"hljs-keyword\">return</span> <span class=\"hljs-built_in\">super</span>().__new__(cls, name, bases, attrs)\n\n<span class=\"hljs-keyword\">class</span> <span class=\"hljs-title class_\">MyClass</span>(metaclass=MyMeta):\n    <span class=\"hljs-keyword\">pass</span>  <span class=\"hljs-comment\"># Output: Creating class MyClass</span>\n</code></pre>",
+					"children": [],
+					"payload": {
+						"lines": "181,191"
+					}
+				}, {
+					"content": "Use cases:  Modifying class attributes, registering classes, enforcing coding conventions, creating singletons.",
+					"children": [],
+					"payload": {
+						"lines": "191,192"
+					}
+				}],
+				"payload": {
+					"lines": "177,192"
+				}
+			}, {
+				"content": "Concurrency and Parallelism",
+				"children": [{
+					"content": "Threading:",
+					"children": [{
+						"content": "<code>threading</code> module:  Provides support for creating and managing threads.",
+						"children": [],
+						"payload": {
+							"lines": "194,195"
+						}
+					}, {
+						"content": "Global Interpreter Lock (GIL):  Limits true parallelism in CPython for CPU-bound tasks.  Threads are useful for I/O-bound tasks (waiting for network requests, file operations, etc.).",
+						"children": [],
+						"payload": {
+							"lines": "195,196"
+						}
+					}, {
+						"content": "Example:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">import</span> threading\n<span class=\"hljs-keyword\">import</span> time\n\n<span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">worker</span>():\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Thread starting\"</span>)\n    time.sleep(<span class=\"hljs-number\">2</span>)\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Thread finishing\"</span>)\n\nthreads = []\n<span class=\"hljs-keyword\">for</span> i <span class=\"hljs-keyword\">in</span> <span class=\"hljs-built_in\">range</span>(<span class=\"hljs-number\">3</span>):\n    t = threading.Thread(target=worker)\n    threads.append(t)\n    t.start()\n\n<span class=\"hljs-keyword\">for</span> t <span class=\"hljs-keyword\">in</span> threads:\n    t.join()  <span class=\"hljs-comment\"># Wait for all threads to complete</span>\n\n<span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Main thread finishing\"</span>)\n\n</code></pre>",
+						"children": [],
+						"payload": {
+							"lines": "196,218"
+						}
+					}],
+					"payload": {
+						"lines": "193,218"
+					}
+				}, {
+					"content": "Multiprocessing:",
+					"children": [{
+						"content": "<code>multiprocessing</code> module:  Allows true parallelism by creating multiple processes, each with its own interpreter and memory space.  Bypasses the GIL limitation for CPU-bound tasks.",
+						"children": [],
+						"payload": {
+							"lines": "219,220"
+						}
+					}, {
+						"content": "Example:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">import</span> multiprocessing\n<span class=\"hljs-keyword\">import</span> time\n\n<span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">worker</span>():\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Process starting\"</span>)\n    time.sleep(<span class=\"hljs-number\">2</span>)\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Process finishing\"</span>)\n\nprocesses = []\n<span class=\"hljs-keyword\">for</span> i <span class=\"hljs-keyword\">in</span> <span class=\"hljs-built_in\">range</span>(<span class=\"hljs-number\">3</span>):\n    p = multiprocessing.Process(target=worker)\n    processes.append(p)\n    p.start()\n\n<span class=\"hljs-keyword\">for</span> p <span class=\"hljs-keyword\">in</span> processes:\n    p.join()  <span class=\"hljs-comment\"># Wait for all processes to complete</span>\n\n<span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Main process finishing\"</span>)\n</code></pre>",
+						"children": [],
+						"payload": {
+							"lines": "220,241"
+						}
+					}],
+					"payload": {
+						"lines": "218,241"
+					}
+				}, {
+					"content": "Asyncio:",
+					"children": [{
+						"content": "<code>asyncio</code> module:  Provides a framework for asynchronous programming. Uses coroutines and an event loop to achieve concurrency.  Efficient for I/O-bound tasks.",
+						"children": [],
+						"payload": {
+							"lines": "242,243"
+						}
+					}, {
+						"content": "<code>async</code> and <code>await</code> keywords: Used to define and work with coroutines.",
+						"children": [],
+						"payload": {
+							"lines": "243,244"
+						}
+					}, {
+						"content": "Example (simplified):<pre><code class=\"language-python\"><span class=\"hljs-keyword\">import</span> asyncio\n\n<span class=\"hljs-keyword\">async</span> <span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">worker</span>():\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Coroutine starting\"</span>)\n    <span class=\"hljs-keyword\">await</span> asyncio.sleep(<span class=\"hljs-number\">2</span>)  <span class=\"hljs-comment\"># Non-blocking sleep</span>\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Coroutine finishing\"</span>)\n\n<span class=\"hljs-keyword\">async</span> <span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">main</span>():\n    tasks = [worker() <span class=\"hljs-keyword\">for</span> _ <span class=\"hljs-keyword\">in</span> <span class=\"hljs-built_in\">range</span>(<span class=\"hljs-number\">3</span>)]\n    <span class=\"hljs-keyword\">await</span> asyncio.gather(*tasks)\n\nasyncio.run(main())\n</code></pre>",
+						"children": [],
+						"payload": {
+							"lines": "244,259"
+						}
+					}],
+					"payload": {
+						"lines": "241,259"
+					}
+				}],
+				"payload": {
+					"lines": "192,259"
+				}
+			}],
+			"payload": {
+				"lines": "1,259"
+			}
+		}, {})
+	</script>
+</body>
+
+</html>

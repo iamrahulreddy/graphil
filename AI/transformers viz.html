@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Muskula Rahul"/>
+    <title>Transformers Viz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #mindmap {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+
+<body>
+    <svg id="mindmap"></svg>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17.3-alpha.1/dist/browser/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/index.js"></script>
+    <script>
+        (e => {
+            window.WebFontConfig = {
+                custom: {
+                    families: ["KaTeX_AMS", "KaTeX_Caligraphic:n4,n7", "KaTeX_Fraktur:n4,n7", "KaTeX_Main:n4,n7,i4,i7", "KaTeX_Math:i4,i7", "KaTeX_Script", "KaTeX_SansSerif:n4,n7,i4", "KaTeX_Size1", "KaTeX_Size2", "KaTeX_Size3", "KaTeX_Size4", "KaTeX_Typewriter"]
+                },
+                active: () => {
+                    e().refreshHook.call()
+                }
+            }
+        })(() => window.markmap)
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" defer></script>
+    <script>
+        (() => {
+            setTimeout(() => {
+                const {
+                    markmap: q,
+                    mm: N
+                } = window, j = new q.Toolbar;
+                j.attach(N);
+                const we = j.render();
+                we.setAttribute("style", "position:absolute;bottom:20px;right:20px"), document.body.append(we)
+            })
+        })()
+    </script>
+    <script>
+        ((u, d, h, f) => {
+            const g = u();
+            window.mm = g.Markmap.create("svg#mindmap", (d || g.deriveOptions)(f), h)
+        })(() => window.markmap, null, {
+            "content": "<strong>Transformers: A Deep Dive</strong>",
+            "children": [{
+                "content": "<strong>Introduction</strong>",
+                "children": [{
+                    "content": "<strong>Transformers</strong>: Neural network architecture designed for sequence-to-sequence tasks.",
+                    "children": [],
+                    "payload": {
+                        "lines": "4,5"
+                    }
+                }, {
+                    "content": "Key paper: \"Attention is All You Need\" (Vaswani et al., 2017).",
+                    "children": [],
+                    "payload": {
+                        "lines": "5,6"
+                    }
+                }, {
+                    "content": "Applications:",
+                    "children": [{
+                        "content": "Natural Language Processing (NLP)",
+                        "children": [],
+                        "payload": {
+                            "lines": "7,8"
+                        }
+                    }, {
+                        "content": "Computer Vision",
+                        "children": [],
+                        "payload": {
+                            "lines": "8,9"
+                        }
+                    }, {
+                        "content": "Time-series analysis",
+                        "children": [],
+                        "payload": {
+                            "lines": "9,11"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "6,11"
+                    }
+                }],
+                "payload": {
+                    "lines": "3,4"
+                }
+            }, {
+                "content": "<strong>Architecture Overview</strong>",
+                "children": [{
+                    "content": "Encoder",
+                    "children": [{
+                        "content": "Processes the input sequence.",
+                        "children": [],
+                        "payload": {
+                            "lines": "16,17"
+                        }
+                    }, {
+                        "content": "Outputs context-rich representations.",
+                        "children": [],
+                        "payload": {
+                            "lines": "17,19"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "15,16"
+                    }
+                }, {
+                    "content": "Decoder",
+                    "children": [{
+                        "content": "Takes encoder outputs and generates a target sequence.",
+                        "children": [],
+                        "payload": {
+                            "lines": "20,22"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "19,20"
+                    }
+                }, {
+                    "content": "Key Components",
+                    "children": [{
+                        "content": "<strong>Multi-head Self-Attention</strong>:",
+                        "children": [{
+                            "content": "Computes attention scores for every token pair.",
+                            "children": [],
+                            "payload": {
+                                "lines": "24,25"
+                            }
+                        }, {
+                            "content": "Formula for attention weights:<span class=\"katex-display\"><span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><semantics><mrow><mtext>Attention</mtext><mo stretchy=\"false\">(</mo><mi>Q</mi><mo separator=\"true\">,</mo><mi>K</mi><mo separator=\"true\">,</mo><mi>V</mi><mo stretchy=\"false\">)</mo><mo>=</mo><mtext>softmax</mtext><mrow><mo fence=\"true\">(</mo><mfrac><mrow><mi>Q</mi><msup><mi>K</mi><mi>T</mi></msup></mrow><msqrt><msub><mi>d</mi><mi>k</mi></msub></msqrt></mfrac><mo fence=\"true\">)</mo></mrow><mi>V</mi></mrow><annotation encoding=\"application/x-tex\">\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V\n</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord text\"><span class=\"mord\">Attention</span></span><span class=\"mopen\">(</span><span class=\"mord mathnormal\">Q</span><span class=\"mpunct\">,</span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.07153em;\">K</span><span class=\"mpunct\">,</span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.22222em;\">V</span><span class=\"mclose\">)</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:2.4684em;vertical-align:-0.95em;\"></span><span class=\"mord text\"><span class=\"mord\">softmax</span></span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"minner\"><span class=\"mopen delimcenter\" style=\"top:0em;\"><span class=\"delimsizing size3\">(</span></span><span class=\"mord\"><span class=\"mopen nulldelimiter\"></span><span class=\"mfrac\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:1.5183em;\"><span style=\"top:-2.2528em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\"><span class=\"mord sqrt\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.8572em;\"><span class=\"svg-align\" style=\"top:-3em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\" style=\"padding-left:0.833em;\"><span class=\"mord\"><span class=\"mord mathnormal\">d</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3361em;\"><span style=\"top:-2.55em;margin-left:0em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mathnormal mtight\" style=\"margin-right:0.03148em;\">k</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.15em;\"><span></span></span></span></span></span></span></span></span><span style=\"top:-2.8172em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"hide-tail\" style=\"min-width:0.853em;height:1.08em;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400em\" height=\"1.08em\" viewBox=\"0 0 400000 1080\" preserveAspectRatio=\"xMinYMin slice\"><path d=\"M95,702\nc-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14\nc0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54\nc44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10\ns173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429\nc69,-144,104.5,-217.7,106.5,-221\nl0 -0\nc5.3,-9.3,12,-14,20,-14\nH400000v40H845.2724\ns-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7\nc-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z\nM834 80h400000v40h-400000z\"></path></svg></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.1828em;\"><span></span></span></span></span></span></span></span><span style=\"top:-3.23em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"frac-line\" style=\"border-bottom-width:0.04em;\"></span></span><span style=\"top:-3.677em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\"><span class=\"mord mathnormal\">Q</span><span class=\"mord\"><span class=\"mord mathnormal\" style=\"margin-right:0.07153em;\">K</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.8413em;\"><span style=\"top:-3.063em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mathnormal mtight\" style=\"margin-right:0.13889em;\">T</span></span></span></span></span></span></span></span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.93em;\"><span></span></span></span></span></span><span class=\"mclose nulldelimiter\"></span></span><span class=\"mclose delimcenter\" style=\"top:0em;\"><span class=\"delimsizing size3\">)</span></span></span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.22222em;\">V</span></span></span></span></span>where:",
+                            "children": [{
+                                "content": "<span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>Q</mi></mrow><annotation encoding=\"application/x-tex\">Q</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.8778em;vertical-align:-0.1944em;\"></span><span class=\"mord mathnormal\">Q</span></span></span></span>: Query matrix",
+                                "children": [],
+                                "payload": {
+                                    "lines": "30,31"
+                                }
+                            }, {
+                                "content": "<span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>K</mi></mrow><annotation encoding=\"application/x-tex\">K</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6833em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.07153em;\">K</span></span></span></span>: Key matrix",
+                                "children": [],
+                                "payload": {
+                                    "lines": "31,32"
+                                }
+                            }, {
+                                "content": "<span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>V</mi></mrow><annotation encoding=\"application/x-tex\">V</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6833em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.22222em;\">V</span></span></span></span>: Value matrix",
+                                "children": [],
+                                "payload": {
+                                    "lines": "32,33"
+                                }
+                            }, {
+                                "content": "<span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msub><mi>d</mi><mi>k</mi></msub></mrow><annotation encoding=\"application/x-tex\">d_k</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.8444em;vertical-align:-0.15em;\"></span><span class=\"mord\"><span class=\"mord mathnormal\">d</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3361em;\"><span style=\"top:-2.55em;margin-left:0em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mathnormal mtight\" style=\"margin-right:0.03148em;\">k</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.15em;\"><span></span></span></span></span></span></span></span></span></span>: Dimensionality of keys",
+                                "children": [],
+                                "payload": {
+                                    "lines": "33,34"
+                                }
+                            }],
+                            "payload": {
+                                "lines": "25,34"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "23,34"
+                        }
+                    }, {
+                        "content": "<strong>Feedforward Neural Networks</strong>:",
+                        "children": [{
+                            "content": "Applies transformations to each position independently.",
+                            "children": [],
+                            "payload": {
+                                "lines": "35,36"
+                            }
+                        }, {
+                            "content": "Formula:<span class=\"katex-display\"><span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><semantics><mrow><mtext>FFN</mtext><mo stretchy=\"false\">(</mo><mi>x</mi><mo stretchy=\"false\">)</mo><mo>=</mo><mtext>ReLU</mtext><mo stretchy=\"false\">(</mo><mi>x</mi><msub><mi>W</mi><mn>1</mn></msub><mo>+</mo><msub><mi>b</mi><mn>1</mn></msub><mo stretchy=\"false\">)</mo><msub><mi>W</mi><mn>2</mn></msub><mo>+</mo><msub><mi>b</mi><mn>2</mn></msub></mrow><annotation encoding=\"application/x-tex\">\\text{FFN}(x) = \\text{ReLU}(xW_1 + b_1)W_2 + b_2\n</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord text\"><span class=\"mord\">FFN</span></span><span class=\"mopen\">(</span><span class=\"mord mathnormal\">x</span><span class=\"mclose\">)</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord text\"><span class=\"mord\">ReLU</span></span><span class=\"mopen\">(</span><span class=\"mord mathnormal\">x</span><span class=\"mord\"><span class=\"mord mathnormal\" style=\"margin-right:0.13889em;\">W</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3011em;\"><span style=\"top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\">1</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.15em;\"><span></span></span></span></span></span></span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span><span class=\"mbin\">+</span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord\"><span class=\"mord mathnormal\">b</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3011em;\"><span style=\"top:-2.55em;margin-left:0em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\">1</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.15em;\"><span></span></span></span></span></span></span><span class=\"mclose\">)</span><span class=\"mord\"><span class=\"mord mathnormal\" style=\"margin-right:0.13889em;\">W</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3011em;\"><span style=\"top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\">2</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.15em;\"><span></span></span></span></span></span></span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span><span class=\"mbin\">+</span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.8444em;vertical-align:-0.15em;\"></span><span class=\"mord\"><span class=\"mord mathnormal\">b</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3011em;\"><span style=\"top:-2.55em;margin-left:0em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\">2</span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.15em;\"><span></span></span></span></span></span></span></span></span></span></span>",
+                            "children": [],
+                            "payload": {
+                                "lines": "36,41"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "34,41"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "22,23"
+                    }
+                }],
+                "payload": {
+                    "lines": "11,12"
+                }
+            }, {
+                "content": "<strong>Positional Encoding</strong>",
+                "children": [{
+                    "content": "Adds positional information to token embeddings.",
+                    "children": [],
+                    "payload": {
+                        "lines": "42,43"
+                    }
+                }, {
+                    "content": "Formula:<span class=\"katex-display\"><span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><semantics><mrow><mi>P</mi><msub><mi>E</mi><mrow><mtext>pos</mtext><mo separator=\"true\">,</mo><mn>2</mn><mi>i</mi></mrow></msub><mo>=</mo><mi>sin</mi><mo>⁡</mo><mrow><mo fence=\"true\">(</mo><mfrac><mtext>pos</mtext><mrow><mn>1000</mn><msup><mn>0</mn><mrow><mn>2</mn><mi>i</mi><mi mathvariant=\"normal\">/</mi><msub><mi>d</mi><mtext>model</mtext></msub></mrow></msup></mrow></mfrac><mo fence=\"true\">)</mo></mrow><mo separator=\"true\">,</mo><mspace width=\"1em\"></mspace><mi>P</mi><msub><mi>E</mi><mrow><mtext>pos</mtext><mo separator=\"true\">,</mo><mn>2</mn><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>cos</mi><mo>⁡</mo><mrow><mo fence=\"true\">(</mo><mfrac><mtext>pos</mtext><mrow><mn>1000</mn><msup><mn>0</mn><mrow><mn>2</mn><mi>i</mi><mi mathvariant=\"normal\">/</mi><msub><mi>d</mi><mtext>model</mtext></msub></mrow></msup></mrow></mfrac><mo fence=\"true\">)</mo></mrow></mrow><annotation encoding=\"application/x-tex\">PE_{\\text{pos},2i} = \\sin\\left(\\frac{\\text{pos}}{10000^{2i/d_{\\text{model}}}}\\right), \\quad\nPE_{\\text{pos},2i+1} = \\cos\\left(\\frac{\\text{pos}}{10000^{2i/d_{\\text{model}}}}\\right)\n</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.9694em;vertical-align:-0.2861em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.13889em;\">P</span><span class=\"mord\"><span class=\"mord mathnormal\" style=\"margin-right:0.05764em;\">E</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3117em;\"><span style=\"top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord text mtight\"><span class=\"mord mtight\">pos</span></span><span class=\"mpunct mtight\">,</span><span class=\"mord mtight\">2</span><span class=\"mord mathnormal mtight\">i</span></span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.2861em;\"><span></span></span></span></span></span></span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1.854em;vertical-align:-0.704em;\"></span><span class=\"mop\">sin</span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"minner\"><span class=\"mopen delimcenter\" style=\"top:0em;\"><span class=\"delimsizing size2\">(</span></span><span class=\"mord\"><span class=\"mopen nulldelimiter\"></span><span class=\"mfrac\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:1.1076em;\"><span style=\"top:-2.296em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\"><span class=\"mord\">1000</span><span class=\"mord\"><span class=\"mord\">0</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.814em;\"><span style=\"top:-2.989em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord mtight\">2</span><span class=\"mord mathnormal mtight\">i</span><span class=\"mord mtight\">/</span><span class=\"mord mtight\"><span class=\"mord mathnormal mtight\">d</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3448em;\"><span style=\"top:-2.3488em;margin-left:0em;margin-right:0.0714em;\"><span class=\"pstrut\" style=\"height:2.5em;\"></span><span class=\"sizing reset-size3 size1 mtight\"><span class=\"mord mtight\"><span class=\"mord text mtight\"><span class=\"mord mtight\">model</span></span></span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.1512em;\"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span style=\"top:-3.23em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"frac-line\" style=\"border-bottom-width:0.04em;\"></span></span><span style=\"top:-3.677em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\"><span class=\"mord text\"><span class=\"mord\">pos</span></span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.704em;\"><span></span></span></span></span></span><span class=\"mclose nulldelimiter\"></span></span><span class=\"mclose delimcenter\" style=\"top:0em;\"><span class=\"delimsizing size2\">)</span></span></span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"mpunct\">,</span><span class=\"mspace\" style=\"margin-right:1em;\"></span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.13889em;\">P</span><span class=\"mord\"><span class=\"mord mathnormal\" style=\"margin-right:0.05764em;\">E</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3117em;\"><span style=\"top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord text mtight\"><span class=\"mord mtight\">pos</span></span><span class=\"mpunct mtight\">,</span><span class=\"mord mtight\">2</span><span class=\"mord mathnormal mtight\">i</span><span class=\"mbin mtight\">+</span><span class=\"mord mtight\">1</span></span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.2861em;\"><span></span></span></span></span></span></span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1.854em;vertical-align:-0.704em;\"></span><span class=\"mop\">cos</span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"minner\"><span class=\"mopen delimcenter\" style=\"top:0em;\"><span class=\"delimsizing size2\">(</span></span><span class=\"mord\"><span class=\"mopen nulldelimiter\"></span><span class=\"mfrac\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:1.1076em;\"><span style=\"top:-2.296em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\"><span class=\"mord\">1000</span><span class=\"mord\"><span class=\"mord\">0</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.814em;\"><span style=\"top:-2.989em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord mtight\">2</span><span class=\"mord mathnormal mtight\">i</span><span class=\"mord mtight\">/</span><span class=\"mord mtight\"><span class=\"mord mathnormal mtight\">d</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.3448em;\"><span style=\"top:-2.3488em;margin-left:0em;margin-right:0.0714em;\"><span class=\"pstrut\" style=\"height:2.5em;\"></span><span class=\"sizing reset-size3 size1 mtight\"><span class=\"mord mtight\"><span class=\"mord text mtight\"><span class=\"mord mtight\">model</span></span></span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.1512em;\"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span style=\"top:-3.23em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"frac-line\" style=\"border-bottom-width:0.04em;\"></span></span><span style=\"top:-3.677em;\"><span class=\"pstrut\" style=\"height:3em;\"></span><span class=\"mord\"><span class=\"mord text\"><span class=\"mord\">pos</span></span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.704em;\"><span></span></span></span></span></span><span class=\"mclose nulldelimiter\"></span></span><span class=\"mclose delimcenter\" style=\"top:0em;\"><span class=\"delimsizing size2\">)</span></span></span></span></span></span></span>",
+                    "children": [],
+                    "payload": {
+                        "lines": "43,48"
+                    }
+                }, {
+                    "content": "Ensures the model understands sequence order.",
+                    "children": [],
+                    "payload": {
+                        "lines": "48,50"
+                    }
+                }],
+                "payload": {
+                    "lines": "41,42"
+                }
+            }, {
+                "content": "<strong>Training</strong>",
+                "children": [{
+                    "content": "<strong>Loss Function</strong>:",
+                    "children": [{
+                        "content": "Typically, cross-entropy for classification tasks.",
+                        "children": [],
+                        "payload": {
+                            "lines": "52,53"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "51,53"
+                    }
+                }, {
+                    "content": "<strong>Optimization</strong>:",
+                    "children": [{
+                        "content": "Adam optimizer with warm-up schedule for learning rate.",
+                        "children": [],
+                        "payload": {
+                            "lines": "54,55"
+                        }
+                    }, {
+                        "content": "Formula for learning rate:<span class=\"katex-display\"><span class=\"katex\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"><semantics><mrow><mtext>lr</mtext><mo>=</mo><msubsup><mi>d</mi><mtext>model</mtext><mrow><mo>−</mo><mn>0.5</mn></mrow></msubsup><mo>⋅</mo><mi>min</mi><mo>⁡</mo><mrow><mo fence=\"true\">(</mo><msup><mtext>step</mtext><mrow><mo>−</mo><mn>0.5</mn></mrow></msup><mo separator=\"true\">,</mo><mtext>step</mtext><mo>⋅</mo><msup><mtext>warmup_steps</mtext><mrow><mo>−</mo><mn>1.5</mn></mrow></msup><mo fence=\"true\">)</mo></mrow></mrow><annotation encoding=\"application/x-tex\">\\text{lr} = d_{\\text{model}}^{-0.5} \\cdot \\min\\left(\\text{step}^{-0.5}, \\text{step} \\cdot \\text{warmup\\_steps}^{-1.5}\\right)\n</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em;\"></span><span class=\"mord text\"><span class=\"mord\">lr</span></span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span><span class=\"mrel\">=</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1.1555em;vertical-align:-0.2914em;\"></span><span class=\"mord\"><span class=\"mord mathnormal\">d</span><span class=\"msupsub\"><span class=\"vlist-t vlist-t2\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.8641em;\"><span style=\"top:-2.4086em;margin-left:0em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord text mtight\"><span class=\"mord mtight\">model</span></span></span></span></span><span style=\"top:-3.113em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord mtight\">−</span><span class=\"mord mtight\">0.5</span></span></span></span></span><span class=\"vlist-s\">​</span></span><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.2914em;\"><span></span></span></span></span></span></span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span><span class=\"mbin\">⋅</span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1.2141em;vertical-align:-0.35em;\"></span><span class=\"mop\">min</span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"minner\"><span class=\"mopen delimcenter\" style=\"top:0em;\"><span class=\"delimsizing size1\">(</span></span><span class=\"mord\"><span class=\"mord text\"><span class=\"mord\">step</span></span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.8641em;\"><span style=\"top:-3.113em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord mtight\">−</span><span class=\"mord mtight\">0.5</span></span></span></span></span></span></span></span></span><span class=\"mpunct\">,</span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"mord text\"><span class=\"mord\">step</span></span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span><span class=\"mbin\">⋅</span><span class=\"mspace\" style=\"margin-right:0.2222em;\"></span><span class=\"mord\"><span class=\"mord text\"><span class=\"mord\">warmup_steps</span></span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.8641em;\"><span style=\"top:-3.113em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord mtight\">−</span><span class=\"mord mtight\">1.5</span></span></span></span></span></span></span></span></span><span class=\"mclose delimcenter\" style=\"top:0em;\"><span class=\"delimsizing size1\">)</span></span></span></span></span></span></span>",
+                        "children": [],
+                        "payload": {
+                            "lines": "55,60"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "53,60"
+                    }
+                }],
+                "payload": {
+                    "lines": "50,51"
+                }
+            }, {
+                "content": "<strong>Variants</strong>",
+                "children": [{
+                    "content": "<strong>BERT</strong>:",
+                    "children": [{
+                        "content": "Bi-directional Encoder Representations.",
+                        "children": [],
+                        "payload": {
+                            "lines": "62,63"
+                        }
+                    }, {
+                        "content": "Pretrained on masked language modeling (MLM) and next sentence prediction (NSP).",
+                        "children": [],
+                        "payload": {
+                            "lines": "63,64"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "61,64"
+                    }
+                }, {
+                    "content": "<strong>GPT</strong>:",
+                    "children": [{
+                        "content": "Generative Pre-trained Transformer.",
+                        "children": [],
+                        "payload": {
+                            "lines": "65,66"
+                        }
+                    }, {
+                        "content": "Unidirectional; focuses on autoregressive tasks.",
+                        "children": [],
+                        "payload": {
+                            "lines": "66,67"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "64,67"
+                    }
+                }, {
+                    "content": "<strong>T5</strong>:",
+                    "children": [{
+                        "content": "Text-to-Text Transfer Transformer.",
+                        "children": [],
+                        "payload": {
+                            "lines": "68,69"
+                        }
+                    }, {
+                        "content": "Treats all NLP tasks as text generation problems.",
+                        "children": [],
+                        "payload": {
+                            "lines": "69,71"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "67,71"
+                    }
+                }],
+                "payload": {
+                    "lines": "60,61"
+                }
+            }, {
+                "content": "<strong>Advantages</strong>",
+                "children": [{
+                    "content": "Parallelizable due to attention mechanism.",
+                    "children": [],
+                    "payload": {
+                        "lines": "72,73"
+                    }
+                }, {
+                    "content": "Scales well to large datasets and models.",
+                    "children": [],
+                    "payload": {
+                        "lines": "73,75"
+                    }
+                }],
+                "payload": {
+                    "lines": "71,72"
+                }
+            }, {
+                "content": "<strong>Challenges</strong>",
+                "children": [{
+                    "content": "Computationally expensive.",
+                    "children": [],
+                    "payload": {
+                        "lines": "76,77"
+                    }
+                }, {
+                    "content": "Memory-intensive for long sequences.",
+                    "children": [],
+                    "payload": {
+                        "lines": "77,79"
+                    }
+                }],
+                "payload": {
+                    "lines": "75,76"
+                }
+            }, {
+                "content": "<strong>Applications<strong>",
+                "children": [{
+                    "content": "Machine Translation",
+                    "children": [],
+                    "payload": {
+                        "lines": "80,81"
+                    }
+                }, {
+                    "content": "Summarization",
+                    "children": [],
+                    "payload": {
+                        "lines": "81,82"
+                    }
+                }, {
+                    "content": "Question Answering",
+                    "children": [],
+                    "payload": {
+                        "lines": "82,83"
+                    }
+                }, {
+                    "content": "Image Captioning",
+                    "children": [],
+                    "payload": {
+                        "lines": "83,84"
+                    }
+                }],
+                "payload": {
+                    "lines": "79,80"
+                }
+            }],
+            "payload": {
+                "lines": "1,2"
+            }
+        }, {
+            "maxWidth": 300
+        })
+    </script>
+</body>
+
+</html>

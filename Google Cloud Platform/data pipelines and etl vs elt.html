@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="author" content="Muskula Rahul"/>
+	<title>Data Pipelines And ELT vs ETL Viz</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#mindmap {
+			display: block;
+			width: 100vw;
+			height: 100vh;
+		}
+	</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/style.css">
+</head>
+
+<body>
+	<svg id="mindmap"></svg>
+	<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17.3-alpha.1/dist/browser/index.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/index.js"></script>
+	<script>
+		(() => {
+			setTimeout(() => {
+				const {
+					markmap: q,
+					mm: N
+				} = window, j = new q.Toolbar;
+				j.attach(N);
+				const we = j.render();
+				we.setAttribute("style", "position:absolute;bottom:20px;right:20px"), document.body.append(we)
+			})
+		})()
+	</script>
+	<script>
+		((u, d, h, f) => {
+			const g = u();
+			window.mm = g.Markmap.create("svg#mindmap", (d || g.deriveOptions)(f), h)
+		})(() => window.markmap, null, {
+			"content": "<strong>Data Pipelines and ETL vs. ELT</strong>",
+			"children": [{
+				"content": "<strong>Introduction to Data Pipelines</strong>",
+				"children": [{
+					"content": "<strong>Definition</strong>",
+					"children": [{
+						"content": "<strong>Data Pipeline</strong>: A data pipeline is a series of data processing steps used to automate the flow of data from source systems to data storage and data analytics tools. It ensures that data is collected, cleaned, transformed, and loaded efficiently and accurately.",
+						"children": [],
+						"payload": {
+							"lines": "6,8"
+						}
+					}],
+					"payload": {
+						"lines": "5,6"
+					}
+				}, {
+					"content": "<strong>Components</strong>",
+					"children": [{
+						"content": "<strong>Data Ingestion</strong>: The process of collecting raw data from various sources such as databases, APIs, files, and streams.",
+						"children": [],
+						"payload": {
+							"lines": "9,10"
+						}
+					}, {
+						"content": "<strong>Data Transformation</strong>: The process of cleaning, filtering, aggregating, and enriching the data to make it suitable for analysis.",
+						"children": [],
+						"payload": {
+							"lines": "10,11"
+						}
+					}, {
+						"content": "<strong>Data Loading</strong>: The process of storing the transformed data into a data warehouse, data lake, or other storage systems.",
+						"children": [],
+						"payload": {
+							"lines": "11,12"
+						}
+					}, {
+						"content": "<strong>Data Orchestration</strong>: The process of managing and scheduling the execution of data pipeline tasks to ensure they run in the correct order and at the right time.",
+						"children": [],
+						"payload": {
+							"lines": "12,14"
+						}
+					}],
+					"payload": {
+						"lines": "8,9"
+					}
+				}, {
+					"content": "<strong>Benefits</strong>",
+					"children": [{
+						"content": "<strong>Automation</strong>: Reduces manual effort and human error by automating data processing tasks.",
+						"children": [],
+						"payload": {
+							"lines": "15,16"
+						}
+					}, {
+						"content": "<strong>Scalability</strong>: Can handle large volumes of data and scale horizontally to accommodate growing data needs.",
+						"children": [],
+						"payload": {
+							"lines": "16,17"
+						}
+					}, {
+						"content": "<strong>Consistency</strong>: Ensures data is processed consistently and reliably, maintaining data integrity.",
+						"children": [],
+						"payload": {
+							"lines": "17,18"
+						}
+					}, {
+						"content": "<strong>Efficiency</strong>: Optimizes data processing tasks, reducing time and resources required.",
+						"children": [],
+						"payload": {
+							"lines": "18,20"
+						}
+					}],
+					"payload": {
+						"lines": "14,15"
+					}
+				}],
+				"payload": {
+					"lines": "3,4"
+				}
+			}, {
+				"content": "<strong>ETL (Extract, Transform, Load)</strong>",
+				"children": [{
+					"content": "<strong>Definition</strong>",
+					"children": [{
+						"content": "<strong>ETL</strong>: ETL is a data integration process that involves extracting data from various sources, transforming it to fit operational needs, and loading it into a data warehouse or other storage systems.",
+						"children": [],
+						"payload": {
+							"lines": "23,25"
+						}
+					}],
+					"payload": {
+						"lines": "22,23"
+					}
+				}, {
+					"content": "<strong>Process</strong>",
+					"children": [{
+						"content": "1. <strong>Extract</strong>: Collect raw data from source systems such as databases, APIs, files, and streams.",
+						"children": [],
+						"payload": {
+							"lines": "26,27",
+							"listIndex": 1
+						}
+					}, {
+						"content": "2. <strong>Transform</strong>: Clean, filter, aggregate, and enrich the data to make it suitable for analysis. This step may involve data validation, deduplication, and normalization.",
+						"children": [],
+						"payload": {
+							"lines": "27,28",
+							"listIndex": 2
+						}
+					}, {
+						"content": "3. <strong>Load</strong>: Store the transformed data into a data warehouse, data lake, or other storage systems.",
+						"children": [],
+						"payload": {
+							"lines": "28,30",
+							"listIndex": 3
+						}
+					}],
+					"payload": {
+						"lines": "25,26"
+					}
+				}, {
+					"content": "<strong>Use Cases</strong>",
+					"children": [{
+						"content": "<strong>Data Warehousing</strong>: Populating data warehouses with cleaned and transformed data for business intelligence and analytics.",
+						"children": [],
+						"payload": {
+							"lines": "31,32"
+						}
+					}, {
+						"content": "<strong>Data Migration</strong>: Moving data from legacy systems to modern data storage solutions.",
+						"children": [],
+						"payload": {
+							"lines": "32,33"
+						}
+					}, {
+						"content": "<strong>Data Integration</strong>: Combining data from multiple sources to create a unified view.",
+						"children": [],
+						"payload": {
+							"lines": "33,35"
+						}
+					}],
+					"payload": {
+						"lines": "30,31"
+					}
+				}, {
+					"content": "<strong>Tools</strong>",
+					"children": [{
+						"content": "<strong>Apache NiFi</strong>: A data integration tool that supports real-time data processing and automation.",
+						"children": [],
+						"payload": {
+							"lines": "36,37"
+						}
+					}, {
+						"content": "<strong>Talend</strong>: An open-source data integration platform that provides ETL capabilities.",
+						"children": [],
+						"payload": {
+							"lines": "37,38"
+						}
+					}, {
+						"content": "<strong>Informatica</strong>: A enterprise-grade data integration tool that supports ETL and data governance.",
+						"children": [],
+						"payload": {
+							"lines": "38,40"
+						}
+					}],
+					"payload": {
+						"lines": "35,36"
+					}
+				}],
+				"payload": {
+					"lines": "20,21"
+				}
+			}, {
+				"content": "<strong>ELT (Extract, Load, Transform)</strong>",
+				"children": [{
+					"content": "<strong>Definition</strong>",
+					"children": [{
+						"content": "<strong>ELT</strong>: ELT is a data integration process that involves extracting data from various sources, loading it into a data warehouse or data lake, and then transforming it within the storage system.",
+						"children": [],
+						"payload": {
+							"lines": "43,45"
+						}
+					}],
+					"payload": {
+						"lines": "42,43"
+					}
+				}, {
+					"content": "<strong>Process</strong>",
+					"children": [{
+						"content": "1. <strong>Extract</strong>: Collect raw data from source systems such as databases, APIs, files, and streams.",
+						"children": [],
+						"payload": {
+							"lines": "46,47",
+							"listIndex": 1
+						}
+					}, {
+						"content": "2. <strong>Load</strong>: Store the raw data into a data warehouse, data lake, or other storage systems.",
+						"children": [],
+						"payload": {
+							"lines": "47,48",
+							"listIndex": 2
+						}
+					}, {
+						"content": "3. <strong>Transform</strong>: Clean, filter, aggregate, and enrich the data within the storage system using SQL or other query languages.",
+						"children": [],
+						"payload": {
+							"lines": "48,50",
+							"listIndex": 3
+						}
+					}],
+					"payload": {
+						"lines": "45,46"
+					}
+				}, {
+					"content": "<strong>Use Cases</strong>",
+					"children": [{
+						"content": "<strong>Big Data Analytics</strong>: Processing large volumes of data in data lakes using distributed computing frameworks.",
+						"children": [],
+						"payload": {
+							"lines": "51,52"
+						}
+					}, {
+						"content": "<strong>Cloud Data Warehousing</strong>: Leveraging cloud-based data warehouses that offer scalable storage and compute resources.",
+						"children": [],
+						"payload": {
+							"lines": "52,53"
+						}
+					}, {
+						"content": "<strong>Real-Time Data Processing</strong>: Handling real-time data streams and performing transformations on-the-fly.",
+						"children": [],
+						"payload": {
+							"lines": "53,55"
+						}
+					}],
+					"payload": {
+						"lines": "50,51"
+					}
+				}, {
+					"content": "<strong>Tools</strong>",
+					"children": [{
+						"content": "<strong>Google BigQuery</strong>: A fully-managed, serverless data warehouse that supports ELT processes.",
+						"children": [],
+						"payload": {
+							"lines": "56,57"
+						}
+					}, {
+						"content": "<strong>Amazon Redshift</strong>: A cloud-based data warehouse that provides scalable storage and compute resources for ELT.",
+						"children": [],
+						"payload": {
+							"lines": "57,58"
+						}
+					}, {
+						"content": "<strong>Snowflake</strong>: A cloud-based data warehousing solution that supports ELT and provides advanced data processing capabilities.",
+						"children": [],
+						"payload": {
+							"lines": "58,60"
+						}
+					}],
+					"payload": {
+						"lines": "55,56"
+					}
+				}],
+				"payload": {
+					"lines": "40,41"
+				}
+			}, {
+				"content": "<strong>ETL vs. ELT</strong>",
+				"children": [{
+					"content": "<strong>Key Differences</strong>",
+					"children": [{
+						"content": "<strong>Order of Operations</strong>:",
+						"children": [{
+							"content": "<strong>ETL</strong>: Transformations are performed before loading the data into the storage system.",
+							"children": [],
+							"payload": {
+								"lines": "64,65"
+							}
+						}, {
+							"content": "<strong>ELT</strong>: Transformations are performed after loading the data into the storage system.",
+							"children": [],
+							"payload": {
+								"lines": "65,66"
+							}
+						}],
+						"payload": {
+							"lines": "63,66"
+						}
+					}, {
+						"content": "<strong>Performance</strong>:",
+						"children": [{
+							"content": "<strong>ETL</strong>: Can be slower due to the need to transform data before loading, which may require additional processing resources.",
+							"children": [],
+							"payload": {
+								"lines": "67,68"
+							}
+						}, {
+							"content": "<strong>ELT</strong>: Can be faster as it leverages the compute resources of the storage system to perform transformations.",
+							"children": [],
+							"payload": {
+								"lines": "68,69"
+							}
+						}],
+						"payload": {
+							"lines": "66,69"
+						}
+					}, {
+						"content": "<strong>Scalability</strong>:",
+						"children": [{
+							"content": "<strong>ETL</strong>: May require additional infrastructure to handle large-scale transformations.",
+							"children": [],
+							"payload": {
+								"lines": "70,71"
+							}
+						}, {
+							"content": "<strong>ELT</strong>: Scales easily with the storage system, leveraging distributed computing and cloud resources.",
+							"children": [],
+							"payload": {
+								"lines": "71,72"
+							}
+						}],
+						"payload": {
+							"lines": "69,72"
+						}
+					}, {
+						"content": "<strong>Flexibility</strong>:",
+						"children": [{
+							"content": "<strong>ETL</strong>: Offers more control over the transformation process but can be more complex to manage.",
+							"children": [],
+							"payload": {
+								"lines": "73,74"
+							}
+						}, {
+							"content": "<strong>ELT</strong>: Simplifies the data pipeline by leveraging the capabilities of the storage system but may have limitations in transformation capabilities.",
+							"children": [],
+							"payload": {
+								"lines": "74,76"
+							}
+						}],
+						"payload": {
+							"lines": "72,76"
+						}
+					}],
+					"payload": {
+						"lines": "62,63"
+					}
+				}, {
+					"content": "<strong>When to Use ETL</strong>",
+					"children": [{
+						"content": "<strong>Legacy Systems</strong>: When working with legacy systems that require data to be transformed before loading.",
+						"children": [],
+						"payload": {
+							"lines": "77,78"
+						}
+					}, {
+						"content": "<strong>Complex Transformations</strong>: When the transformations are complex and require specialized processing.",
+						"children": [],
+						"payload": {
+							"lines": "78,79"
+						}
+					}, {
+						"content": "<strong>On-Premises Solutions</strong>: When using on-premises data warehouses and storage systems.",
+						"children": [],
+						"payload": {
+							"lines": "79,81"
+						}
+					}],
+					"payload": {
+						"lines": "76,77"
+					}
+				}, {
+					"content": "<strong>When to Use ELT</strong>",
+					"children": [{
+						"content": "<strong>Cloud-Based Solutions</strong>: When using cloud-based data warehouses and data lakes that offer scalable storage and compute resources.",
+						"children": [],
+						"payload": {
+							"lines": "82,83"
+						}
+					}, {
+						"content": "<strong>Big Data</strong>: When processing large volumes of data that benefit from distributed computing and parallel processing.",
+						"children": [],
+						"payload": {
+							"lines": "83,84"
+						}
+					}, {
+						"content": "<strong>Real-Time Data</strong>: When handling real-time data streams and performing transformations on-the-fly.",
+						"children": [],
+						"payload": {
+							"lines": "84,86"
+						}
+					}],
+					"payload": {
+						"lines": "81,82"
+					}
+				}],
+				"payload": {
+					"lines": "60,61"
+				}
+			}, {
+				"content": "<strong>Best Practices for Data Pipelines</strong>",
+				"children": [{
+					"content": "<strong>Design Principles</strong>",
+					"children": [{
+						"content": "<strong>Modularity</strong>: Break down the data pipeline into modular components that can be easily managed and scaled.",
+						"children": [],
+						"payload": {
+							"lines": "89,90"
+						}
+					}, {
+						"content": "<strong>Reusability</strong>: Design reusable components that can be used across multiple data pipelines.",
+						"children": [],
+						"payload": {
+							"lines": "90,91"
+						}
+					}, {
+						"content": "<strong>Fault Tolerance</strong>: Implement error handling and retry mechanisms to ensure data pipeline robustness.",
+						"children": [],
+						"payload": {
+							"lines": "91,92"
+						}
+					}, {
+						"content": "<strong>Monitoring</strong>: Monitor data pipeline performance and health to identify and resolve issues promptly.",
+						"children": [],
+						"payload": {
+							"lines": "92,94"
+						}
+					}],
+					"payload": {
+						"lines": "88,89"
+					}
+				}, {
+					"content": "<strong>Data Quality</strong>",
+					"children": [{
+						"content": "<strong>Validation</strong>: Implement data validation checks to ensure data integrity and quality.",
+						"children": [],
+						"payload": {
+							"lines": "95,96"
+						}
+					}, {
+						"content": "<strong>Cleansing</strong>: Clean and transform data to remove inconsistencies and errors.",
+						"children": [],
+						"payload": {
+							"lines": "96,97"
+						}
+					}, {
+						"content": "<strong>Profiling</strong>: Profile data to understand its structure, quality, and distribution.",
+						"children": [],
+						"payload": {
+							"lines": "97,99"
+						}
+					}],
+					"payload": {
+						"lines": "94,95"
+					}
+				}, {
+					"content": "<strong>Security</strong>",
+					"children": [{
+						"content": "<strong>Access Control</strong>: Implement access control mechanisms to restrict access to sensitive data.",
+						"children": [],
+						"payload": {
+							"lines": "100,101"
+						}
+					}, {
+						"content": "<strong>Encryption</strong>: Encrypt data in transit and at rest to protect against unauthorized access.",
+						"children": [],
+						"payload": {
+							"lines": "101,102"
+						}
+					}, {
+						"content": "<strong>Auditing</strong>: Audit data pipeline activities to track data lineage and ensure compliance.",
+						"children": [],
+						"payload": {
+							"lines": "102,104"
+						}
+					}],
+					"payload": {
+						"lines": "99,100"
+					}
+				}, {
+					"content": "<strong>Performance Optimization</strong>",
+					"children": [{
+						"content": "<strong>Parallel Processing</strong>: Leverage parallel processing to speed up data transformations and loading.",
+						"children": [],
+						"payload": {
+							"lines": "105,106"
+						}
+					}, {
+						"content": "<strong>Caching</strong>: Use caching mechanisms to reduce data retrieval times and improve performance.",
+						"children": [],
+						"payload": {
+							"lines": "106,107"
+						}
+					}, {
+						"content": "<strong>Partitioning</strong>: Partition data to optimize query performance and data management.",
+						"children": [],
+						"payload": {
+							"lines": "107,109"
+						}
+					}],
+					"payload": {
+						"lines": "104,105"
+					}
+				}],
+				"payload": {
+					"lines": "86,87"
+				}
+			}],
+			"payload": {
+				"lines": "1,2"
+			}
+		}, {
+			"maxWidth": 1300
+		})
+	</script>
+</body>
+
+</html>

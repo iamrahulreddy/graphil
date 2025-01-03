@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Muskula Rahul"/>
+    <title>Try Ecxcept Viz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #mindmap {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/style.css">
+</head>
+
+<body>
+    <svg id="mindmap"></svg>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17.3-alpha.1/dist/browser/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/index.js"></script>
+    <script>
+        (() => {
+            setTimeout(() => {
+                const {
+                    markmap: q,
+                    mm: N
+                } = window, j = new q.Toolbar;
+                j.attach(N);
+                const we = j.render();
+                we.setAttribute("style", "position:absolute;bottom:20px;right:20px"), document.body.append(we)
+            })
+        })()
+    </script>
+    <script>
+        ((u, d, h, f) => {
+            const g = u();
+            window.mm = g.Markmap.create("svg#mindmap", (d || g.deriveOptions)(f), h)
+        })(() => window.markmap, null, {
+            "content": "Python Error Handling 🐍",
+            "children": [{
+                "content": "Introduction",
+                "children": [{
+                    "content": "<strong>Purpose</strong>: Manage runtime errors gracefully",
+                    "children": [],
+                    "payload": {
+                        "lines": "3,4"
+                    }
+                }, {
+                    "content": "<strong>Key Concepts</strong>: Try, Except, Else, Finally",
+                    "children": [],
+                    "payload": {
+                        "lines": "4,6"
+                    }
+                }],
+                "payload": {
+                    "lines": "2,3"
+                }
+            }, {
+                "content": "Basic Structure",
+                "children": [{
+                    "content": "<pre><code class=\"language-python\"><span class=\"hljs-keyword\">try</span>:\n    <span class=\"hljs-comment\"># Code that may raise an exception</span>\n    <span class=\"hljs-keyword\">pass</span>\n<span class=\"hljs-keyword\">except</span> Exception <span class=\"hljs-keyword\">as</span> e:\n    <span class=\"hljs-comment\"># Code that runs if an exception occurs</span>\n    <span class=\"hljs-keyword\">pass</span>\n<span class=\"hljs-keyword\">else</span>:\n    <span class=\"hljs-comment\"># Code that runs if no exception occurs</span>\n    <span class=\"hljs-keyword\">pass</span>\n<span class=\"hljs-keyword\">finally</span>:\n    <span class=\"hljs-comment\"># Code that runs no matter what</span>\n    <span class=\"hljs-keyword\">pass</span>\n</code></pre>",
+                    "children": []
+                }],
+                "payload": {
+                    "lines": "6,7"
+                }
+            }, {
+                "content": "Try Block 🔍",
+                "children": [{
+                    "content": "<strong>Purpose</strong>: Contains code that might raise an exception",
+                    "children": [],
+                    "payload": {
+                        "lines": "23,24"
+                    }
+                }, {
+                    "content": "<strong>Example</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">try</span>:\n    result = <span class=\"hljs-number\">10</span> / <span class=\"hljs-number\">0</span>\n</code></pre>",
+                    "children": [],
+                    "payload": {
+                        "lines": "24,30"
+                    }
+                }],
+                "payload": {
+                    "lines": "22,23"
+                }
+            }, {
+                "content": "Except Block 🛡️",
+                "children": [{
+                    "content": "<strong>Purpose</strong>: Handles exceptions raised in the try block",
+                    "children": [],
+                    "payload": {
+                        "lines": "31,32"
+                    }
+                }, {
+                    "content": "<strong>Syntax</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">except</span> ExceptionType <span class=\"hljs-keyword\">as</span> e:\n    <span class=\"hljs-comment\"># Handle the exception</span>\n</code></pre>",
+                    "children": [],
+                    "payload": {
+                        "lines": "32,37"
+                    }
+                }, {
+                    "content": "<strong>Multiple Exceptions</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">except</span> (TypeError, ValueError) <span class=\"hljs-keyword\">as</span> e:\n    <span class=\"hljs-comment\"># Handle multiple exceptions</span>\n</code></pre>",
+                    "children": [],
+                    "payload": {
+                        "lines": "37,43"
+                    }
+                }],
+                "payload": {
+                    "lines": "30,31"
+                }
+            }, {
+                "content": "Else Block ✅",
+                "children": [{
+                    "content": "<strong>Purpose</strong>: Executes if no exceptions are raised in the try block",
+                    "children": [],
+                    "payload": {
+                        "lines": "44,45"
+                    }
+                }, {
+                    "content": "<strong>Example</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">try</span>:\n    result = <span class=\"hljs-number\">10</span> / <span class=\"hljs-number\">2</span>\n<span class=\"hljs-keyword\">except</span> ZeroDivisionError:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Cannot divide by zero!\"</span>)\n<span class=\"hljs-keyword\">else</span>:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Division successful!\"</span>)\n</code></pre>",
+                    "children": [],
+                    "payload": {
+                        "lines": "45,55"
+                    }
+                }],
+                "payload": {
+                    "lines": "43,44"
+                }
+            }, {
+                "content": "Finally Block 🔄",
+                "children": [{
+                    "content": "<strong>Purpose</strong>: Executes regardless of whether an exception was raised",
+                    "children": [],
+                    "payload": {
+                        "lines": "56,57"
+                    }
+                }, {
+                    "content": "<strong>Example</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">try</span>:\n    result = <span class=\"hljs-number\">10</span> / <span class=\"hljs-number\">2</span>\n<span class=\"hljs-keyword\">except</span> ZeroDivisionError:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Cannot divide by zero!\"</span>)\n<span class=\"hljs-keyword\">finally</span>:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"This will always run.\"</span>)\n</code></pre>",
+                    "children": [],
+                    "payload": {
+                        "lines": "57,67"
+                    }
+                }],
+                "payload": {
+                    "lines": "55,56"
+                }
+            }, {
+                "content": "Custom Exceptions 🛠️",
+                "children": [{
+                    "content": "<strong>Purpose</strong>: Create your own exception types",
+                    "children": [],
+                    "payload": {
+                        "lines": "68,69"
+                    }
+                }, {
+                    "content": "<strong>Example</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title class_\">MyCustomError</span>(<span class=\"hljs-title class_ inherited__\">Exception</span>):\n    <span class=\"hljs-keyword\">pass</span>\n\n<span class=\"hljs-keyword\">raise</span> MyCustomError(<span class=\"hljs-string\">\"This is a custom error message!\"</span>)\n</code></pre>",
+                    "children": [],
+                    "payload": {
+                        "lines": "69,77"
+                    }
+                }],
+                "payload": {
+                    "lines": "67,68"
+                }
+            }, {
+                "content": "Best Practices 🌟",
+                "children": [{
+                    "content": "<strong>Specific Exceptions</strong>: Catch specific exceptions rather than general ones",
+                    "children": [],
+                    "payload": {
+                        "lines": "78,79"
+                    }
+                }, {
+                    "content": "<strong>Logging</strong>: Use logging to record exceptions",
+                    "children": [],
+                    "payload": {
+                        "lines": "79,80"
+                    }
+                }, {
+                    "content": "<strong>Cleanup</strong>: Use finally block for cleanup actions",
+                    "children": [],
+                    "payload": {
+                        "lines": "80,82"
+                    }
+                }],
+                "payload": {
+                    "lines": "77,78"
+                }
+            }, {
+                "content": "Common Built-in Exceptions 📚",
+                "children": [{
+                    "content": "<strong>ZeroDivisionError</strong>: Raised when division or modulo by zero takes place",
+                    "children": [],
+                    "payload": {
+                        "lines": "83,84"
+                    }
+                }, {
+                    "content": "<strong>TypeError</strong>: Raised when an operation or function is applied to an object of inappropriate type",
+                    "children": [],
+                    "payload": {
+                        "lines": "84,85"
+                    }
+                }, {
+                    "content": "<strong>ValueError</strong>: Raised when a function receives an argument of the right type but inappropriate value",
+                    "children": [],
+                    "payload": {
+                        "lines": "85,86"
+                    }
+                }, {
+                    "content": "<strong>FileNotFoundError</strong>: Raised when a file or directory is requested but cannot be found",
+                    "children": [],
+                    "payload": {
+                        "lines": "86,87"
+                    }
+                }, {
+                    "content": "<strong>KeyError</strong>: Raised when a dictionary key is not found",
+                    "children": [],
+                    "payload": {
+                        "lines": "87,88"
+                    }
+                }, {
+                    "content": "<strong>IndexError</strong>: Raised when trying to access an index that is out of range",
+                    "children": [],
+                    "payload": {
+                        "lines": "88,89"
+                    }
+                }, {
+                    "content": "<strong>AttributeError</strong>: Raised when an attribute reference or assignment fails",
+                    "children": [],
+                    "payload": {
+                        "lines": "89,90"
+                    }
+                }, {
+                    "content": "<strong>ImportError</strong>: Raised when an imported module is not found",
+                    "children": [],
+                    "payload": {
+                        "lines": "90,91"
+                    }
+                }, {
+                    "content": "<strong>NameError</strong>: Raised when a local or global name is not found",
+                    "children": [],
+                    "payload": {
+                        "lines": "91,92"
+                    }
+                }, {
+                    "content": "<strong>MemoryError</strong>: Raised when an operation runs out of memory but the situation may still be rescued",
+                    "children": [],
+                    "payload": {
+                        "lines": "92,93"
+                    }
+                }, {
+                    "content": "<strong>OverflowError</strong>: Raised when the result of an arithmetic operation is too large to be expressed",
+                    "children": [],
+                    "payload": {
+                        "lines": "93,95"
+                    }
+                }],
+                "payload": {
+                    "lines": "82,83"
+                }
+            }, {
+                "content": "Example Scenario 🌐",
+                "children": [{
+                    "content": "<strong>Reading a File</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">try</span>:\n    <span class=\"hljs-keyword\">with</span> <span class=\"hljs-built_in\">open</span>(<span class=\"hljs-string\">'file.txt'</span>, <span class=\"hljs-string\">'r'</span>) <span class=\"hljs-keyword\">as</span> file:\n        content = file.read()\n<span class=\"hljs-keyword\">except</span> FileNotFoundError:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"File not found!\"</span>)\n<span class=\"hljs-keyword\">except</span> IOError:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Error reading file!\"</span>)\n<span class=\"hljs-keyword\">else</span>:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"File read successfully!\"</span>)\n<span class=\"hljs-keyword\">finally</span>:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"File operation completed.\"</span>)\n</code></pre>",
+                    "children": [],
+                    "payload": {
+                        "lines": "96,111"
+                    }
+                }],
+                "payload": {
+                    "lines": "95,96"
+                }
+            }, {
+                "content": "Advanced Error Handling Techniques 🚀",
+                "children": [{
+                    "content": "Nested Try-Except Blocks",
+                    "children": [{
+                        "content": "<strong>Purpose</strong>: Handle different exceptions at different levels",
+                        "children": [],
+                        "payload": {
+                            "lines": "114,115"
+                        }
+                    }, {
+                        "content": "<strong>Example</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">try</span>:\n    <span class=\"hljs-keyword\">try</span>:\n        result = <span class=\"hljs-number\">10</span> / <span class=\"hljs-number\">0</span>\n    <span class=\"hljs-keyword\">except</span> ZeroDivisionError:\n        <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">\"Inner block: Cannot divide by zero!\"</span>)\n        <span class=\"hljs-keyword\">raise</span>\n<span class=\"hljs-keyword\">except</span> Exception <span class=\"hljs-keyword\">as</span> e:\n    <span class=\"hljs-built_in\">print</span>(<span class=\"hljs-string\">f\"Outer block: <span class=\"hljs-subst\">{e}</span>\"</span>)\n</code></pre>",
+                        "children": [],
+                        "payload": {
+                            "lines": "115,127"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "113,114"
+                    }
+                }, {
+                    "content": "Exception Chaining",
+                    "children": [{
+                        "content": "<strong>Purpose</strong>: Preserve the original exception while raising a new one",
+                        "children": [],
+                        "payload": {
+                            "lines": "128,129"
+                        }
+                    }, {
+                        "content": "<strong>Example</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">try</span>:\n    result = <span class=\"hljs-number\">10</span> / <span class=\"hljs-number\">0</span>\n<span class=\"hljs-keyword\">except</span> ZeroDivisionError <span class=\"hljs-keyword\">as</span> e:\n    <span class=\"hljs-keyword\">raise</span> RuntimeError(<span class=\"hljs-string\">\"A runtime error occurred\"</span>) <span class=\"hljs-keyword\">from</span> e\n</code></pre>",
+                        "children": [],
+                        "payload": {
+                            "lines": "129,137"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "127,128"
+                    }
+                }, {
+                    "content": "Assertions",
+                    "children": [{
+                        "content": "<strong>Purpose</strong>: Debugging aid that tests a condition",
+                        "children": [],
+                        "payload": {
+                            "lines": "138,139"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">assert</span> condition, <span class=\"hljs-string\">\"Error message\"</span>\n</code></pre>",
+                        "children": [],
+                        "payload": {
+                            "lines": "139,143"
+                        }
+                    }, {
+                        "content": "<strong>Example</strong>:<pre><code class=\"language-python\"><span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">divide</span>(<span class=\"hljs-params\">a, b</span>):\n    <span class=\"hljs-keyword\">assert</span> b != <span class=\"hljs-number\">0</span>, <span class=\"hljs-string\">\"Division by zero is not allowed\"</span>\n    <span class=\"hljs-keyword\">return</span> a / b\n\n<span class=\"hljs-keyword\">try</span>:\n    result = divide(<span class=\"hljs-number\">10</span>, <span class=\"hljs-number\">0</span>)\n<span class=\"hljs-keyword\">except</span> AssertionError <span class=\"hljs-keyword\">as</span> e:\n    <span class=\"hljs-built_in\">print</span>(e)\n</code></pre>",
+                        "children": [],
+                        "payload": {
+                            "lines": "143,155"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "137,138"
+                    }
+                }],
+                "payload": {
+                    "lines": "111,112"
+                }
+            }, {
+                "content": "Conclusion",
+                "children": [{
+                    "content": "<strong>Importance</strong>: Proper error handling ensures robust and reliable code",
+                    "children": [],
+                    "payload": {
+                        "lines": "156,157"
+                    }
+                }, {
+                    "content": "<strong>Flexibility</strong>: Python's error handling mechanisms are versatile and powerful",
+                    "children": [],
+                    "payload": {
+                        "lines": "157,159"
+                    }
+                }],
+                "payload": {
+                    "lines": "155,156"
+                }
+            }, {
+                "content": "Additional Resources 📚",
+                "children": [{
+                    "content": "<strong>Official Documentation</strong>: <a href=\"https://docs.python.org/3/tutorial/errors.html\">Python Exception Handling</a>",
+                    "children": [],
+                    "payload": {
+                        "lines": "160,161"
+                    }
+                }, {
+                    "content": "<strong>Books</strong>:",
+                    "children": [{
+                        "content": "\"Python Crash Course\" by Eric Matthes",
+                        "children": [],
+                        "payload": {
+                            "lines": "162,163"
+                        }
+                    }, {
+                        "content": "\"Fluent Python\" by Luciano Ramalho",
+                        "children": [],
+                        "payload": {
+                            "lines": "163,164"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "161,164"
+                    }
+                }, {
+                    "content": "<strong>Online Courses</strong>:",
+                    "children": [{
+                        "content": "Coursera: \"Python for Everybody\" by Dr. Charles Severance",
+                        "children": [],
+                        "payload": {
+                            "lines": "165,166"
+                        }
+                    }, {
+                        "content": "Udemy: \"Complete Python Bootcamp\" by Jose Portilla",
+                        "children": [],
+                        "payload": {
+                            "lines": "166,168"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "164,168"
+                    }
+                }],
+                "payload": {
+                    "lines": "159,160"
+                }
+            }, {
+                "content": "Practice Exercises 🏋️",
+                "children": [{
+                    "content": "1. <strong>Division Program</strong>: Write a program that takes two numbers as input and performs division. Handle any potential exceptions.",
+                    "children": [],
+                    "payload": {
+                        "lines": "169,170",
+                        "listIndex": 1
+                    }
+                }, {
+                    "content": "2. <strong>File Operations</strong>: Write a program that reads from a file and handles <code>FileNotFoundError</code> and <code>IOError</code>.",
+                    "children": [],
+                    "payload": {
+                        "lines": "170,171",
+                        "listIndex": 2
+                    }
+                }, {
+                    "content": "3. <strong>Custom Exception</strong>: Create a custom exception and demonstrate its use in a program.",
+                    "children": [],
+                    "payload": {
+                        "lines": "171,172",
+                        "listIndex": 3
+                    }
+                }, {
+                    "content": "4. <strong>Nested Try-Except</strong>: Write a program that uses nested try-except blocks to handle different levels of exceptions.",
+                    "children": [],
+                    "payload": {
+                        "lines": "172,173",
+                        "listIndex": 4
+                    }
+                }, {
+                    "content": "5. <strong>Assertions</strong>: Write a program that uses assertions to validate input values.",
+                    "children": [],
+                    "payload": {
+                        "lines": "173,175",
+                        "listIndex": 5
+                    }
+                }],
+                "payload": {
+                    "lines": "168,169"
+                }
+            }],
+            "payload": {
+                "lines": "0,1"
+            }
+        }, null)
+    </script>
+</body>
+
+</html>

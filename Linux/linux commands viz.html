@@ -1,0 +1,2658 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Muskula Rahul"/>
+    <title>Linux Commands Viz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #mindmap {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/style.css">
+</head>
+
+<body>
+    <svg id="mindmap"></svg>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-view@0.17.3-alpha.1/dist/browser/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.17.3-alpha.1/dist/index.js"></script>
+    <script>
+        (() => {
+            setTimeout(() => {
+                const {
+                    markmap: q,
+                    mm: N
+                } = window, j = new q.Toolbar;
+                j.attach(N);
+                const we = j.render();
+                we.setAttribute("style", "position:absolute;bottom:20px;right:20px"), document.body.append(we)
+            })
+        })()
+    </script>
+    <script>
+        ((u, d, h, f) => {
+            const g = u();
+            window.mm = g.Markmap.create("svg#mindmap", (d || g.deriveOptions)(f), h)
+        })(() => window.markmap, null, {
+            "content": "Linux Commands and Their Uses",
+            "children": [{
+                "content": "File and Directory Operations",
+                "children": [{
+                    "content": "ls",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: List directory contents.",
+                        "children": [],
+                        "payload": {
+                            "lines": "6,7"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>ls [options] [file|directory]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "7,8"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-l</code>: Long listing format.",
+                            "children": [],
+                            "payload": {
+                                "lines": "9,10"
+                            }
+                        }, {
+                            "content": "<code>-a</code>: Include directory entries whose names begin with a dot.",
+                            "children": [],
+                            "payload": {
+                                "lines": "10,11"
+                            }
+                        }, {
+                            "content": "<code>-h</code>: With -l, print sizes in human readable format (e.g., 1K 234M 2G).",
+                            "children": [],
+                            "payload": {
+                                "lines": "11,13"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "8,13"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "5,6"
+                    }
+                }, {
+                    "content": "cd",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Change the current directory.",
+                        "children": [],
+                        "payload": {
+                            "lines": "14,15"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>cd [directory]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "15,16"
+                        }
+                    }, {
+                        "content": "<strong>Common Uses</strong>:",
+                        "children": [{
+                            "content": "<code>cd ..</code>: Move up one directory.",
+                            "children": [],
+                            "payload": {
+                                "lines": "17,18"
+                            }
+                        }, {
+                            "content": "<code>cd ~</code>: Move to the home directory.",
+                            "children": [],
+                            "payload": {
+                                "lines": "18,19"
+                            }
+                        }, {
+                            "content": "<code>cd -</code>: Move to the previous directory.",
+                            "children": [],
+                            "payload": {
+                                "lines": "19,21"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "16,21"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "13,14"
+                    }
+                }, {
+                    "content": "pwd",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Print the current working directory.",
+                        "children": [],
+                        "payload": {
+                            "lines": "22,23"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>pwd</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "23,25"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "21,22"
+                    }
+                }, {
+                    "content": "mkdir",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Make directories.",
+                        "children": [],
+                        "payload": {
+                            "lines": "26,27"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>mkdir [options] directory</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "27,28"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-p</code>: Create parent directories as needed.",
+                            "children": [],
+                            "payload": {
+                                "lines": "29,31"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "28,31"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "25,26"
+                    }
+                }, {
+                    "content": "rmdir",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Remove empty directories.",
+                        "children": [],
+                        "payload": {
+                            "lines": "32,33"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>rmdir [options] directory</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "33,35"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "31,32"
+                    }
+                }, {
+                    "content": "rm",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Remove files or directories.",
+                        "children": [],
+                        "payload": {
+                            "lines": "36,37"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>rm [options] file|directory</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "37,38"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-r</code>: Remove directories and their contents recursively.",
+                            "children": [],
+                            "payload": {
+                                "lines": "39,40"
+                            }
+                        }, {
+                            "content": "<code>-f</code>: Force removal without prompting.",
+                            "children": [],
+                            "payload": {
+                                "lines": "40,42"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "38,42"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "35,36"
+                    }
+                }, {
+                    "content": "cp",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Copy files and directories.",
+                        "children": [],
+                        "payload": {
+                            "lines": "43,44"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>cp [options] source destination</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "44,45"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-r</code>: Copy directories recursively.",
+                            "children": [],
+                            "payload": {
+                                "lines": "46,47"
+                            }
+                        }, {
+                            "content": "<code>-v</code>: Verbose, explain what is being done.",
+                            "children": [],
+                            "payload": {
+                                "lines": "47,49"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "45,49"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "42,43"
+                    }
+                }, {
+                    "content": "mv",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Move or rename files and directories.",
+                        "children": [],
+                        "payload": {
+                            "lines": "50,51"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>mv [options] source destination</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "51,53"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "49,50"
+                    }
+                }, {
+                    "content": "touch",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Change file timestamps or create an empty file.",
+                        "children": [],
+                        "payload": {
+                            "lines": "54,55"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>touch [options] file</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "55,57"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "53,54"
+                    }
+                }, {
+                    "content": "chmod",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Change file mode bits (permissions).",
+                        "children": [],
+                        "payload": {
+                            "lines": "58,59"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>chmod [options] mode file</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "59,60"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>u+rwx</code>: Add read, write, and execute permissions for the owner.",
+                            "children": [],
+                            "payload": {
+                                "lines": "61,62"
+                            }
+                        }, {
+                            "content": "<code>g+rwx</code>: Add read, write, and execute permissions for the group.",
+                            "children": [],
+                            "payload": {
+                                "lines": "62,63"
+                            }
+                        }, {
+                            "content": "<code>o+rwx</code>: Add read, write, and execute permissions for others.",
+                            "children": [],
+                            "payload": {
+                                "lines": "63,65"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "60,65"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "57,58"
+                    }
+                }, {
+                    "content": "chown",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Change file owner and group.",
+                        "children": [],
+                        "payload": {
+                            "lines": "66,67"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>chown [options] owner[:group] file</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "67,69"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "65,66"
+                    }
+                }],
+                "payload": {
+                    "lines": "3,4"
+                }
+            }, {
+                "content": "File Viewing and Editing",
+                "children": [{
+                    "content": "cat",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Concatenate files and print on the standard output.",
+                        "children": [],
+                        "payload": {
+                            "lines": "72,73"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>cat [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "73,74"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-n</code>: Number the output lines, starting at 1.",
+                            "children": [],
+                            "payload": {
+                                "lines": "75,77"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "74,77"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "71,72"
+                    }
+                }, {
+                    "content": "less",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Opposite of more.",
+                        "children": [],
+                        "payload": {
+                            "lines": "78,79"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>less [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "79,81"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "77,78"
+                    }
+                }, {
+                    "content": "more",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: File perusal filter for crt viewing.",
+                        "children": [],
+                        "payload": {
+                            "lines": "82,83"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>more [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "83,85"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "81,82"
+                    }
+                }, {
+                    "content": "head",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Output the first part of files.",
+                        "children": [],
+                        "payload": {
+                            "lines": "86,87"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>head [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "87,88"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-n</code>: Print the first N lines instead of the first 10.",
+                            "children": [],
+                            "payload": {
+                                "lines": "89,91"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "88,91"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "85,86"
+                    }
+                }, {
+                    "content": "tail",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Output the last part of files.",
+                        "children": [],
+                        "payload": {
+                            "lines": "92,93"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>tail [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "93,94"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-n</code>: Print the last N lines instead of the last 10.",
+                            "children": [],
+                            "payload": {
+                                "lines": "95,96"
+                            }
+                        }, {
+                            "content": "<code>-f</code>: Output appended data as the file grows.",
+                            "children": [],
+                            "payload": {
+                                "lines": "96,98"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "94,98"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "91,92"
+                    }
+                }, {
+                    "content": "nano",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Small, free and friendly text editor.",
+                        "children": [],
+                        "payload": {
+                            "lines": "99,100"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>nano [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "100,102"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "98,99"
+                    }
+                }, {
+                    "content": "vi",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Screen-oriented (visual) display editor.",
+                        "children": [],
+                        "payload": {
+                            "lines": "103,104"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>vi [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "104,106"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "102,103"
+                    }
+                }],
+                "payload": {
+                    "lines": "69,70"
+                }
+            }, {
+                "content": "File Searching",
+                "children": [{
+                    "content": "find",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Search for files in a directory hierarchy.",
+                        "children": [],
+                        "payload": {
+                            "lines": "109,110"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>find [path] [expression]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "110,111"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-name</code>: Search by name.",
+                            "children": [],
+                            "payload": {
+                                "lines": "112,113"
+                            }
+                        }, {
+                            "content": "<code>-type</code>: Search by file type (e.g., f for file, d for directory).",
+                            "children": [],
+                            "payload": {
+                                "lines": "113,114"
+                            }
+                        }, {
+                            "content": "<code>-exec</code>: Execute a command on the found files.",
+                            "children": [],
+                            "payload": {
+                                "lines": "114,116"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "111,116"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "108,109"
+                    }
+                }, {
+                    "content": "grep",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Print lines matching a pattern.",
+                        "children": [],
+                        "payload": {
+                            "lines": "117,118"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>grep [options] pattern [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "118,119"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-i</code>: Ignore case distinctions.",
+                            "children": [],
+                            "payload": {
+                                "lines": "120,121"
+                            }
+                        }, {
+                            "content": "<code>-r</code>: Read all files under each directory, recursively.",
+                            "children": [],
+                            "payload": {
+                                "lines": "121,122"
+                            }
+                        }, {
+                            "content": "<code>-v</code>: Invert the match, to select non-matching lines.",
+                            "children": [],
+                            "payload": {
+                                "lines": "122,124"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "119,124"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "116,117"
+                    }
+                }],
+                "payload": {
+                    "lines": "106,107"
+                }
+            }, {
+                "content": "Process Management",
+                "children": [{
+                    "content": "ps",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Report a snapshot of current processes.",
+                        "children": [],
+                        "payload": {
+                            "lines": "127,128"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>ps [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "128,129"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-e</code>: Select all processes.",
+                            "children": [],
+                            "payload": {
+                                "lines": "130,131"
+                            }
+                        }, {
+                            "content": "<code>-f</code>: Full-format listing.",
+                            "children": [],
+                            "payload": {
+                                "lines": "131,133"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "129,133"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "126,127"
+                    }
+                }, {
+                    "content": "top",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Display tasks.",
+                        "children": [],
+                        "payload": {
+                            "lines": "134,135"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>top [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "135,137"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "133,134"
+                    }
+                }, {
+                    "content": "kill",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Send a signal to a process.",
+                        "children": [],
+                        "payload": {
+                            "lines": "138,139"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>kill [options] pid</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "139,140"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-9</code>: Forcefully kill the process.",
+                            "children": [],
+                            "payload": {
+                                "lines": "141,143"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "140,143"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "137,138"
+                    }
+                }, {
+                    "content": "pgrep",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Look up processes based on name and other attributes.",
+                        "children": [],
+                        "payload": {
+                            "lines": "144,145"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>pgrep [options] pattern</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "145,147"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "143,144"
+                    }
+                }, {
+                    "content": "pkill",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Send signal to all processes running the named program.",
+                        "children": [],
+                        "payload": {
+                            "lines": "148,149"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>pkill [options] pattern</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "149,151"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "147,148"
+                    }
+                }],
+                "payload": {
+                    "lines": "124,125"
+                }
+            }, {
+                "content": "System Information",
+                "children": [{
+                    "content": "uname",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Print system information.",
+                        "children": [],
+                        "payload": {
+                            "lines": "154,155"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>uname [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "155,156"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-a</code>: Print all information.",
+                            "children": [],
+                            "payload": {
+                                "lines": "157,158"
+                            }
+                        }, {
+                            "content": "<code>-r</code>: Print the kernel release.",
+                            "children": [],
+                            "payload": {
+                                "lines": "158,160"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "156,160"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "153,154"
+                    }
+                }, {
+                    "content": "df",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Report file system disk space usage.",
+                        "children": [],
+                        "payload": {
+                            "lines": "161,162"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>df [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "162,163"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-h</code>: Human-readable format.",
+                            "children": [],
+                            "payload": {
+                                "lines": "164,166"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "163,166"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "160,161"
+                    }
+                }, {
+                    "content": "du",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Estimate file space usage.",
+                        "children": [],
+                        "payload": {
+                            "lines": "167,168"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>du [options] [file|directory]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "168,169"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-h</code>: Human-readable format.",
+                            "children": [],
+                            "payload": {
+                                "lines": "170,171"
+                            }
+                        }, {
+                            "content": "<code>-s</code>: Display only a total for each argument.",
+                            "children": [],
+                            "payload": {
+                                "lines": "171,173"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "169,173"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "166,167"
+                    }
+                }, {
+                    "content": "free",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Display amount of free and used memory in the system.",
+                        "children": [],
+                        "payload": {
+                            "lines": "174,175"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>free [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "175,176"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-h</code>: Human-readable format.",
+                            "children": [],
+                            "payload": {
+                                "lines": "177,179"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "176,179"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "173,174"
+                    }
+                }, {
+                    "content": "top",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Display tasks.",
+                        "children": [],
+                        "payload": {
+                            "lines": "180,181"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>top [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "181,183"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "179,180"
+                    }
+                }, {
+                    "content": "uptime",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Tell how long the system has been running.",
+                        "children": [],
+                        "payload": {
+                            "lines": "184,185"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>uptime</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "185,187"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "183,184"
+                    }
+                }],
+                "payload": {
+                    "lines": "151,152"
+                }
+            }, {
+                "content": "Networking",
+                "children": [{
+                    "content": "ifconfig",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Configure a network interface.",
+                        "children": [],
+                        "payload": {
+                            "lines": "190,191"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>ifconfig [interface] [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "191,192"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>up</code>: Activate the interface.",
+                            "children": [],
+                            "payload": {
+                                "lines": "193,194"
+                            }
+                        }, {
+                            "content": "<code>down</code>: Deactivate the interface.",
+                            "children": [],
+                            "payload": {
+                                "lines": "194,196"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "192,196"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "189,190"
+                    }
+                }, {
+                    "content": "ping",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Send ICMP ECHO_REQUEST to network hosts.",
+                        "children": [],
+                        "payload": {
+                            "lines": "197,198"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>ping [options] host</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "198,199"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-c</code>: Stop after sending count ECHO_REQUEST packets.",
+                            "children": [],
+                            "payload": {
+                                "lines": "200,202"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "199,202"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "196,197"
+                    }
+                }, {
+                    "content": "netstat",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Network statistics.",
+                        "children": [],
+                        "payload": {
+                            "lines": "203,204"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>netstat [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "204,205"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-t</code>: Display TCP connections.",
+                            "children": [],
+                            "payload": {
+                                "lines": "206,207"
+                            }
+                        }, {
+                            "content": "<code>-u</code>: Display UDP connections.",
+                            "children": [],
+                            "payload": {
+                                "lines": "207,208"
+                            }
+                        }, {
+                            "content": "<code>-l</code>: Display listening sockets.",
+                            "children": [],
+                            "payload": {
+                                "lines": "208,210"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "205,210"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "202,203"
+                    }
+                }, {
+                    "content": "ssh",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: OpenSSH SSH client (remote login program).",
+                        "children": [],
+                        "payload": {
+                            "lines": "211,212"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>ssh [options] [user@]hostname</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "212,213"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-p</code>: Specify the port to connect to.",
+                            "children": [],
+                            "payload": {
+                                "lines": "214,216"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "213,216"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "210,211"
+                    }
+                }, {
+                    "content": "scp",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Secure copy (remote file copy program).",
+                        "children": [],
+                        "payload": {
+                            "lines": "217,218"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>scp [options] source destination</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "218,219"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-r</code>: Recursively copy entire directories.",
+                            "children": [],
+                            "payload": {
+                                "lines": "220,222"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "219,222"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "216,217"
+                    }
+                }],
+                "payload": {
+                    "lines": "187,188"
+                }
+            }, {
+                "content": "Package Management",
+                "children": [{
+                    "content": "apt-get",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: APT package handling utility.",
+                        "children": [],
+                        "payload": {
+                            "lines": "225,226"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>apt-get [options] command</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "226,227"
+                        }
+                    }, {
+                        "content": "<strong>Common Commands</strong>:",
+                        "children": [{
+                            "content": "<code>update</code>: Resynchronize the package index files from their sources.",
+                            "children": [],
+                            "payload": {
+                                "lines": "228,229"
+                            }
+                        }, {
+                            "content": "<code>upgrade</code>: Install the newest versions of all installed packages.",
+                            "children": [],
+                            "payload": {
+                                "lines": "229,230"
+                            }
+                        }, {
+                            "content": "<code>install</code>: Install new packages.",
+                            "children": [],
+                            "payload": {
+                                "lines": "230,231"
+                            }
+                        }, {
+                            "content": "<code>remove</code>: Remove packages.",
+                            "children": [],
+                            "payload": {
+                                "lines": "231,233"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "227,233"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "224,225"
+                    }
+                }, {
+                    "content": "dpkg",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Debian package manager.",
+                        "children": [],
+                        "payload": {
+                            "lines": "234,235"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>dpkg [options] command</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "235,236"
+                        }
+                    }, {
+                        "content": "<strong>Common Commands</strong>:",
+                        "children": [{
+                            "content": "<code>-i</code>: Install the package.",
+                            "children": [],
+                            "payload": {
+                                "lines": "237,238"
+                            }
+                        }, {
+                            "content": "<code>-r</code>: Remove the package.",
+                            "children": [],
+                            "payload": {
+                                "lines": "238,239"
+                            }
+                        }, {
+                            "content": "<code>-l</code>: List packages matching the given pattern.",
+                            "children": [],
+                            "payload": {
+                                "lines": "239,241"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "236,241"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "233,234"
+                    }
+                }, {
+                    "content": "yum",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Yellowdog Updater Modified.",
+                        "children": [],
+                        "payload": {
+                            "lines": "242,243"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>yum [options] command</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "243,244"
+                        }
+                    }, {
+                        "content": "<strong>Common Commands</strong>:",
+                        "children": [{
+                            "content": "<code>install</code>: Install a package or packages on your system.",
+                            "children": [],
+                            "payload": {
+                                "lines": "245,246"
+                            }
+                        }, {
+                            "content": "<code>remove</code>: Remove a package or packages from your system.",
+                            "children": [],
+                            "payload": {
+                                "lines": "246,247"
+                            }
+                        }, {
+                            "content": "<code>update</code>: Update a package or packages on your system.",
+                            "children": [],
+                            "payload": {
+                                "lines": "247,249"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "244,249"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "241,242"
+                    }
+                }, {
+                    "content": "rpm",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: RPM Package Manager.",
+                        "children": [],
+                        "payload": {
+                            "lines": "250,251"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>rpm [options] command</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "251,252"
+                        }
+                    }, {
+                        "content": "<strong>Common Commands</strong>:",
+                        "children": [{
+                            "content": "<code>-i</code>: Install the package.",
+                            "children": [],
+                            "payload": {
+                                "lines": "253,254"
+                            }
+                        }, {
+                            "content": "<code>-e</code>: Erase (uninstall) the package.",
+                            "children": [],
+                            "payload": {
+                                "lines": "254,255"
+                            }
+                        }, {
+                            "content": "<code>-q</code>: Query the package.",
+                            "children": [],
+                            "payload": {
+                                "lines": "255,257"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "252,257"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "249,250"
+                    }
+                }],
+                "payload": {
+                    "lines": "222,223"
+                }
+            }, {
+                "content": "User Management",
+                "children": [{
+                    "content": "useradd",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Create a new user or update default new user information.",
+                        "children": [],
+                        "payload": {
+                            "lines": "260,261"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>useradd [options] username</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "261,262"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-m</code>: Create the user's home directory.",
+                            "children": [],
+                            "payload": {
+                                "lines": "263,264"
+                            }
+                        }, {
+                            "content": "<code>-s</code>: Specify the user's login shell.",
+                            "children": [],
+                            "payload": {
+                                "lines": "264,266"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "262,266"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "259,260"
+                    }
+                }, {
+                    "content": "usermod",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Modify a user account.",
+                        "children": [],
+                        "payload": {
+                            "lines": "267,268"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>usermod [options] username</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "268,269"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-l</code>: Change the user's login name.",
+                            "children": [],
+                            "payload": {
+                                "lines": "270,271"
+                            }
+                        }, {
+                            "content": "<code>-s</code>: Change the user's login shell.",
+                            "children": [],
+                            "payload": {
+                                "lines": "271,273"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "269,273"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "266,267"
+                    }
+                }, {
+                    "content": "userdel",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Delete a user account and related files.",
+                        "children": [],
+                        "payload": {
+                            "lines": "274,275"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>userdel [options] username</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "275,276"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-r</code>: Remove the home directory and mail spool.",
+                            "children": [],
+                            "payload": {
+                                "lines": "277,279"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "276,279"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "273,274"
+                    }
+                }, {
+                    "content": "passwd",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Update user's authentication tokens.",
+                        "children": [],
+                        "payload": {
+                            "lines": "280,281"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>passwd [options] [username]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "281,283"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "279,280"
+                    }
+                }, {
+                    "content": "groupadd",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Create a new group.",
+                        "children": [],
+                        "payload": {
+                            "lines": "284,285"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>groupadd [options] groupname</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "285,287"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "283,284"
+                    }
+                }, {
+                    "content": "groupmod",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Modify a group definition on the system.",
+                        "children": [],
+                        "payload": {
+                            "lines": "288,289"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>groupmod [options] groupname</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "289,291"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "287,288"
+                    }
+                }, {
+                    "content": "groupdel",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Delete a group from the system.",
+                        "children": [],
+                        "payload": {
+                            "lines": "292,293"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>groupdel [options] groupname</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "293,295"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "291,292"
+                    }
+                }],
+                "payload": {
+                    "lines": "257,258"
+                }
+            }, {
+                "content": "File Permissions",
+                "children": [{
+                    "content": "chmod",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Change file mode bits (permissions).",
+                        "children": [],
+                        "payload": {
+                            "lines": "298,299"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>chmod [options] mode file</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "299,300"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>u+rwx</code>: Add read, write, and execute permissions for the owner.",
+                            "children": [],
+                            "payload": {
+                                "lines": "301,302"
+                            }
+                        }, {
+                            "content": "<code>g+rwx</code>: Add read, write, and execute permissions for the group.",
+                            "children": [],
+                            "payload": {
+                                "lines": "302,303"
+                            }
+                        }, {
+                            "content": "<code>o+rwx</code>: Add read, write, and execute permissions for others.",
+                            "children": [],
+                            "payload": {
+                                "lines": "303,305"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "300,305"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "297,298"
+                    }
+                }, {
+                    "content": "chown",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Change file owner and group.",
+                        "children": [],
+                        "payload": {
+                            "lines": "306,307"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>chown [options] owner[:group] file</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "307,309"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "305,306"
+                    }
+                }, {
+                    "content": "chgrp",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Change group ownership.",
+                        "children": [],
+                        "payload": {
+                            "lines": "310,311"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>chgrp [options] group file</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "311,313"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "309,310"
+                    }
+                }],
+                "payload": {
+                    "lines": "295,296"
+                }
+            }, {
+                "content": "Disk Management",
+                "children": [{
+                    "content": "fdisk",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Partition table manipulator for Linux.",
+                        "children": [],
+                        "payload": {
+                            "lines": "316,317"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>fdisk [options] device</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "317,319"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "315,316"
+                    }
+                }, {
+                    "content": "mkfs",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Build a Linux filesystem.",
+                        "children": [],
+                        "payload": {
+                            "lines": "320,321"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>mkfs [options] [fs-type] [device]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "321,322"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-t</code>: Specify the filesystem type.",
+                            "children": [],
+                            "payload": {
+                                "lines": "323,325"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "322,325"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "319,320"
+                    }
+                }, {
+                    "content": "mount",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Mount a filesystem.",
+                        "children": [],
+                        "payload": {
+                            "lines": "326,327"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>mount [options] [device] [directory]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "327,328"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-t</code>: Specify the filesystem type.",
+                            "children": [],
+                            "payload": {
+                                "lines": "329,330"
+                            }
+                        }, {
+                            "content": "<code>-o</code>: Specify mount options.",
+                            "children": [],
+                            "payload": {
+                                "lines": "330,332"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "328,332"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "325,326"
+                    }
+                }, {
+                    "content": "umount",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Unmount filesystems.",
+                        "children": [],
+                        "payload": {
+                            "lines": "333,334"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>umount [options] [device|directory]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "334,336"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "332,333"
+                    }
+                }, {
+                    "content": "df",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Report file system disk space usage.",
+                        "children": [],
+                        "payload": {
+                            "lines": "337,338"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>df [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "338,339"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-h</code>: Human-readable format.",
+                            "children": [],
+                            "payload": {
+                                "lines": "340,342"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "339,342"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "336,337"
+                    }
+                }, {
+                    "content": "du",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Estimate file space usage.",
+                        "children": [],
+                        "payload": {
+                            "lines": "343,344"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>du [options] [file|directory]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "344,345"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-h</code>: Human-readable format.",
+                            "children": [],
+                            "payload": {
+                                "lines": "346,347"
+                            }
+                        }, {
+                            "content": "<code>-s</code>: Display only a total for each argument.",
+                            "children": [],
+                            "payload": {
+                                "lines": "347,349"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "345,349"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "342,343"
+                    }
+                }],
+                "payload": {
+                    "lines": "313,314"
+                }
+            }, {
+                "content": "Text Processing",
+                "children": [{
+                    "content": "awk",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Pattern scanning and processing language.",
+                        "children": [],
+                        "payload": {
+                            "lines": "352,353"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>awk [options] 'program' [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "353,355"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "351,352"
+                    }
+                }, {
+                    "content": "sed",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Stream editor for filtering and transforming text.",
+                        "children": [],
+                        "payload": {
+                            "lines": "356,357"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>sed [options] 'script' [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "357,359"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "355,356"
+                    }
+                }, {
+                    "content": "sort",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Sort lines of text files.",
+                        "children": [],
+                        "payload": {
+                            "lines": "360,361"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>sort [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "361,362"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-r</code>: Reverse the result of comparisons.",
+                            "children": [],
+                            "payload": {
+                                "lines": "363,364"
+                            }
+                        }, {
+                            "content": "<code>-n</code>: Compare according to string numerical value.",
+                            "children": [],
+                            "payload": {
+                                "lines": "364,366"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "362,366"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "359,360"
+                    }
+                }, {
+                    "content": "uniq",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Report or omit repeated lines.",
+                        "children": [],
+                        "payload": {
+                            "lines": "367,368"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>uniq [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "368,369"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-c</code>: Prefix lines by the number of occurrences.",
+                            "children": [],
+                            "payload": {
+                                "lines": "370,371"
+                            }
+                        }, {
+                            "content": "<code>-d</code>: Only print duplicate lines.",
+                            "children": [],
+                            "payload": {
+                                "lines": "371,373"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "369,373"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "366,367"
+                    }
+                }, {
+                    "content": "tr",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Translate or delete characters.",
+                        "children": [],
+                        "payload": {
+                            "lines": "374,375"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>tr [options] [set1] [set2]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "375,376"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-d</code>: Delete characters in set1.",
+                            "children": [],
+                            "payload": {
+                                "lines": "377,378"
+                            }
+                        }, {
+                            "content": "<code>-s</code>: Squeeze multiple occurrences of the characters listed in the last specified set1.",
+                            "children": [],
+                            "payload": {
+                                "lines": "378,380"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "376,380"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "373,374"
+                    }
+                }],
+                "payload": {
+                    "lines": "349,350"
+                }
+            }, {
+                "content": "Compression",
+                "children": [{
+                    "content": "tar",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: An archiving utility.",
+                        "children": [],
+                        "payload": {
+                            "lines": "383,384"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>tar [options] [files]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "384,385"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-c</code>: Create a new archive.",
+                            "children": [],
+                            "payload": {
+                                "lines": "386,387"
+                            }
+                        }, {
+                            "content": "<code>-x</code>: Extract files from an archive.",
+                            "children": [],
+                            "payload": {
+                                "lines": "387,388"
+                            }
+                        }, {
+                            "content": "<code>-f</code>: Specify the archive file name.",
+                            "children": [],
+                            "payload": {
+                                "lines": "388,389"
+                            }
+                        }, {
+                            "content": "<code>-z</code>: Filter the archive through gzip.",
+                            "children": [],
+                            "payload": {
+                                "lines": "389,391"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "385,391"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "382,383"
+                    }
+                }, {
+                    "content": "gzip",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Compress or expand files.",
+                        "children": [],
+                        "payload": {
+                            "lines": "392,393"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>gzip [options] [files]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "393,394"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-d</code>: Decompress.",
+                            "children": [],
+                            "payload": {
+                                "lines": "395,397"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "394,397"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "391,392"
+                    }
+                }, {
+                    "content": "gunzip",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Decompress files compressed by gzip.",
+                        "children": [],
+                        "payload": {
+                            "lines": "398,399"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>gunzip [options] [files]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "399,401"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "397,398"
+                    }
+                }, {
+                    "content": "bzip2",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: A block-sorting file compressor.",
+                        "children": [],
+                        "payload": {
+                            "lines": "402,403"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>bzip2 [options] [files]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "403,404"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-d</code>: Decompress.",
+                            "children": [],
+                            "payload": {
+                                "lines": "405,407"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "404,407"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "401,402"
+                    }
+                }, {
+                    "content": "bunzip2",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Decompress files compressed by bzip2.",
+                        "children": [],
+                        "payload": {
+                            "lines": "408,409"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>bunzip2 [options] [files]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "409,411"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "407,408"
+                    }
+                }, {
+                    "content": "zip",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Package and compress (archive) files into zip files.",
+                        "children": [],
+                        "payload": {
+                            "lines": "412,413"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>zip [options] [zipfile] [files]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "413,414"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-r</code>: Recurse into directories.",
+                            "children": [],
+                            "payload": {
+                                "lines": "415,417"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "414,417"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "411,412"
+                    }
+                }, {
+                    "content": "unzip",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: List, test and extract compressed files in a zip archive.",
+                        "children": [],
+                        "payload": {
+                            "lines": "418,419"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>unzip [options] [zipfile]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "419,420"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-d</code>: Extract files into exdir.",
+                            "children": [],
+                            "payload": {
+                                "lines": "421,423"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "420,423"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "417,418"
+                    }
+                }],
+                "payload": {
+                    "lines": "380,381"
+                }
+            }, {
+                "content": "Miscellaneous",
+                "children": [{
+                    "content": "echo",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Display a line of text.",
+                        "children": [],
+                        "payload": {
+                            "lines": "426,427"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>echo [options] [string]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "427,428"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-e</code>: Enable interpretation of backslash escapes.",
+                            "children": [],
+                            "payload": {
+                                "lines": "429,431"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "428,431"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "425,426"
+                    }
+                }, {
+                    "content": "date",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Display the current date and time.",
+                        "children": [],
+                        "payload": {
+                            "lines": "432,433"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>date [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "433,434"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-u</code>: Print the coordinates Universal Time (UTC).",
+                            "children": [],
+                            "payload": {
+                                "lines": "435,437"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "434,437"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "431,432"
+                    }
+                }, {
+                    "content": "cal",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Display a calendar.",
+                        "children": [],
+                        "payload": {
+                            "lines": "438,439"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>cal [options] [[month] year]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "439,441"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "437,438"
+                    }
+                }, {
+                    "content": "man",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Format and display the online manual pages.",
+                        "children": [],
+                        "payload": {
+                            "lines": "442,443"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>man [options] [section] name</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "443,444"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-k</code>: Search the short descriptions in the manual page.",
+                            "children": [],
+                            "payload": {
+                                "lines": "445,447"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "444,447"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "441,442"
+                    }
+                }, {
+                    "content": "alias",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Create an alias for a command.",
+                        "children": [],
+                        "payload": {
+                            "lines": "448,449"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>alias [name='value']</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "449,451"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "447,448"
+                    }
+                }, {
+                    "content": "history",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Display or manipulate the history list.",
+                        "children": [],
+                        "payload": {
+                            "lines": "452,453"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>history [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "453,454"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-c</code>: Clear the history list.",
+                            "children": [],
+                            "payload": {
+                                "lines": "455,456"
+                            }
+                        }, {
+                            "content": "<code>-d</code>: Delete the history entry at position offset.",
+                            "children": [],
+                            "payload": {
+                                "lines": "456,458"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "454,458"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "451,452"
+                    }
+                }, {
+                    "content": "clear",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Clear the terminal screen.",
+                        "children": [],
+                        "payload": {
+                            "lines": "459,460"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>clear</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "460,462"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "458,459"
+                    }
+                }, {
+                    "content": "exit",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Cause the shell to exit.",
+                        "children": [],
+                        "payload": {
+                            "lines": "463,464"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>exit [n]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "464,466"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "462,463"
+                    }
+                }, {
+                    "content": "reboot",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Reboot the system.",
+                        "children": [],
+                        "payload": {
+                            "lines": "467,468"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>reboot [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "468,470"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "466,467"
+                    }
+                }, {
+                    "content": "shutdown",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Bring the system down in a secure way.",
+                        "children": [],
+                        "payload": {
+                            "lines": "471,472"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>shutdown [options] [time] [message]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "472,473"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-h</code>: Halt after shutdown.",
+                            "children": [],
+                            "payload": {
+                                "lines": "474,475"
+                            }
+                        }, {
+                            "content": "<code>-r</code>: Reboot after shutdown.",
+                            "children": [],
+                            "payload": {
+                                "lines": "475,477"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "473,477"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "470,471"
+                    }
+                }, {
+                    "content": "su",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Change user ID or become superuser.",
+                        "children": [],
+                        "payload": {
+                            "lines": "478,479"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>su [options] [username]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "479,481"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "477,478"
+                    }
+                }, {
+                    "content": "sudo",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Execute a command as another user.",
+                        "children": [],
+                        "payload": {
+                            "lines": "482,483"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>sudo [options] [command]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "483,484"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-u</code>: Run command as specified user.",
+                            "children": [],
+                            "payload": {
+                                "lines": "485,487"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "484,487"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "481,482"
+                    }
+                }, {
+                    "content": "crontab",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Maintain crontab files for individual users.",
+                        "children": [],
+                        "payload": {
+                            "lines": "488,489"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>crontab [options] [file]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "489,490"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-e</code>: Edit the current crontab.",
+                            "children": [],
+                            "payload": {
+                                "lines": "491,492"
+                            }
+                        }, {
+                            "content": "<code>-l</code>: List the current crontab.",
+                            "children": [],
+                            "payload": {
+                                "lines": "492,493"
+                            }
+                        }, {
+                            "content": "<code>-r</code>: Remove the current crontab.",
+                            "children": [],
+                            "payload": {
+                                "lines": "493,495"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "490,495"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "487,488"
+                    }
+                }, {
+                    "content": "wget",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Non-interactive network downloader.",
+                        "children": [],
+                        "payload": {
+                            "lines": "496,497"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>wget [options] [URL]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "497,498"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-O</code>: Save to filename.",
+                            "children": [],
+                            "payload": {
+                                "lines": "499,500"
+                            }
+                        }, {
+                            "content": "<code>-r</code>: Download recursively.",
+                            "children": [],
+                            "payload": {
+                                "lines": "500,502"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "498,502"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "495,496"
+                    }
+                }, {
+                    "content": "curl",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Transfer a URL.",
+                        "children": [],
+                        "payload": {
+                            "lines": "503,504"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>curl [options] [URL]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "504,505"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-O</code>: Write output to a file named as the remote file.",
+                            "children": [],
+                            "payload": {
+                                "lines": "506,507"
+                            }
+                        }, {
+                            "content": "<code>-L</code>: Follow redirects.",
+                            "children": [],
+                            "payload": {
+                                "lines": "507,509"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "505,509"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "502,503"
+                    }
+                }, {
+                    "content": "lsof",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: List open files.",
+                        "children": [],
+                        "payload": {
+                            "lines": "510,511"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>lsof [options]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "511,512"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-i</code>: List files any of whose Internet address matches the address specified.",
+                            "children": [],
+                            "payload": {
+                                "lines": "513,514"
+                            }
+                        }, {
+                            "content": "<code>-u</code>: List files for login names or user IDs.",
+                            "children": [],
+                            "payload": {
+                                "lines": "514,516"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "512,516"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "509,510"
+                    }
+                }, {
+                    "content": "iptables",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Administration tool for IPv4 packet filtering and NAT.",
+                        "children": [],
+                        "payload": {
+                            "lines": "517,518"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>iptables [options] [chain] [match] [target]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "518,519"
+                        }
+                    }, {
+                        "content": "<strong>Common Options</strong>:",
+                        "children": [{
+                            "content": "<code>-A</code>: Append to chain.",
+                            "children": [],
+                            "payload": {
+                                "lines": "520,521"
+                            }
+                        }, {
+                            "content": "<code>-D</code>: Delete matching rule from chain.",
+                            "children": [],
+                            "payload": {
+                                "lines": "521,522"
+                            }
+                        }, {
+                            "content": "<code>-L</code>: List all rules in chain.",
+                            "children": [],
+                            "payload": {
+                                "lines": "522,524"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "519,524"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "516,517"
+                    }
+                }, {
+                    "content": "systemctl",
+                    "children": [{
+                        "content": "<strong>Definition</strong>: Control the systemd system and service manager.",
+                        "children": [],
+                        "payload": {
+                            "lines": "525,526"
+                        }
+                    }, {
+                        "content": "<strong>Syntax</strong>: <code>systemctl [options] [command]</code>",
+                        "children": [],
+                        "payload": {
+                            "lines": "526,527"
+                        }
+                    }, {
+                        "content": "<strong>Common Commands</strong>:",
+                        "children": [{
+                            "content": "<code>start</code>: Start a service.",
+                            "children": [],
+                            "payload": {
+                                "lines": "528,529"
+                            }
+                        }, {
+                            "content": "<code>stop</code>: Stop a service.",
+                            "children": [],
+                            "payload": {
+                                "lines": "529,530"
+                            }
+                        }, {
+                            "content": "<code>restart</code>: Restart a service.",
+                            "children": [],
+                            "payload": {
+                                "lines": "530,531"
+                            }
+                        }, {
+                            "content": "<code>status</code>: Show the status of a service.",
+                            "children": [],
+                            "payload": {
+                                "lines": "531,532"
+                            }
+                        }, {
+                            "content": "<code>enable</code>: Enable a service to start on boot.",
+                            "children": [],
+                            "payload": {
+                                "lines": "532,533"
+                            }
+                        }, {
+                            "content": "<code>disable</code>: Disable a service from starting on boot.",
+                            "children": [],
+                            "payload": {
+                                "lines": "533,534"
+                            }
+                        }],
+                        "payload": {
+                            "lines": "527,534"
+                        }
+                    }],
+                    "payload": {
+                        "lines": "524,525"
+                    }
+                }],
+                "payload": {
+                    "lines": "423,424"
+                }
+            }],
+            "payload": {
+                "lines": "1,2"
+            }
+        }, {
+            "maxWidth": 300,
+            "initialExpandLevel": 5
+        })
+    </script>
+</body>
+
+</html>
