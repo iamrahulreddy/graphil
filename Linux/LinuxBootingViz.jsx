@@ -1,171 +1,249 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Server, ArrowRight, Info, Activity, Shield, Clock, Zap, AlertCircle, Check, HelpCircle, Play, Pause, RefreshCcw, Terminal } from 'lucide-react';
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import {
+  Server,
+  Info,
+  Activity,
+  Clock,
+  AlertCircle,
+  Check,
+  HelpCircle,
+  Play,
+  Pause,
+  RefreshCcw,
+  Terminal,
+  Cpu,
+  Loader,
+  Users,
+  Monitor,
+} from "lucide-react";
 
 const stagesData = [
   {
-    name: 'BIOS/UEFI',
-    description: 'Initial hardware checks and boot preparation.',
-    detailedDescription: 'The Basic Input/Output System (BIOS) or Unified Extensible Firmware Interface (UEFI) performs a Power-On Self-Test (POST) to ensure hardware is functioning correctly. It then identifies and initializes essential hardware components like the CPU, memory, and storage devices. Finally, it locates and loads the bootloader from the designated boot device.',
+    name: "Power On / Firmware (BIOS/UEFI)",
+    description: "Initial hardware checks and boot device selection.",
+    detailedDescription:
+      "The system is powered on. The firmware (BIOS or UEFI) performs a Power-On Self-Test (POST) to ensure essential hardware components are functioning correctly. It initializes the CPU, memory, and other peripherals. The firmware then identifies the boot device based on the configured boot order and loads the bootloader from that device.",
     icon: <Server className="w-5 h-5" />,
     tasks: [
-      'Power-On Self-Test (POST): Checks hardware integrity.',
-      'CPU Initialization: Starts the central processing unit.',
-      'Memory Check: Verifies RAM functionality.',
-      'Device Enumeration: Identifies connected hardware.',
-      'Boot Device Selection: Chooses the drive to boot from.'
+      "Power-On Self-Test (POST)",
+      "Hardware initialization (CPU, Memory, etc.)",
+      "Boot device detection",
+      "Load bootloader",
     ],
     commonIssues: [
-      'Incorrect boot order in BIOS settings.',
-      'Hardware failure detected during POST (e.g., RAM issues).',
-      'Outdated or corrupted BIOS/UEFI firmware.',
-      'Loose or faulty hardware connections.'
+      "Incorrect boot order",
+      "Hardware failure (POST errors)",
+      "Corrupted firmware",
     ],
-    advancedDetails: 'Delving deeper, the firmware interacts directly with the hardware at a very low level. Understanding the specific error codes during POST can be crucial for diagnosing hardware problems. Modern UEFI also offers secure boot features and more advanced boot management capabilities.',
+    advancedDetails:
+      "The firmware interacts directly with hardware. Modern UEFI systems often include features like Secure Boot, which can impact later stages. Understanding POST error codes (beeps or on-screen) is crucial for diagnosing hardware issues.",
     troubleshooting: [
-      'Consult your motherboard manual for POST beep codes or on-screen error messages.',
-      'Ensure all hardware components are properly seated and connected.',
-      'Try booting with minimal hardware to isolate potential issues.',
-      'Consider updating your BIOS/UEFI firmware from the manufacturer\'s website (proceed with caution).'
+      "Check BIOS/UEFI settings for boot order",
+      "Consult motherboard manual for POST codes",
+      "Reseat hardware components",
+      "Update firmware (with caution)",
     ],
-    timeRange: '5-30 seconds',
-    color: 'bg-indigo-500'
+    timeRange: "5-30 seconds",
+    color: "bg-blue-500",
   },
   {
-    name: 'GRUB',
-    description: 'Loads the operating system kernel.',
-    detailedDescription: 'The Grand Unified Bootloader (GRUB) is a crucial intermediary. It loads the kernel image and the initial ramdisk (initramfs) into memory. GRUB presents a boot menu, allowing users to select different operating systems or kernel versions. It also passes boot parameters to the kernel, configuring its initial behavior.',
-    icon: <ArrowRight className="w-5 h-5" />,
+    name: "Bootloader (GRUB)",
+    description: "Loads the kernel and initramfs.",
+    detailedDescription:
+      "The bootloader (commonly GRUB) takes control. It loads the Linux kernel and the initial RAM disk (initramfs) into memory. GRUB often presents a menu to select different operating systems or kernel versions. It also passes boot parameters to the kernel.",
+    icon: <Loader className="w-5 h-5 animate-spin" />,
     tasks: [
-      'Load GRUB Configuration: Reads settings from `/boot/grub/grub.cfg`.',
-      'Display Boot Menu: Presents options to the user (if configured).',
-      'Load Kernel Image: Loads the selected kernel file into RAM.',
-      'Load Initramfs: Loads a temporary root filesystem.',
-      'Pass Boot Parameters: Sends instructions to the kernel.'
+      "Load kernel image into memory",
+      "Load initramfs",
+      "Present boot menu (optional)",
+      "Pass boot parameters to kernel",
     ],
     commonIssues: [
-      'Missing or corrupted GRUB configuration file (`grub.cfg`).',
-      'Incorrect kernel parameters leading to boot failures.',
-      'Issues with the specified root partition UUID in the GRUB configuration.',
-      'Problems after manually editing the GRUB configuration without proper understanding.'
+      "Corrupted GRUB configuration",
+      "Incorrect kernel parameters",
+      "Missing kernel or initramfs",
     ],
-    advancedDetails: 'GRUB’s configuration file can be highly customized to manage complex multi-boot environments. Understanding the syntax and available modules within GRUB is essential for advanced troubleshooting and configuration. Secure boot settings in UEFI can also impact GRUB’s ability to load.',
+    advancedDetails:
+      "GRUB can be highly customized for complex multi-boot setups. Secure Boot can influence GRUB's ability to load the kernel. Understanding GRUB's configuration language is helpful for advanced troubleshooting.",
     troubleshooting: [
-      'Boot from a live environment to repair or regenerate the GRUB configuration.',
-      'Use the GRUB rescue prompt to manually load the kernel and initramfs.',
-      'Review the `/boot/grub/grub.cfg` file for errors (be cautious when editing).',
-      'Ensure the kernel and initramfs files specified in the configuration exist and are not corrupted.'
+      "Boot from a live environment to repair GRUB",
+      "Use GRUB rescue prompt",
+      "Verify kernel and initramfs files",
     ],
-    timeRange: '2-10 seconds',
-    color: 'bg-teal-500'
+    timeRange: "2-10 seconds",
+    color: "bg-green-500",
   },
   {
-    name: 'Kernel',
-    description: 'Core operating system initialization.',
-    detailedDescription: 'The Linux kernel takes over, initializing core operating system functionalities. This involves setting up memory management, scheduling processes, and initializing essential hardware drivers. The kernel mounts the root filesystem specified by the boot parameters, making the main operating system files accessible.',
-    icon: <Zap className="w-5 h-5" />,
+    name: "Kernel Initialization",
+    description: "Core OS setup and driver loading.",
+    detailedDescription:
+      "The kernel takes over and begins initializing the core operating system. It sets up memory management, process scheduling, and loads essential hardware drivers. It then mounts the root filesystem as specified by boot parameters.",
+    icon: <Cpu className="w-5 h-5" />,
     tasks: [
-      'Decompress Kernel: Extracts the compressed kernel image.',
-      'Initialize CPU: Sets up the processor for operation.',
-      'Setup Memory Management: Organizes system memory.',
-      'Load Drivers: Enables communication with hardware.',
-      'Mount Root Filesystem: Makes the main OS partition accessible.'
+      "Decompress kernel",
+      "Initialize CPU and memory management",
+      "Load drivers",
+      "Mount root filesystem",
     ],
     commonIssues: [
-      'Missing or incompatible kernel modules (drivers).',
-      'Kernel panics due to critical errors during initialization.',
-      'Filesystem errors preventing the root filesystem from mounting.',
-      'Incorrect or missing drivers for essential hardware components.'
+      "Missing or incompatible drivers",
+      "Kernel panic",
+      "Filesystem errors",
     ],
-    advancedDetails: 'The kernel interacts with hardware through modules. Understanding how to compile and load custom kernel modules can be crucial for supporting specific hardware. The Device Tree (DTB) also plays a significant role in describing hardware to the kernel on modern systems.',
+    advancedDetails:
+      "The kernel uses modules to interact with hardware. Understanding how to manage kernel modules is essential for supporting specific hardware. Device Tree (DTB) plays a role in describing hardware to the kernel on many systems.",
     troubleshooting: [
-      'Boot with a previous kernel version to bypass potential issues with the current one.',
-      'Use kernel parameters like `nomodeset` to troubleshoot graphics driver problems.',
-      'Examine the kernel logs (dmesg) for detailed error messages.',
-      'Ensure necessary kernel modules are present in the initramfs image.'
+      "Boot with a previous kernel",
+      "Use kernel parameters (e.g., `nomodeset`)",
+      "Examine kernel logs (dmesg)",
     ],
-    timeRange: '5-20 seconds',
-    color: 'bg-yellow-600'
+    timeRange: "5-20 seconds",
+    color: "bg-yellow-500",
   },
   {
-    name: 'Init System',
-    description: 'Starts system services and user environment.',
-    detailedDescription: 'The init system (like systemd or SysVinit) is the first process spawned by the kernel. It manages the startup of system services, network configuration, and user session management. It reads configuration files to determine which services to start and in what order, establishing the basic operating environment.',
+    name: "Initial RAM Disk (initramfs)",
+    description: "Prepares the root filesystem and loads necessary modules.",
+    detailedDescription:
+      "The initramfs is a temporary root filesystem loaded into RAM. It contains essential tools and modules needed to mount the real root filesystem. It performs tasks like loading drivers for storage devices, setting up device mapper volumes, or decrypting the root filesystem before handing over control to the init system.",
+    icon: <memorychip className="w-5 h-5" />,
+    tasks: [
+      "Load necessary modules (storage, etc.)",
+      "Setup device mapper volumes (if needed)",
+      "Decrypt root filesystem (if encrypted)",
+      "Mount real root filesystem",
+      "Hand over to init system",
+    ],
+    commonIssues: [
+      "Missing modules in initramfs",
+      "Incorrect initramfs configuration",
+      "Problems with encrypted volumes",
+    ],
+    advancedDetails:
+      "The initramfs is often customized for specific hardware or system configurations. It can be rebuilt using tools like `dracut` or `mkinitcpio`. Understanding its contents is important for troubleshooting early boot issues.",
+    troubleshooting: [
+      "Rebuild initramfs",
+      "Inspect initramfs contents",
+      "Check boot parameters related to initramfs",
+    ],
+    timeRange: "2-5 seconds",
+    color: "bg-purple-500",
+  },
+  {
+    name: "Init System (systemd)",
+    description: "Starts system services and manages the user environment.",
+    detailedDescription:
+      "The init system (typically systemd) is the first process started by the kernel. It manages system services, mounts filesystems, sets up networking, and configures the user environment. Systemd uses unit files to define and manage services and their dependencies.",
     icon: <Activity className="w-5 h-5" />,
     tasks: [
-      'Start Init Process: Launches systemd or another init system.',
-      'Parse Unit Files: Reads service configurations.',
-      'Resolve Dependencies: Ensures services start in the correct order.',
-      'Start Core Services: Launches essential system processes.',
-      'Setup User Environment: Prepares for user logins.'
+      "Start system services",
+      "Mount filesystems",
+      "Configure networking",
+      "Manage user sessions",
     ],
     commonIssues: [
-      'Service dependency conflicts preventing services from starting.',
-      'Errors in service unit files causing failures.',
-      'Services timing out during startup.',
-      'Incorrectly configured network settings preventing network services from starting.'
+      "Service startup failures",
+      "Filesystem mount errors",
+      "Network configuration issues",
     ],
-    advancedDetails: 'Systemd uses a sophisticated dependency management system and provides extensive logging capabilities. Understanding systemd units, targets, and journals is crucial for system administration and troubleshooting. Older init systems like SysVinit use shell scripts for service management.',
+    advancedDetails:
+      "Systemd uses a complex dependency management system. Understanding systemd units, targets, and journals is crucial for system administration. Older systems might use SysVinit, which uses shell scripts for service management.",
     troubleshooting: [
-      'Use `systemctl status <service>` to check the status of individual services (for systemd).',
-      'Examine the system logs using `journalctl` (for systemd) or logs in `/var/log`.',
-      'Check service unit files for syntax errors or incorrect configurations.',
-      'Manually start services using `systemctl start <service>` to isolate issues.'
+      "Use `systemctl status <service>`",
+      "Examine `journalctl` logs",
+      "Check unit file configurations",
     ],
-    timeRange: '10-30 seconds',
-    color: 'bg-purple-600'
+    timeRange: "10-30 seconds",
+    color: "bg-indigo-500",
   },
   {
-    name: 'User Space',
-    description: 'Final stage, user login and desktop environment.',
-    detailedDescription: 'The system reaches the final stage, transitioning to user space. This involves starting the display manager (for graphical logins), launching user services, and presenting the login prompt. Once a user logs in, their desktop environment (GNOME, KDE, etc.) is started, completing the boot process.',
-    icon: <Shield className="w-5 h-5" />,
+    name: "Display Manager",
+    description: "Provides graphical login.",
+    detailedDescription:
+      "The display manager (e.g., GDM, LightDM) starts the X Window System or Wayland and provides a graphical login interface. It handles user authentication and starts the user's desktop environment.",
+    icon: <Monitor className="w-5 h-5" />,
     tasks: [
-      'Start Networking: Initializes network connections.',
-      'Launch Display Manager: Starts the graphical login screen.',
-      'Start User Services: Launches user-specific background processes.',
-      'Enable Login Prompt: Allows users to log in.',
-      'Complete Boot Process: System is ready for user interaction.'
+      "Start X server or Wayland compositor",
+      "Display login screen",
+      "Authenticate users",
+      "Start desktop environment",
     ],
     commonIssues: [
-      'Display manager failing to start, resulting in a command-line login only.',
-      'Network configuration problems preventing network access.',
-      'Permission issues preventing user services from starting.',
-      'Problems with the user’s desktop environment configuration.'
+      "Display manager fails to start",
+      "Authentication problems",
+      "Desktop environment issues",
     ],
-    advancedDetails: 'The display manager handles authentication and session management. Understanding Xorg or Wayland (display servers) and desktop environment configurations is key for troubleshooting issues in this stage. Login managers like GDM, SDDM, and LightDM have their own configurations.',
+    advancedDetails:
+      "Understanding display servers (Xorg, Wayland) and desktop environments (GNOME, KDE, etc.) is important for troubleshooting graphical login issues. Display managers have their own configuration files.",
     troubleshooting: [
-      'Check the logs of the display manager (e.g., in `/var/log`).',
-      'Examine the user’s `.xsession-errors` file for issues with the desktop environment.',
-      'Verify network configuration using tools like `ip addr` and `ping`.',
-      'Try logging in as a different user to isolate user-specific configuration problems.'
+      "Check display manager logs",
+      "Verify user permissions",
+      "Try a different desktop environment",
     ],
-    timeRange: '15-45 seconds',
-    color: 'bg-red-600'
-  }
+    timeRange: "5-15 seconds",
+    color: "bg-pink-500",
+  },
+  {
+    name: "User Space & Desktop Environment",
+    description: "User login, session management, and application launch.",
+    detailedDescription:
+      "After successful login, the user's desktop environment is loaded. User-specific services and applications are started. The system is now fully operational and ready for user interaction.",
+    icon: <Users className="w-5 h-5" />,
+    tasks: [
+      "Start user session",
+      "Load desktop environment",
+      "Launch user applications",
+    ],
+    commonIssues: [
+      "Desktop environment crashes",
+      "Application startup problems",
+      "User configuration errors",
+    ],
+    advancedDetails:
+      "Each desktop environment has its own configuration system. Understanding how user sessions are managed is crucial for troubleshooting user-specific issues. XDG specifications play a role in standardizing desktop environments.",
+    troubleshooting: [
+      "Check user's `.xsession-errors` file",
+      "Examine application logs",
+      "Try a different user account",
+    ],
+    timeRange: "5-20 seconds",
+    color: "bg-teal-500",
+  },
 ];
 
 const StageButton = ({ stage, index, currentStage, onClick }) => (
   <button
     onClick={() => onClick(index)}
-    className={`relative flex items-center space-x-1 sm:space-x-2 px-3 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition-colors focus:outline-none flex-shrink-0
-      ${currentStage === index
-        ? `${stage.color} text-white shadow-md`
-        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+    className={`relative flex items-center space-x-1 sm:space-x-2 px-3 sm:px-5 py-2 sm:py-3 rounded-xl text-xs sm:text-sm font-medium transition-colors focus:outline-none flex-shrink-0
+      ${
+        currentStage === index
+          ? `${stage.color} text-white shadow-lg hover:brightness-110`
+          : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+      }`}
   >
-    {React.cloneElement(stage.icon, { className: "w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" })}
+    {React.cloneElement(stage.icon, {
+      className: "w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0",
+    })}
     <span className="whitespace-nowrap">{stage.name}</span>
-    {/* Triangle indicator */}
+    {/* Indicator */}
     {currentStage === index && (
-      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-3 h-3 bg-white rotate-45 shadow-sm border-b border-r border-gray-200"></div>
+      <div
+        className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-0 h-0 border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent ${stage.color}`}
+      ></div>
     )}
   </button>
 );
 
 const StageDetails = ({ stage }) => (
   <div className="space-y-4 sm:space-y-6">
-    <div className={`bg-${stage.color.split('-')[0]}-50 border border-${stage.color.split('-')[0]}-200 rounded-lg p-4 sm:p-5`}>
+    <div
+      className={`${stage.color.replace("bg", "bg-opacity-10")} border border-${
+        stage.color.split("-")[0]
+      }-200 rounded-lg p-4 sm:p-5`}
+    >
       <h3 className="font-semibold text-base sm:text-lg text-gray-800 flex items-center space-x-2">
-        {React.cloneElement(stage.icon, { className: "w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" })}
+        {React.cloneElement(stage.icon, {
+          className: "w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0",
+        })}
         <span>{stage.name}</span>
       </h3>
       <p className="text-gray-700 text-sm mt-2">{stage.description}</p>
@@ -180,7 +258,10 @@ const StageDetails = ({ stage }) => (
       </div>
       <ul className="p-4 sm:p-5 space-y-2 sm:space-y-3">
         {stage.tasks.map((task, index) => (
-          <li key={index} className="text-gray-600 text-xs sm:text-sm flex items-center space-x-2">
+          <li
+            key={index}
+            className="text-gray-600 text-xs sm:text-sm flex items-center space-x-2"
+          >
             <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-500 flex-shrink-0"></div>
             <span>{task}</span>
           </li>
@@ -204,51 +285,63 @@ const LinuxBootingVisualizer = () => {
   const stages = useMemo(() => stagesData, []);
 
   const bootSequence = [
-    // BIOS Phase
+    // Power On / Firmware Phase
     [
-      '[    0.000000] BIOS-provided physical RAM map:',
-      '[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable',
-      '[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x00000000bffdffff] usable',
-      '[    0.000000] NX (Execute Disable) protection: active',
-      '[    0.000000] DMI: System manufacturer System Product Name/P8Z77-V PRO, BIOS 1234 12/12/2023',
-      '[    0.000000] Hypervisor detected: KVM',
+      "[    0.000000] Initializing BIOS/UEFI...",
+      "[    0.001000] Performing Power-On Self Test (POST)...",
+      "[    0.005000] Checking hardware components...",
+      "[    0.010000] Initializing CPU and memory...",
+      "[    0.015000] Detecting boot device...",
+      "[    0.020000] Boot device found: /dev/sda1",
+      "[    0.025000] Loading bootloader...",
     ],
-    // GRUB Phase
+    // Bootloader Phase
     [
-      'Loading Linux 6.1.0-14-amd64 ...',
-      'Loading initial ramdisk ...',
-      'Starting version 254.5-1',
-      '[    0.132513] Initializing cgroup subsys cpuset',
-      '[    0.133024] Initializing cgroup subsys cpu',
-      '[    0.133531] Initializing cgroup subsys cpuacct',
+      "GRUB version 2.06",
+      "Loading Linux kernel 6.1.0-14-amd64...",
+      "Loading initial RAM disk...",
+      "[    0.132513] Initializing cgroup subsys cpuset",
+      "[    0.133024] Initializing cgroup subsys cpu",
     ],
-    // Kernel Phase
+    // Kernel Initialization Phase
     [
-      '[    1.015564] RTC time: 12:00:00, date: 2024/01/05',
-      '[    1.016960] CPU0: Intel(R) Core(TM) i7-12700K CPU @ 3.60GHz stepping 02',
-      '[    1.019870] Performance Events: PEBS fmt3+, 16-deep LBR, Core3 events, Intel PMU driver.',
-      '[    1.167730] Initializing USB Mass Storage driver...',
-      '[    1.168223] scsi host6: usb-storage 1-1:1.0',
-      '[    1.168512] usbcore: registered new interface driver usb-storage',
+      "[    1.000000] Linux version 6.1.0-14-amd64",
+      "[    1.015564] Initializing system time...",
+      "[    1.016960] Detecting CPU information...",
+      "[    1.019870] Loading drivers...",
+      "[    1.167730] Initializing storage devices...",
+      "[    1.168223] Mounting root filesystem...",
+    ],
+    // Initramfs Phase
+    [
+      "[    1.500000] Loading initramfs...",
+      "[    1.510000] Checking root filesystem...",
+      "[    1.520000] Loading storage drivers...",
+      "[    1.530000] Mounting /dev/sda1...",
+      "[    1.540000] Switching to real root...",
     ],
     // Init System Phase
     [
-      '[    2.324502] systemd[1]: systemd 254.5-1 running in system mode',
-      '[    2.325890] systemd[1]: Detected architecture x86-64.',
-      '[    2.327512] systemd[1]: Set hostname to <localhost>.',
-      '[    2.329001] systemd[1]: Started Journal Service.',
-      '[    2.330512] systemd[1]: Starting Load Kernel Modules...',
-      '[    2.332001] systemd[1]: Starting Remount Root and Kernel File Systems...',
+      "[    2.324502] systemd[1]: Starting systemd...",
+      "[    2.325890] systemd[1]: Detecting architecture...",
+      "[    2.327512] systemd[1]: Setting hostname...",
+      "[    2.329001] systemd[1]: Starting essential services...",
+      "[    2.330512] systemd[1]: Mounting filesystems...",
+      "[    2.332001] systemd[1]: Configuring networking...",
     ],
-    // Login Phase
+    // Display Manager Phase
     [
-      '[    4.152390] systemd[1]: Reached target Graphical Interface.',
-      '[    4.153512] systemd[1]: Starting Update UTMP about System Runlevel Changes...',
-      '[    4.155001] systemd[1]: Started Update UTMP about System Runlevel Changes.',
-      'Welcome to Linux!',
-      '',
-      'localhost login: _'
-    ]
+      "[    3.500000] Starting display manager...",
+      "[    3.510000] Initializing X server...",
+      "[    3.520000] Loading GDM...",
+      "[    3.530000] Displaying login screen...",
+    ],
+    // User Space & Desktop Environment Phase
+    [
+      "[    4.152390] systemd[1]: Reached target Graphical Interface.",
+      "Welcome to Linux!",
+      "localhost login: ",
+    ],
   ];
 
   // Synchronize terminal phases with stage changes
@@ -261,36 +354,37 @@ const LinuxBootingVisualizer = () => {
 
   useEffect(() => {
     if (!isRunning) return;
-  
+
     const currentSequence = bootSequence[currentPhase];
     if (!currentSequence) return;
-  
+
     let lineIndex = lines.length;
-  
+
     // Check if we've already displayed all lines for the current phase
     if (lineIndex >= currentSequence.length) {
       return; // Don't set up a new interval if all lines are displayed
     }
-  
+
     const interval = setInterval(() => {
       if (lineIndex < currentSequence.length) {
-        setLines(prev => [...prev, currentSequence[lineIndex]]);
+        setLines((prev) => [...prev, currentSequence[lineIndex]]);
         lineIndex++;
       } else {
         clearInterval(interval);
       }
     }, speed);
-  
+
     return () => clearInterval(interval);
   }, [currentPhase, isRunning, lines.length, speed, bootSequence]);
-  
 
   useEffect(() => {
     let interval;
     if (isAutoPlay) {
       interval = setInterval(() => {
         setCurrentStage((prevStage) => (prevStage + 1) % stages.length);
-        setProgress((prevProgress) => (prevProgress + (100 / stages.length)) % 100);
+        setProgress(
+          (prevProgress) => (prevProgress + 100 / stages.length) % 100
+        );
       }, simulationSpeed);
     }
     return () => clearInterval(interval);
@@ -304,7 +398,7 @@ const LinuxBootingVisualizer = () => {
         y: Math.random() * 100,
         size: Math.random() * 4 + 2,
         duration: Math.random() * 2 + 1,
-        color: stages[currentStage].color.replace('bg-', '')
+        color: stages[currentStage].color.replace("bg-", ""),
       }));
       setParticles(newParticles);
 
@@ -316,11 +410,14 @@ const LinuxBootingVisualizer = () => {
     }
   }, [currentStage, isAutoPlay, stages]);
 
-  const handleStageClick = useCallback((index) => {
-    setCurrentStage(index);
-    setIsAutoPlay(false);
-    setProgress((index / stages.length) * 100);
-  }, [stages.length]);
+  const handleStageClick = useCallback(
+    (index) => {
+      setCurrentStage(index);
+      setIsAutoPlay(false);
+      setProgress((index / stages.length) * 100);
+    },
+    [stages.length]
+  );
 
   const reset = () => {
     setCurrentStage(0);
@@ -337,10 +434,12 @@ const LinuxBootingVisualizer = () => {
         <div className="px-3 sm:px-6 py-3 border-b border-gray-200 bg-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0">
           <div>
             <h2 className="text-lg sm:text-xl text-gray-800 flex items-center space-x-2">
-              <Server className="w-5 h-5 sm:w-6 sm:h-6 font-bold text-indigo-500 flex-shrink-0" />
+              <Server className="w-5 h-5 sm:w-6 sm:h-6 font-bold text-blue-500 flex-shrink-0" />
               <span>Linux Boot Process</span>
             </h2>
-            <p className="text-gray-500 text-xs sm:text-sm mt-1">From basic hardware checks to the login screen.</p>
+            <p className="text-gray-500 text-xs sm:text-sm mt-1">
+              Step-by-step visualization from power-on to login.
+            </p>
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-6 w-full sm:w-auto">
             <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-600">
@@ -351,10 +450,18 @@ const LinuxBootingVisualizer = () => {
               <button
                 onClick={() => setIsAutoPlay(!isAutoPlay)}
                 className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium focus:outline-none transition-colors flex-1 sm:flex-none flex items-center justify-center
-                  ${isAutoPlay ? 'bg-red-100 text-red-600 hover:bg-red-200' : 'bg-green-100 text-green-600 hover:bg-green-200'}`}
+                  ${
+                    isAutoPlay
+                      ? "bg-red-100 text-red-600 hover:bg-red-200"
+                      : "bg-green-100 text-green-600 hover:bg-green-200"
+                  }`}
               >
-                {isAutoPlay ? <Pause className="w-4 h-4 mr-1" /> : <Play className="w-4 h-4 mr-1" />}
-                {isAutoPlay ? 'Pause' : 'Play'}
+                {isAutoPlay ? (
+                  <Pause className="w-4 h-4 mr-1" />
+                ) : (
+                  <Play className="w-4 h-4 mr-1" />
+                )}
+                {isAutoPlay ? "Pause" : "Play"}
               </button>
               <select
                 value={simulationSpeed}
@@ -389,8 +496,13 @@ const LinuxBootingVisualizer = () => {
               className="h-full rounded-full transition-all duration-100"
               style={{
                 width: `${progress}%`,
-                backgroundColor: stages[currentStage].color.split('-')[0] !== 'bg' ? stages[currentStage].color : stages[currentStage].color.replace('bg', '').replace('-500', '-600'),
-                transition: 'width 0.3s linear', // Smoother transition
+                backgroundColor:
+                  stages[currentStage].color.split("-")[0] !== "bg"
+                    ? stages[currentStage].color
+                    : stages[currentStage].color
+                        .replace("bg", "")
+                        .replace("-500", "-600"),
+                transition: "width 0.3s linear", // Smoother transition
               }}
             />
           </div>
@@ -404,7 +516,9 @@ const LinuxBootingVisualizer = () => {
                 <div className="bg-gray-800 p-3 flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Terminal className="w-5 h-5 text-gray-400" />
-                    <span className="text-gray-300 text-sm">Linux Boot Process</span>
+                    <span className="text-gray-300 text-sm">
+                      Linux Boot Process
+                    </span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <select
@@ -420,7 +534,11 @@ const LinuxBootingVisualizer = () => {
                       onClick={() => setIsRunning(!isRunning)}
                       className="text-gray-300 hover:text-white"
                     >
-                      {isRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                      {isRunning ? (
+                        <Pause className="w-4 h-4" />
+                      ) : (
+                        <Play className="w-4 h-4" />
+                      )}
                     </button>
                     <button
                       onClick={reset}
@@ -437,14 +555,15 @@ const LinuxBootingVisualizer = () => {
                     {lines.map((line, index) => (
                       <div
                         key={index}
-                        className={`text-gray-300 ${line?.startsWith('[')
-                          ? 'text-green-400'
-                          : line?.includes('error')
-                          ? 'text-red-400'
-                          : line?.includes('Warning')
-                          ? 'text-yellow-400'
-                          : 'text-gray-300'
-                          }`}
+                        className={`text-gray-300 ${
+                          line?.startsWith("[")
+                            ? "text-green-400"
+                            : line?.includes("error")
+                            ? "text-red-400"
+                            : line?.includes("Warning")
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }`}
                       >
                         {line}
                       </div>
@@ -458,7 +577,9 @@ const LinuxBootingVisualizer = () => {
                   <div className="h-2 bg-gray-700 rounded-full">
                     <div
                       className="h-full bg-green-500 rounded-full transition-all duration-300"
-                      style={{ width: `${(currentPhase + 1) * (100 / stages.length)}%` }}
+                      style={{
+                        width: `${(currentPhase + 1) * (100 / stages.length)}%`,
+                      }}
                     />
                   </div>
                   <div className="mt-2 text-xs text-gray-400 text-center">
@@ -481,11 +602,17 @@ const LinuxBootingVisualizer = () => {
                   </h4>
                 </div>
                 <div className="p-4 sm:p-5">
-                  <p className="text-gray-700 text-xs sm:text-sm">{stages[currentStage].detailedDescription}</p>
+                  <p className="text-gray-700 text-xs sm:text-sm">
+                    {stages[currentStage].detailedDescription}
+                  </p>
                   {stages[currentStage].advancedDetails && (
                     <details className="mt-4">
-                      <summary className="text-blue-500 text-xs sm:text-sm cursor-pointer">More Details</summary>
-                      <p className="text-gray-600 text-xs mt-2">{stages[currentStage].advancedDetails}</p>
+                      <summary className="text-blue-500 text-xs sm:text-sm cursor-pointer">
+                        More Details
+                      </summary>
+                      <p className="text-gray-600 text-xs mt-2">
+                        {stages[currentStage].advancedDetails}
+                      </p>
                     </details>
                   )}
                 </div>
@@ -499,7 +626,10 @@ const LinuxBootingVisualizer = () => {
                 </h4>
                 <ul className="mt-3 space-y-2 sm:space-y-3">
                   {stages[currentStage].commonIssues.map((issue, index) => (
-                    <li key={index} className="text-orange-700 text-xs sm:text-sm flex items-center space-x-2">
+                    <li
+                      key={index}
+                      className="text-orange-700 text-xs sm:text-sm flex items-center space-x-2"
+                    >
                       <div className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0"></div>
                       <span>{issue}</span>
                     </li>
@@ -515,7 +645,10 @@ const LinuxBootingVisualizer = () => {
                   </h4>
                   <ul className="mt-3 space-y-2 sm:space-y-3">
                     {stages[currentStage].troubleshooting.map((tip, index) => (
-                      <li key={index} className="text-green-700 text-xs sm:text-sm flex items-center space-x-2">
+                      <li
+                        key={index}
+                        className="text-green-700 text-xs sm:text-sm flex items-center space-x-2"
+                      >
                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0"></div>
                         <span>{tip}</span>
                       </li>
@@ -544,4 +677,4 @@ const LinuxBootingVisualizer = () => {
   );
 };
 
-export default LinuxBootingViz;
+export default LinuxBootingVisualizer;
