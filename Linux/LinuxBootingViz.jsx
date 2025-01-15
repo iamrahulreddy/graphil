@@ -15,6 +15,7 @@ import {
   Loader,
   Users,
   Monitor,
+  MemoryStick
 } from "lucide-react";
 
 const stagesData = [
@@ -22,7 +23,7 @@ const stagesData = [
     name: "Power On / Firmware (BIOS/UEFI)",
     description: "Initial hardware checks and boot device selection.",
     detailedDescription:
-      "The system is powered on. The firmware (BIOS or UEFI) performs a Power-On Self-Test (POST) to ensure essential hardware components are functioning correctly. It initializes the CPU, memory, and other peripherals. The firmware then identifies the boot device based on the configured boot order and loads the bootloader from that device.",
+      "The system is powered on. The firmware (BIOS or UEFI) performs a Power-On Self-Test (POST) to ensure essential hardware components are functioning correctly. It initializes the CPU, memory, and other peripherals. The firmware then identifies the boot device based on the configured boot order (e.g., hard drive, SSD, USB) and loads the bootloader from that device.",
     icon: <Server className="w-5 h-5" />,
     tasks: [
       "Power-On Self-Test (POST)",
@@ -31,181 +32,233 @@ const stagesData = [
       "Load bootloader",
     ],
     commonIssues: [
-      "Incorrect boot order",
-      "Hardware failure (POST errors)",
-      "Corrupted firmware",
+      "Incorrect boot order in BIOS/UEFI settings",
+      "Hardware failure (indicated by POST error codes - beeps or on-screen messages)",
+      "Corrupted firmware (BIOS/UEFI)",
+      "Failed boot device (hard drive, SSD)",
     ],
     advancedDetails:
-      "The firmware interacts directly with hardware. Modern UEFI systems often include features like Secure Boot, which can impact later stages. Understanding POST error codes (beeps or on-screen) is crucial for diagnosing hardware issues.",
+      "BIOS (Basic Input/Output System): Older firmware standard. Simpler interface, limited features. \n" +
+      "UEFI (Unified Extensible Firmware Interface): Modern replacement for BIOS. More advanced, supports larger disks, faster booting, and features like Secure Boot. \n" +
+      "POST Codes: Specific beep sequences or on-screen codes indicate the nature of hardware failures during POST. Refer to your motherboard's manual for detailed interpretations. \n" +
+      "Boot Order: The sequence in which the firmware searches for a bootable device. \n" +
+      "Secure Boot: A UEFI feature that ensures only trusted software is loaded during boot, preventing malware from loading early in the process. Can sometimes interfere with booting certain Linux distributions if not configured properly.",
     troubleshooting: [
-      "Check BIOS/UEFI settings for boot order",
-      "Consult motherboard manual for POST codes",
-      "Reseat hardware components",
-      "Update firmware (with caution)",
+      "Check BIOS/UEFI settings for correct boot order. Ensure the desired boot device is listed first.",
+      "Consult motherboard manual for POST error code meanings. For example, a single beep often indicates successful POST, while multiple beeps or no beeps can point to specific problems.",
+      "Reseat RAM modules, graphics card, and other components to ensure good connections.",
+      "Attempt to boot from a different device (e.g., a USB drive with a live Linux distribution).",
+      "If you suspect corrupted firmware, try updating or reflashing the BIOS/UEFI (with extreme caution, as this can brick your motherboard if done incorrectly).",
     ],
-    timeRange: "5-30 seconds",
+    timeRange: "2-15 seconds",
     color: "bg-blue-500",
   },
   {
     name: "Bootloader (GRUB)",
     description: "Loads the kernel and initramfs.",
     detailedDescription:
-      "The bootloader (commonly GRUB) takes control. It loads the Linux kernel and the initial RAM disk (initramfs) into memory. GRUB often presents a menu to select different operating systems or kernel versions. It also passes boot parameters to the kernel.",
+      "The bootloader (commonly GRUB on Linux systems) takes control from the firmware. Its primary role is to load the Linux kernel and the initial RAM disk (initramfs) into memory. GRUB often presents a menu allowing you to choose between different operating systems (if you have a multi-boot setup) or different kernel versions. It also passes essential boot parameters to the kernel, influencing how the kernel behaves during initialization.",
     icon: <Loader className="w-5 h-5 animate-spin" />,
     tasks: [
       "Load kernel image into memory",
-      "Load initramfs",
+      "Load initramfs into memory",
       "Present boot menu (optional)",
-      "Pass boot parameters to kernel",
+      "Pass boot parameters to the kernel",
     ],
     commonIssues: [
-      "Corrupted GRUB configuration",
+      "Corrupted GRUB configuration file (e.g., `/boot/grub/grub.cfg`)",
       "Incorrect kernel parameters",
-      "Missing kernel or initramfs",
+      "Missing or corrupted kernel image or initramfs files",
+      "Problems after a system update or new kernel installation",
     ],
     advancedDetails:
-      "GRUB can be highly customized for complex multi-boot setups. Secure Boot can influence GRUB's ability to load the kernel. Understanding GRUB's configuration language is helpful for advanced troubleshooting.",
+      "GRUB (Grand Unified Bootloader): A powerful and flexible bootloader. \n" +
+      "GRUB Configuration: Usually located at `/boot/grub/grub.cfg`. It's a complex file that defines the boot menu entries and kernel parameters. It's often automatically generated by tools like `update-grub`. Editing it manually requires a good understanding of GRUB's syntax. \n" +
+      "Kernel Parameters: These are options passed to the kernel during boot to modify its behavior. Examples include `quiet` (suppress verbose output), `splash` (show a splash screen), `nomodeset` (disable kernel mode setting for graphics), `single` (boot into single-user mode for troubleshooting). \n" +
+      "Multi-boot: GRUB can be configured to chainload other bootloaders, allowing you to boot different operating systems installed on the same machine. \n" +
+      "Secure Boot: In Secure Boot environments, the bootloader must be digitally signed to be considered trusted by the firmware.",
     troubleshooting: [
-      "Boot from a live environment to repair GRUB",
-      "Use GRUB rescue prompt",
-      "Verify kernel and initramfs files",
+      "Boot from a live Linux environment (USB or DVD) and use tools to repair GRUB (e.g., `boot-repair` utility).",
+      "If you are familiar with the GRUB command-line interface, you can use the GRUB rescue prompt to manually specify the kernel and initramfs to boot.",
+      "Verify that the kernel image (e.g., `vmlinuz-6.1.0-14-amd64`) and initramfs files (e.g., `initrd.img-6.1.0-14-amd64`) exist in the `/boot` directory.",
+      "After a kernel update that causes boot problems, try selecting an older kernel from the GRUB menu.",
     ],
-    timeRange: "2-10 seconds",
+    timeRange: "1-5 seconds",
     color: "bg-green-500",
   },
   {
     name: "Kernel Initialization",
     description: "Core OS setup and driver loading.",
     detailedDescription:
-      "The kernel takes over and begins initializing the core operating system. It sets up memory management, process scheduling, and loads essential hardware drivers. It then mounts the root filesystem as specified by boot parameters.",
+      "The kernel takes over from the bootloader. It's the heart of the Linux operating system. The kernel initializes core components like memory management, process scheduling, and loads essential hardware drivers. It detects and configures attached hardware devices. After basic initialization, it mounts the root filesystem (the primary filesystem where the operating system resides), as specified by the boot parameters.",
     icon: <Cpu className="w-5 h-5" />,
     tasks: [
-      "Decompress kernel",
+      "Decompress kernel image",
       "Initialize CPU and memory management",
-      "Load drivers",
-      "Mount root filesystem",
+      "Detect and initialize hardware devices",
+      "Load kernel modules (drivers)",
+      "Mount the root filesystem",
     ],
     commonIssues: [
-      "Missing or incompatible drivers",
-      "Kernel panic",
-      "Filesystem errors",
+      "Missing or incompatible device drivers (especially for storage controllers or graphics cards)",
+      "Kernel panic (a critical error that halts the system)",
+      "Filesystem errors on the root filesystem",
+      "Hardware conflicts",
     ],
     advancedDetails:
-      "The kernel uses modules to interact with hardware. Understanding how to manage kernel modules is essential for supporting specific hardware. Device Tree (DTB) plays a role in describing hardware to the kernel on many systems.",
+      "Kernel Modules: These are pieces of code that can be dynamically loaded into the kernel to extend its functionality, often used for device drivers. You can manage them with commands like `lsmod` (list), `insmod` (insert), `rmmod` (remove). \n" +
+      "Device Tree (DTB): On many ARM-based systems (like Raspberry Pi), the Device Tree is a data structure that describes the hardware to the kernel, allowing a single kernel image to support different hardware configurations. \n" +
+      "dmesg: A command that displays kernel messages, which are crucial for diagnosing hardware detection and driver loading issues during boot. \n" +
+      "Kernel Parameters: Parameters like `root=/dev/sda1` (specifies the root filesystem device) and `ro` (mount root filesystem read-only) are passed by the bootloader and have significant impact here. \n" +
+      "ACPI (Advanced Configuration and Power Interface): A standard used by the kernel to manage power and interact with hardware. ACPI tables provide information about devices and their power states.",
     troubleshooting: [
-      "Boot with a previous kernel",
-      "Use kernel parameters (e.g., `nomodeset`)",
-      "Examine kernel logs (dmesg)",
+      "If you encounter a kernel panic, carefully note the error messages displayed on the screen, as they often provide clues about the cause.",
+      "Boot with a previously known working kernel (if available from the GRUB menu).",
+      "Use kernel parameters like `nomodeset` (for graphics issues) or `single` (for single-user mode troubleshooting).",
+      "Examine kernel logs using `dmesg` or by looking at `/var/log/kern.log` (or similar files depending on your distribution) for errors related to hardware detection or driver loading.",
+      "If you suspect a hardware conflict, try disabling devices in the BIOS/UEFI settings (e.g., onboard sound or network card) to see if it resolves the issue.",
     ],
-    timeRange: "5-20 seconds",
+    timeRange: "1-10 seconds",
     color: "bg-yellow-500",
   },
   {
     name: "Initial RAM Disk (initramfs)",
     description: "Prepares the root filesystem and loads necessary modules.",
     detailedDescription:
-      "The initramfs is a temporary root filesystem loaded into RAM. It contains essential tools and modules needed to mount the real root filesystem. It performs tasks like loading drivers for storage devices, setting up device mapper volumes, or decrypting the root filesystem before handing over control to the init system.",
-    icon: <memorychip className="w-5 h-5" />,
+      "The initramfs (initial RAM filesystem) is a temporary root filesystem that is loaded into RAM during the boot process. It contains essential tools, scripts, and kernel modules needed to mount the real root filesystem and continue the boot process. It's particularly crucial when the root filesystem is on a complex storage setup (e.g., encrypted, RAID, LVM) or requires specific drivers that are not built directly into the kernel.",
+    icon: <MemoryStick className="w-5 h-5" />,
     tasks: [
-      "Load necessary modules (storage, etc.)",
-      "Setup device mapper volumes (if needed)",
-      "Decrypt root filesystem (if encrypted)",
-      "Mount real root filesystem",
-      "Hand over to init system",
+      "Load necessary kernel modules (e.g., for storage, encryption)",
+      "Set up device mapper volumes (LVM, RAID)",
+      "Decrypt the root filesystem (if encrypted)",
+      "Mount the real root filesystem",
+      "Hand over control to the init system on the real root filesystem",
     ],
     commonIssues: [
-      "Missing modules in initramfs",
-      "Incorrect initramfs configuration",
-      "Problems with encrypted volumes",
+      "Missing or incorrect modules in the initramfs (preventing the root filesystem from being mounted)",
+      "Incorrect initramfs configuration (especially for custom setups)",
+      "Problems with encrypted volumes (incorrect passphrase, corrupted encryption header)",
+      "Boot failures after updating the kernel or initramfs",
     ],
     advancedDetails:
-      "The initramfs is often customized for specific hardware or system configurations. It can be rebuilt using tools like `dracut` or `mkinitcpio`. Understanding its contents is important for troubleshooting early boot issues.",
+      "initramfs Structure: It's typically a compressed cpio archive. You can inspect its contents using tools like `lsinitramfs` (on Debian/Ubuntu) or by manually extracting it. \n" +
+      "initramfs Generation: Tools like `update-initramfs` (Debian/Ubuntu) or `dracut` (Fedora/Red Hat) are used to create and update the initramfs. These tools automatically include necessary modules and scripts based on your system's configuration. \n" +
+      "Customization: You can customize the initramfs by adding scripts or modules to handle specific hardware or boot requirements. This usually involves modifying configuration files in `/etc/initramfs-tools` (Debian/Ubuntu) or `/etc/dracut.conf.d` (Fedora/Red Hat). \n" +
+      "init Script: The `init` script within the initramfs is the main script that orchestrates the early boot process. It's responsible for loading modules, mounting filesystems, and eventually handing over control to the init system on the real root filesystem.",
     troubleshooting: [
-      "Rebuild initramfs",
-      "Inspect initramfs contents",
-      "Check boot parameters related to initramfs",
+      "Rebuild the initramfs using `update-initramfs -u -k all` (Debian/Ubuntu) or `dracut -f` (Fedora/Red Hat). This often fixes problems caused by missing or outdated modules.",
+      "Carefully inspect the initramfs contents using `lsinitramfs` to verify that the necessary modules and scripts are present.",
+      "Check boot parameters related to the initramfs (e.g., `rd.break` to drop into a debug shell within the initramfs) for troubleshooting.",
+      "If you are dealing with encrypted volumes, double-check that you are using the correct passphrase and that the encryption setup is properly configured.",
     ],
-    timeRange: "2-5 seconds",
+    timeRange: "0.5-3 seconds",
     color: "bg-purple-500",
   },
   {
     name: "Init System (systemd)",
     description: "Starts system services and manages the user environment.",
     detailedDescription:
-      "The init system (typically systemd) is the first process started by the kernel. It manages system services, mounts filesystems, sets up networking, and configures the user environment. Systemd uses unit files to define and manage services and their dependencies.",
+      "The init system is the first process started by the kernel (its process ID is always 1). On most modern Linux distributions, systemd is the init system. It's responsible for starting and managing system services (daemons), mounting filesystems (as defined in `/etc/fstab`), setting up networking, and managing user sessions. Systemd uses unit files to define and control services and their dependencies.",
     icon: <Activity className="w-5 h-5" />,
     tasks: [
-      "Start system services",
-      "Mount filesystems",
-      "Configure networking",
-      "Manage user sessions",
+      "Start system services (daemons)",
+      "Mount filesystems (according to /etc/fstab)",
+      "Configure networking (interfaces, IP addresses, DNS)",
+      "Manage user sessions (login, logout)",
+      "Handle system shutdown and reboot",
     ],
     commonIssues: [
-      "Service startup failures",
-      "Filesystem mount errors",
-      "Network configuration issues",
+      "Service startup failures (due to misconfiguration, missing dependencies, or errors in the service itself)",
+      "Filesystem mount errors (incorrect entries in `/etc/fstab`, missing filesystems)",
+      "Network configuration problems (incorrect IP settings, DNS resolution issues)",
+      "Conflicts between services",
     ],
     advancedDetails:
-      "Systemd uses a complex dependency management system. Understanding systemd units, targets, and journals is crucial for system administration. Older systems might use SysVinit, which uses shell scripts for service management.",
+      "systemd: A powerful and complex init system that provides significant advantages over older init systems like SysVinit. It uses a declarative approach to service management, with dependencies and relationships between services explicitly defined. \n" +
+      "Unit Files: These are configuration files that define how systemd manages services, mounts, devices, sockets, etc. They are typically located in `/etc/systemd/system` or `/usr/lib/systemd/system`. \n" +
+      "Targets: systemd uses targets to group units and define different system states. For example, `multi-user.target` is similar to the traditional runlevel 3, while `graphical.target` is similar to runlevel 5. \n" +
+      "journalctl: A powerful command-line tool for viewing and querying the systemd journal, which contains log messages from the kernel, systemd, and various services. \n" +
+      "systemctl: The primary command-line tool for interacting with systemd. You can use it to start, stop, enable, disable, and check the status of services.",
     troubleshooting: [
-      "Use `systemctl status <service>`",
-      "Examine `journalctl` logs",
-      "Check unit file configurations",
+      "Use `systemctl status <service>` to check the status of a specific service and identify any errors.",
+      "Examine the systemd journal using `journalctl` to find error messages related to service failures, filesystem issues, or network problems.",
+      "Check unit file configurations in `/etc/systemd/system` or `/usr/lib/systemd/system` for errors or missing dependencies.",
+      "Verify filesystem entries in `/etc/fstab` for correctness.",
+      "If you encounter network issues, use tools like `ip`, `ping`, and `nslookup` to diagnose the problem.",
+      "Use `systemctl list-dependencies <target>` to understand the dependencies of a particular target.",
+      "As a last resort, you can try booting into a different target (e.g., `rescue.target` or `emergency.target`) to troubleshoot the system in a minimal environment.",
     ],
-    timeRange: "10-30 seconds",
+    timeRange: "3-15 seconds",
     color: "bg-indigo-500",
   },
   {
     name: "Display Manager",
     description: "Provides graphical login.",
     detailedDescription:
-      "The display manager (e.g., GDM, LightDM) starts the X Window System or Wayland and provides a graphical login interface. It handles user authentication and starts the user's desktop environment.",
+      "The display manager is responsible for starting the display server (X Window System or Wayland) and providing a graphical login screen. It handles user authentication and starts the user's chosen desktop environment after successful login. Common display managers include GDM (GNOME), LightDM, and SDDM (KDE).",
     icon: <Monitor className="w-5 h-5" />,
     tasks: [
-      "Start X server or Wayland compositor",
-      "Display login screen",
-      "Authenticate users",
-      "Start desktop environment",
+      "Start the display server (Xorg or Wayland)",
+      "Display the login screen (greeter)",
+      "Authenticate users (verify username and password)",
+      "Start the user's desktop environment (e.g., GNOME, KDE, Xfce)",
     ],
     commonIssues: [
-      "Display manager fails to start",
-      "Authentication problems",
-      "Desktop environment issues",
+      "Display manager fails to start, resulting in a blank screen or a text-mode login",
+      "Authentication problems (incorrect password, user account issues)",
+      "Desktop environment fails to load or crashes after login",
+      "Graphical glitches or driver problems",
     ],
     advancedDetails:
-      "Understanding display servers (Xorg, Wayland) and desktop environments (GNOME, KDE, etc.) is important for troubleshooting graphical login issues. Display managers have their own configuration files.",
+      "X Window System (Xorg): The traditional display server for Linux. It provides a framework for graphical user interfaces. \n" +
+      "Wayland: A newer, more modern display server protocol that is gradually replacing Xorg. It aims to be simpler and more efficient. \n" +
+      "Display Managers: These are programs that manage user logins and start the appropriate display server and desktop environment. \n" +
+      "Desktop Environments: These provide the complete graphical user experience, including the window manager, panels, system menus, and default applications (e.g., file manager, terminal). \n" +
+      "Configuration: Display managers have their own configuration files (e.g., `/etc/lightdm/lightdm.conf` for LightDM). Desktop environments are typically configured through settings within the desktop environment itself.",
     troubleshooting: [
-      "Check display manager logs",
-      "Verify user permissions",
-      "Try a different desktop environment",
+      "If the display manager fails to start, try switching to a text console (Ctrl+Alt+F1-F6) and examining logs in `/var/log/Xorg.0.log` (for Xorg) or the output of `journalctl`.",
+      "Check the display manager's logs (e.g., `/var/log/lightdm` for LightDM) for errors.",
+      "Verify user account permissions and try logging in as a different user.",
+      "If the desktop environment fails to load, try selecting a different desktop environment from the login screen (if available).",
+      "Check for errors in the user's `.xsession-errors` file in their home directory.",
+      "If you suspect a graphics driver problem, try booting with the `nomodeset` kernel parameter or reinstalling/updating your graphics drivers.",
     ],
-    timeRange: "5-15 seconds",
+    timeRange: "2-8 seconds",
     color: "bg-pink-500",
   },
   {
     name: "User Space & Desktop Environment",
     description: "User login, session management, and application launch.",
     detailedDescription:
-      "After successful login, the user's desktop environment is loaded. User-specific services and applications are started. The system is now fully operational and ready for user interaction.",
+      "After successful login through the display manager, the user's desktop environment is loaded. User-specific services, applications, and daemons are started. The system is now fully operational and ready for user interaction. This stage involves managing user sessions, launching applications, and handling user-level configurations.",
     icon: <Users className="w-5 h-5" />,
     tasks: [
-      "Start user session",
-      "Load desktop environment",
-      "Launch user applications",
+      "Start the user's session",
+      "Load the desktop environment (window manager, panels, etc.)",
+      "Launch user-specific applications and services",
+      "Apply user configurations and settings",
     ],
     commonIssues: [
-      "Desktop environment crashes",
-      "Application startup problems",
-      "User configuration errors",
+      "Desktop environment crashes or freezes",
+      "Applications fail to start or crash frequently",
+      "User configuration errors (corrupted dotfiles)",
+      "Performance issues (slow application startup, high resource usage)",
     ],
     advancedDetails:
-      "Each desktop environment has its own configuration system. Understanding how user sessions are managed is crucial for troubleshooting user-specific issues. XDG specifications play a role in standardizing desktop environments.",
+      "Session Management:  Handles the user's login session, including starting and stopping processes, managing resources, and saving session state. \n" +
+      "Desktop Environment Configuration: Each desktop environment has its own way of storing user settings. These are often stored in dotfiles (hidden files and directories) in the user's home directory (e.g., `.config`, `.local`). \n" +
+      "XDG Specifications: A set of standards that aim to improve interoperability between desktop environments and applications by defining common locations for configuration files, data files, and cache files. \n" +
+      "Autostart Applications: Many desktop environments allow you to configure applications that automatically start when you log in. These are usually defined in `.desktop` files located in `~/.config/autostart`. \n" +
+      "System Monitoring Tools: Tools like `top`, `htop`, and `gnome-system-monitor` can be used to monitor resource usage (CPU, memory, disk I/O) and identify processes that might be causing problems.",
     troubleshooting: [
-      "Check user's `.xsession-errors` file",
-      "Examine application logs",
-      "Try a different user account",
+      "If the desktop environment crashes, check the `.xsession-errors` file in the user's home directory for error messages.",
+      "Try logging in with a different user account to see if the problem is specific to a particular user's configuration.",
+      "If an application is causing problems, try starting it from the terminal to see if any error messages are displayed.",
+      "Temporarily move or rename dotfiles in your home directory to see if they are causing the issue. Be careful, as this can reset your desktop settings.",
+      "Use system monitoring tools to identify resource-intensive processes that might be causing performance issues.",
+      "Check application logs (often located in `~/.local/share` or `~/.cache`) for clues about application crashes.",
     ],
-    timeRange: "5-20 seconds",
+    timeRange: "2-10 seconds",
     color: "bg-teal-500",
   },
 ];
@@ -224,12 +277,6 @@ const StageButton = ({ stage, index, currentStage, onClick }) => (
       className: "w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0",
     })}
     <span className="whitespace-nowrap">{stage.name}</span>
-    {/* Indicator */}
-    {currentStage === index && (
-      <div
-        className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-0 h-0 border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent ${stage.color}`}
-      ></div>
-    )}
   </button>
 );
 
@@ -287,58 +334,114 @@ const LinuxBootingVisualizer = () => {
   const bootSequence = [
     // Power On / Firmware Phase
     [
-      "[    0.000000] Initializing BIOS/UEFI...",
-      "[    0.001000] Performing Power-On Self Test (POST)...",
-      "[    0.005000] Checking hardware components...",
-      "[    0.010000] Initializing CPU and memory...",
-      "[    0.015000] Detecting boot device...",
-      "[    0.020000] Boot device found: /dev/sda1",
-      "[    0.025000] Loading bootloader...",
+      "[    0.000000]  INFO:  Power ON initiated.",
+      "[    0.000010]  INFO:  System Reset - Begin Hardware Initialization.",
+      "[    0.000050]  DEBUG: Performing CMOS checksum...",
+      "[    0.000100]  DEBUG: Checksum OK",
+      "[    0.001000]  INFO:  Performing Power-On Self Test (POST)...",
+      "[    0.001250]  DEBUG: Testing RAM modules...",
+      "[    0.003000]  DEBUG: RAM Test Passed.",
+      "[    0.003200]  DEBUG: Testing CPU Core 0...",
+      "[    0.003400]  DEBUG: Testing CPU Core 1...",
+      "[    0.003800]  DEBUG: All CPU cores OK.",
+      "[    0.005000]  INFO: Checking hardware components (USB, PCI, SATA)...",
+      "[    0.006000]  DEBUG: USB controller found: Device 0x1234:0xabcd.",
+      "[    0.006100]  DEBUG: SATA Controller: Found Controller Intel 0x8086:0xa102",
+      "[    0.008000]  DEBUG: PCI device: Network controller: Realtek 0x10ec:0x8168 detected.",
+      "[    0.009000]  INFO:  Initializing CPU and memory...",
+      "[    0.009100]  DEBUG:  CPU microcode update loaded.",
+      "[    0.012000]  DEBUG: Allocating 8 GB of memory for kernel space.",
+      "[    0.014000] INFO:  Detecting boot device...",
+      "[    0.015000]  DEBUG: Scanning for bootable disks...",
+      "[    0.018000]  DEBUG: Found SATA drive at /dev/sda",
+      "[    0.018500]  DEBUG: Checking partition table of /dev/sda",
+      "[    0.020000] INFO:  Boot device found: /dev/sda1",
+      "[    0.022000]  DEBUG: Partition type ext4",
+      "[    0.025000]  INFO: Loading bootloader...",
     ],
     // Bootloader Phase
     [
-      "GRUB version 2.06",
-      "Loading Linux kernel 6.1.0-14-amd64...",
-      "Loading initial RAM disk...",
-      "[    0.132513] Initializing cgroup subsys cpuset",
-      "[    0.133024] Initializing cgroup subsys cpu",
+      "[    0.026000]  INFO:  GRUB version 2.06, Starting.",
+      "[    0.028000]  DEBUG: Loading GRUB configuration from /boot/grub/grub.cfg",
+      "[    0.030000]  DEBUG: Selected boot entry: 'Linux 6.1.0-14-amd64'",
+      "[    0.040000] INFO: Loading Linux kernel 6.1.0-14-amd64...",
+      "[    0.050000]  DEBUG: Kernel Image loading from /boot/vmlinuz-6.1.0-14-amd64 ...",
+      "[    0.070000]  DEBUG: Kernel Image loaded at address 0xffffffff",
+      "[    0.075000] INFO: Loading initial RAM disk...",
+      "[    0.080000] DEBUG: Initramfs Image loading from /boot/initrd.img-6.1.0-14-amd64...",
+      "[    0.100000]  DEBUG: Initramfs loaded successfully.",
+      "[    0.130000]  INFO: Passing control to the Linux Kernel.",
+      "[    0.132513] [KRNL] Initializing cgroup subsys cpuset",
+      "[    0.133024] [KRNL] Initializing cgroup subsys cpu",
     ],
     // Kernel Initialization Phase
     [
-      "[    1.000000] Linux version 6.1.0-14-amd64",
-      "[    1.015564] Initializing system time...",
-      "[    1.016960] Detecting CPU information...",
-      "[    1.019870] Loading drivers...",
-      "[    1.167730] Initializing storage devices...",
-      "[    1.168223] Mounting root filesystem...",
+      "[    1.000000] [KRNL] Linux version 6.1.0-14-amd64 (build@builder1) #1 SMP PREEMPT_DYNAMIC Debian 6.1.27-1 (2023-07-22)",
+      "[    1.002000] [KRNL] Kernel command line:  BOOT_IMAGE=/boot/vmlinuz-6.1.0-14-amd64 root=/dev/sda1 ro quiet splash",
+      "[    1.005000]  [KRNL] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'",
+      "[    1.015564] [KRNL] Initializing system time...",
+      "[    1.016000]  [KRNL] Using RTC device to load initial system time.",
+      "[    1.016960] [KRNL] Detecting CPU information...",
+      "[    1.018000]  [KRNL]  Detected Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz",
+      "[    1.019870] [KRNL] Loading drivers...",
+      "[    1.030000] [KRNL]    USB 3.0 Host Controller (xhci_hcd) loading....",
+      "[    1.040000]  [KRNL]   SATA Driver (ahci) loading ...",
+      "[    1.060000]  [KRNL]  eth1  Driver (r8169) Loading...",
+      "[    1.165000]  [KRNL]  Audio device (snd_hda_intel) loading...",
+      "[    1.167730] [KRNL] Initializing storage devices...",
+      "[    1.168000] [KRNL]  sda: 476940MB WDC WDS500G2B0C-00PXH0 ",
+      "[    1.168223] [KRNL] Mounting root filesystem...",
+      "[    1.200000]  [KRNL] VFS: Mounted root (ext4 filesystem) readonly on device sda1",
     ],
     // Initramfs Phase
     [
-      "[    1.500000] Loading initramfs...",
-      "[    1.510000] Checking root filesystem...",
-      "[    1.520000] Loading storage drivers...",
-      "[    1.530000] Mounting /dev/sda1...",
-      "[    1.540000] Switching to real root...",
+      "[    1.500000] [KRNL] Loading initramfs...",
+      "[    1.505000] [KRNL]    Extracting initramfs ...",
+      "[    1.510000] [INITRAMFS] Checking root filesystem...",
+      "[    1.515000] [INITRAMFS]   fsck check completed on /dev/sda1 - clean.",
+      "[    1.520000] [INITRAMFS] Loading storage drivers...",
+      "[    1.525000] [INITRAMFS] Module ahci.ko loaded.",
+      "[    1.530000] [INITRAMFS] Mounting /dev/sda1...",
+      "[    1.535000]  [INITRAMFS]   Mount Successful /mnt/root.",
+      "[    1.538000] [INITRAMFS] Copying / from /mnt/root.",
+      "[    1.540000] [INITRAMFS] Switching to real root...",
+      "[    1.550000] [INITRAMFS] Done.",
     ],
     // Init System Phase
     [
-      "[    2.324502] systemd[1]: Starting systemd...",
-      "[    2.325890] systemd[1]: Detecting architecture...",
-      "[    2.327512] systemd[1]: Setting hostname...",
-      "[    2.329001] systemd[1]: Starting essential services...",
-      "[    2.330512] systemd[1]: Mounting filesystems...",
-      "[    2.332001] systemd[1]: Configuring networking...",
+      "[    2.300000] [INIT]   Starting /sbin/init ...",
+      "[    2.324502] [SYSTEMD] systemd[1]: Starting systemd...",
+      "[    2.325000] [SYSTEMD] systemd[1]: Reading init configuration files...",
+      "[    2.325890] [SYSTEMD] systemd[1]: Detecting architecture...",
+      "[    2.327000] [SYSTEMD] systemd[1]: Arch : x86-64",
+      "[    2.327512] [SYSTEMD] systemd[1]: Setting hostname...",
+      "[    2.328500] [SYSTEMD] systemd[1]:  Setting hostname to localhost",
+      "[    2.329001] [SYSTEMD] systemd[1]: Starting essential services...",
+      "[    2.330000] [SYSTEMD] systemd[1]:  Starting journald",
+      "[    2.330512] [SYSTEMD] systemd[1]: Mounting filesystems...",
+      "[    2.331500] [SYSTEMD] systemd[1]: Mounting all required mounts.",
+      "[    2.332001] [SYSTEMD] systemd[1]: Configuring networking...",
+      "[    2.335000] [SYSTEMD] systemd[1]:  Setting hostname - networking configuration complete.",
     ],
     // Display Manager Phase
     [
-      "[    3.500000] Starting display manager...",
-      "[    3.510000] Initializing X server...",
-      "[    3.520000] Loading GDM...",
-      "[    3.530000] Displaying login screen...",
+      "[    3.000000] [SYSTEMD] Starting user managers ...",
+      "[    3.200000] [SYSTEMD] systemd[1]: Reached target Multi-User System.",
+      "[    3.300000] [SYSTEMD]  Starting GDM.service..",
+      "[    3.500000] [GDM] Starting display manager...",
+      "[    3.510000] [XSERVER] Initializing X server...",
+      "[    3.515000] [XSERVER]   Using display :0...",
+      "[    3.518000] [XSERVER]   Loading video drivers ...",
+      "[    3.520000] [GDM] Loading GDM...",
+      "[    3.525000] [GDM] Starting GDM display manager",
+      "[    3.530000] [GDM] Displaying login screen...",
+      "[    3.540000] [GDM] DisplayManager: Logging in Session 1",
     ],
     // User Space & Desktop Environment Phase
     [
-      "[    4.152390] systemd[1]: Reached target Graphical Interface.",
+      "[    4.000000]  [SYSTEMD] User Session logged in",
+      "[    4.100000]  [SYSTEMD] Loading KDE session ..",
+      "[    4.152390] [SYSTEMD] systemd[1]: Reached target Graphical Interface.",
       "Welcome to Linux!",
       "localhost login: ",
     ],
@@ -521,25 +624,6 @@ const LinuxBootingVisualizer = () => {
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <select
-                      value={speed}
-                      onChange={(e) => setSpeed(Number(e.target.value))}
-                      className="bg-gray-700 text-gray-300 text-xs rounded px-2 py-1 border border-gray-600"
-                    >
-                      <option value={25}>Fast</option>
-                      <option value={50}>Normal</option>
-                      <option value={100}>Slow</option>
-                    </select>
-                    <button
-                      onClick={() => setIsRunning(!isRunning)}
-                      className="text-gray-300 hover:text-white"
-                    >
-                      {isRunning ? (
-                        <Pause className="w-4 h-4" />
-                      ) : (
-                        <Play className="w-4 h-4" />
-                      )}
-                    </button>
                     <button
                       onClick={reset}
                       className="text-gray-300 hover:text-white"
