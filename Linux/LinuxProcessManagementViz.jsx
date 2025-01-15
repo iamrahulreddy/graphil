@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { Cpu, MemoryStick, Clock, Activity } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProcessManagementVisualization = () => {
     const [selectedProcess, setSelectedProcess] = useState(null);
@@ -99,19 +101,55 @@ const ProcessManagementVisualization = () => {
         };
         setProcesses(prevProcesses => [...prevProcesses, newProcess]);
         setNextPid(prevNextPid => prevNextPid + 1);
+        toast.success(`Process ${newProcess.name} (PID: ${newProcess.pid}) created successfully!`, {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     };
 
     const handleProcessTermination = (pid) => {
+        const terminatedProcess = processes.find(p => p.pid === pid);
         setProcesses(prevProcesses => prevProcesses.filter(p => p.pid !== pid));
         setSelectedProcess(null);
+        if (terminatedProcess) {
+            toast.error(`Process ${terminatedProcess.name} (PID: ${pid}) terminated.`, {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     };
 
     const handleProcessStateChange = (pid, newState) => {
+        const process = processes.find(p => p.pid === pid);
         setProcesses(prevProcesses =>
             prevProcesses.map(process =>
                 process.pid === pid ? { ...process, state: newState } : process
             )
         );
+        if (process) {
+            toast.info(`Process ${process.name} (PID: ${pid}) state changed to ${processStates[newState]}.`, {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     };
 
     const handleStateFilter = (state) => {
@@ -119,14 +157,30 @@ const ProcessManagementVisualization = () => {
     };
 
     const handleSendSignal = (pid, signal) => {
+        const process = processes.find(p => p.pid === pid);
+        let message = `Signal ${signal} sent to process ${pid}`;
+        let type = 'info';
         if (signal === 'SIGSTOP') {
             handleProcessStateChange(pid, 'T');
+            message = `Process ${process?.name} (PID: ${pid}) stopped. (SIGSTOP)`;
         } else if (signal === 'SIGCONT') {
             handleProcessStateChange(pid, 'R');
+            message = `Process ${process?.name} (PID: ${pid}) continued. (SIGCONT)`;
         } else if (signal === 'SIGTERM') {
             handleProcessTermination(pid);
+            message = `Process ${process?.name} (PID: ${pid}) termination initiated. (SIGTERM)`;
+            type = 'warning';
         }
-        alert(`Signal ${signal} sent to process ${pid}`);
+        toast[type](message, {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     };
 
     const sortedGlossary = useMemo(() => {
@@ -156,14 +210,11 @@ const ProcessManagementVisualization = () => {
 
     return (
         <div className="w-full font-mono max-w-6xl mx-auto p-2 sm:p-4 md:p-6 bg-white">
+            <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
             <div className="mb-4 md:mb-8">
                 <h1 className="text-xl md:text-xl font-bold mb-4">Linux Process Management</h1>
                 <p className="text-md text-gray-700 mb-4">
-                    This dashboard (simulation) provides a real-time view of processes running on a Linux system. Process management is the operating system's way of handling running programs, ensuring that each gets the resources it needs to operate smoothly. Here, you can explore process states (the current condition of a process like running or sleeping), resource usage, and scheduler behavior.
-                    <br /><br />
-                    <span className="font-semibold">Process Creation</span>, <span className="font-semibold">states</span> and <span className="font-semibold">control</span> are essential concepts to grasp to see how programs are started, what they're doing and how they are managed.
-                    <br /><br />
-                    <span className="font-semibold">Process Scheduling</span> ensures processes are managed, and <span className="font-semibold">Inter Process Communication</span> is where processes talk to each other. We simulate some basic operations here to explore how those concepts work.
+                This interactive simulation provides a simplified view of how an operating system like Linux manages processes. (While it attempts to mimic real-world behavior, it's important to remember that actual system complexities are far greater.)
                 </p>
                 <div className="bg-gray-100 p-4 rounded-lg shadow-md mb-4">
                     <h2 className="text-lg md:text-xl font-semibold mb-2">How to Get the Most Out of This Simulation</h2>
@@ -172,9 +223,7 @@ const ProcessManagementVisualization = () => {
                         <li><strong>Create Processes:</strong> Click the "Simulate Process Creation" button to add new processes and observe their behavior.</li>
                         <li><strong>Filter Processes:</strong> Use the process state filters to view processes in different states.</li>
                         <li><strong>Control Processes:</strong> Use the control buttons to stop, continue, or terminate processes. Send signals to processes to see how they respond.</li>
-                        <li><strong>Understand Resource Usage:</strong> Monitor the CPU and memory usage to see how processes impact system resources.</li>
-                        <li><strong>Explore Scheduler Distribution:</strong> View the distribution of different scheduling algorithms to understand how the system allocates CPU time.</li>
-                        <li><strong>Learn Terminology:</strong> Use the glossary to understand key terms and concepts related to process management.</li>
+                        <li><strong>Learn Terminology:</strong> Use the at the end glossary to understand key terms and concepts related to process management.</li>
                     </ul>
                 </div>
                 <div className="flex items-center mb-4">
@@ -236,7 +285,7 @@ const ProcessManagementVisualization = () => {
                 </div>
 
                 <div className="border rounded-lg p-2 md:p-4 shadow-md">
-                    <h2 className="text-lg md:text-xl font-semibold mb-4">Process States</h2>
+                    <h2 className="text-lg md:text-xl font-semibold mb-4">Filter Process States</h2>
                     <p className="text-sm text-gray-700 mb-2">
                         These color-coded indicators represent the different states a process can be in. Each color corresponds to a specific state (e.g., running, sleeping, stopped). Click on a state to filter the process list.
                     </p>
@@ -402,7 +451,7 @@ const ProcessManagementVisualization = () => {
                                 <p className="text-xs md:text-sm"><span className="font-medium">Voluntary Context Switches:</span> {selectedProcess.voluntary_switches}</p>
                                 <p className="text-xs md:text-sm"><span className="font-medium">Non-voluntary Context Switches:</span> {selectedProcess.nonvoluntary_switches}</p>
                                 <p className="text-xs md:text-sm"><span className="font-medium">Child Processes:</span> {selectedProcess.children.join(', ') || 'None'}</p>
-                                <p className="text-xs md:text-sm"><span className="font-medium">IPC Mechanisms:</span> (e.g., Pipes, Shared Memory, Signals)</p>
+                                <p className="text-xs md:text-sm"><span className="font-medium">IPC Mechanisms:</span> (e.g., Pipes,Shared Memory, Signals)</p>
                             </div>
 
                             <h3 className="font-semibold mb-2 mt-4 text-sm md:text-base">Signals</h3>
