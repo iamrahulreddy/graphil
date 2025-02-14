@@ -1,6 +1,6 @@
 ## diagrams
 
-Welcome! This repository powers [diagrams.neuralnets.dev](https://diagrams.neuralnets.dev), a platform I designed to democratize technical education through sophisticated, interactive visualizations. This repository hosts meticulously crafted [react](https://react.dev/) components and HTML templates (HTML templates are generated using markmap code) to transform technical concepts into engaging and comprehensible experiences.
+Welcome! This repository powers [graphil.neuralnets.dev](https://graphil.neuralnets.dev), a platform I designed to democratize technical education through sophisticated, interactive visualizations. This repository hosts meticulously crafted [react](https://react.dev/) components and HTML templates (HTML templates are generated using markmap code) to transform technical concepts into engaging and comprehensible experiences.
 
 ![screenshot of diagrams.neuralnets.dev](./diagrams_web_screenshot.jpeg)
 <p align="center">
