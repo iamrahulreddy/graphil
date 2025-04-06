@@ -1,24 +1,16 @@
-## diagrams
+## Project Graphil
 
 Welcome! This repository powers [graphil.neuralnets.dev](https://graphil.neuralnets.dev), a platform I designed to democratize technical education through sophisticated, interactive visualizations. This repository hosts meticulously crafted [react](https://react.dev/) components and HTML templates (HTML templates are generated using markmap code) to transform technical concepts into engaging and comprehensible experiences.
 
-![screenshot of diagrams.neuralnets.dev](./diagrams_web_screenshot.jpeg)
+![screenshot of graphil.neuralnets.dev](./graphil_web_screenshot.jpeg)
 <p align="center">
-  A screenshot of diagrams.neuralnets.dev website
+  A screenshot of graphil.neuralnets.dev website
 </p>
 
 ### Explore the Platform 🌐
 
-- Experience the interactive demonstrations: [diagrams.neuralnets.dev](https://diagrams.neuralnets.dev)
+- Experience the interactive demonstrations: [graphil.neuralnets.dev](https://graphil.neuralnets.dev)
 - Explore and test the components locally. Each component provides a modular, self-contained visualization that can be easily tested and extended.
-
-### Core Capabilities
-
-- **Python**: Advanced visualizations for code execution flows and data structures  
-- **Linux**: Simulations of system initialization, command execution paths, and process management  
-- **Networking**: Detailed representations of protocols, topologies, and data transmission  
-- **Google Cloud Platform (GCP)**: Illustrations of cloud architectures and service workflows  
-- **Artificial Intelligence**: Interactive visualizations of neural network architectures, training methods, and machine learning paradigms  
 
 ### Technical Foundation 🛠️
 
@@ -29,15 +21,15 @@ Welcome! This repository powers [graphil.neuralnets.dev](https://graphil.neuraln
 ### Repository Structure 🗂️
 
 ```
-├── Linux/         # Visualizations of system-level concepts
-├── Python/        # Demonstrations of language-specific concepts
-├── Networking/    # Protocol and topology visualizations
-├── GCP/           # Cloud infrastructure architecture representations
-├── AI/            # Visualizations of machine learning concepts
+├── Linux/         
+├── Python/        
+├── Networking/    
+├── GCP/          
+├── AI/            
 └── README.md
 ```
 
-Feel free to explore and modify each component as needed. Since they are modular, you can easily extend or integrate them into your own projects. If you use any of these components, I would appreciate it if you could give credit by linking back to this repository or [diagrams.neuralnets.dev](https://diagrams.neuralnets.dev).
+Feel free to explore and modify each component as needed. Since they are modular, you can easily extend or integrate them into your own projects. If you use any of these components, I would appreciate it if you could give credit by linking back to this repository or [graphil.neuralnets.dev](https://graphil.neuralnets.dev).
 
 ### Project Philosophy 🌟
 
