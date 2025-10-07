@@ -35,17 +35,8 @@ import {
   Minus,
   CircleDot,
   ChevronUp,
-  BookOpen, // Added for Glossary
+  BookOpen,
 } from "lucide-react";
-
-/**
- * Professional DNS Visualization Learning Tool
- * Enhanced with modern UI, smooth animations, detailed explanations, and improved responsiveness
- */
-
-// ---------------------------------------------------------
-// Helpers and constants
-// ---------------------------------------------------------
 
 const RECORD_TYPES = [
   { v: "A", desc: "IPv4 address record" },
@@ -138,11 +129,7 @@ const makePacket = ({ qname, qtype, withDNSSEC, stage, answer }) => {
   };
 };
 
-// ---------------------------------------------------------
-// Step engine
-// ---------------------------------------------------------
-
-const buildSimulation = ({ domain, qtype, withDNSSEC, cacheWarm }) => {
+const buildSimulation = ({ domain, qtype, withDNSSEC, cacheScenario }) => {
   const steps = [];
 
   steps.push({
@@ -155,9 +142,33 @@ const buildSimulation = ({ domain, qtype, withDNSSEC, cacheWarm }) => {
     gradient: "from-sky-500 to-sky-600",
   });
 
+  if (cacheScenario === "local") {
+    steps.push({
+      stage: "Stub Resolver",
+      label: "Cache hit in local OS!",
+      detail:
+        "The answer is found directly in the operating system's cache. No network request is needed.",
+      answer: false,
+      icon: <Activity className="w-5 h-5" />,
+      color: "bg-indigo-500",
+      gradient: "from-indigo-500 to-indigo-600",
+    });
+    steps.push({
+      stage: "Return",
+      label: "Local answer returned instantly",
+      detail:
+        "The client receives the final answer from the local OS cache.",
+      answer: true,
+      icon: <Database className="w-5 h-5" />,
+      color: "bg-purple-500",
+      gradient: "from-purple-500 to-purple-600",
+    });
+    return steps;
+  }
+
   steps.push({
     stage: "Stub Resolver",
-    label: "Stub resolver forwards query to recursive resolver",
+    label: "Local cache miss, forwarding query to recursive resolver",
     detail:
       "This is a network request to an ISP or public DNS resolver (e.g., 8.8.8.8).",
     icon: <Activity className="w-5 h-5" />,
@@ -165,7 +176,7 @@ const buildSimulation = ({ domain, qtype, withDNSSEC, cacheWarm }) => {
     gradient: "from-indigo-500 to-indigo-600",
   });
 
-  if (cacheWarm) {
+  if (cacheScenario === "warm") {
     steps.push({
       stage: "Recursive Resolver",
       label: "Cache hit at recursive resolver!",
@@ -246,10 +257,6 @@ const buildSimulation = ({ domain, qtype, withDNSSEC, cacheWarm }) => {
   return steps;
 };
 
-// ---------------------------------------------------------
-// UI atoms
-// ---------------------------------------------------------
-
 const Section = ({ title, icon, children, right, theme }) => (
   <div
     className={`rounded-xl border ${
@@ -302,10 +309,12 @@ const NodeCard = ({
   theme,
   color,
   gradient,
+  disabled,
 }) => (
   <div
     className={[
       "relative rounded-xl border shadow-sm w-full transition-all duration-300",
+      disabled ? "opacity-40" : "",
       active
         ? `border-emerald-400 ring-2 ring-emerald-200 ${
             theme === "dark" ? "bg-emerald-900/20" : "bg-emerald-50"
@@ -431,10 +440,6 @@ const StatusBadge = ({ status, theme }) => {
     </span>
   );
 };
-
-// ---------------------------------------------------------
-// Inspector and Log
-// ---------------------------------------------------------
 
 const Inspector = ({ packet, theme }) => {
   if (!packet) {
@@ -756,10 +761,6 @@ const LogPanel = ({ logs, theme }) => (
   </div>
 );
 
-// ---------------------------------------------------------
-// Main App
-// ---------------------------------------------------------
-
 const App = () => {
   const [domain, setDomain] = useState(DEFAULT_DOMAIN);
   const [qtype, setQtype] = useState("A");
@@ -769,9 +770,9 @@ const App = () => {
   const [stageIndex, setStageIndex] = useState(0);
   const [logs, setLogs] = useState([]);
   const [packet, setPacket] = useState(null);
-  const [cacheWarm, setCacheWarm] = useState(false);
+  const [cacheScenario, setCacheScenario] = useState("cold");
   const [expandedHelp, setExpandedHelp] = useState(false);
-  const [expandedGlossary, setExpandedGlossary] = useState(true);
+  const [expandedGlossary, setExpandedGlossary] = useState(false);
   const [theme, setTheme] = useState("light");
   const [showPerformance, setShowPerformance] = useState(true);
   const [performanceMetrics, setPerformanceMetrics] = useState({
@@ -782,8 +783,8 @@ const App = () => {
   });
 
   const steps = useMemo(
-    () => buildSimulation({ domain, qtype, withDNSSEC, cacheWarm }),
-    [domain, qtype, withDNSSEC, cacheWarm]
+    () => buildSimulation({ domain, qtype, withDNSSEC, cacheScenario }),
+    [domain, qtype, withDNSSEC, cacheScenario]
   );
 
   const timelineRef = useRef(null);
@@ -899,9 +900,42 @@ const App = () => {
 
   const nodeActive = (name) => steps[stageIndex]?.stage === name;
 
+  const handleCacheCycle = () => {
+    if (cacheScenario === "cold") {
+      setCacheScenario("warm");
+    } else if (cacheScenario === "warm") {
+      setCacheScenario("local");
+    } else {
+      setCacheScenario("cold");
+    }
+  };
+
+  const cacheButtonConfig = {
+    cold: {
+      text: "Cold",
+      style:
+        theme === "dark"
+          ? "bg-slate-700 text-slate-300 border-slate-600"
+          : "bg-white text-slate-700 border-slate-300",
+    },
+    warm: {
+      text: "Warm (Resolver)",
+      style:
+        theme === "dark"
+          ? "bg-emerald-600 text-white border-emerald-700"
+          : "bg-emerald-600 text-white border-emerald-700",
+    },
+    local: {
+      text: "Warm (Local)",
+      style:
+        theme === "dark"
+          ? "bg-sky-600 text-white border-sky-700"
+          : "bg-sky-600 text-white border-sky-700",
+    },
+  };
+
   const StageRow = () => (
     <div className="flex flex-col items-center space-y-4 max-w-2xl mx-auto">
-      {/* 1. Client */}
       <div className="w-full">
         <NodeCard
           title="Client"
@@ -915,7 +949,6 @@ const App = () => {
         />
       </div>
 
-      {/* Arrow down */}
       <ChevronDown
         className={`w-8 h-8 ${
           nodeActive("Client") || nodeActive("Stub Resolver")
@@ -928,7 +961,6 @@ const App = () => {
         }`}
       />
 
-      {/* 2. Stub Resolver */}
       <div className="w-full">
         <NodeCard
           title="Stub Resolver"
@@ -942,9 +974,8 @@ const App = () => {
         />
       </div>
 
-      {/* Arrow down */}
       <ChevronDown
-        className={`w-8 h-8 ${
+        className={`w-8 h-8 transition-colors ${
           nodeActive("Stub Resolver") || nodeActive("Recursive Resolver")
             ? theme === "dark"
               ? "text-emerald-400"
@@ -952,16 +983,16 @@ const App = () => {
             : theme === "dark"
             ? "text-slate-600"
             : "text-slate-300"
-        }`}
+        } ${cacheScenario === "local" ? "opacity-20" : ""}`}
       />
 
-      {/* 3. Recursive Resolver */}
       <div className="w-full">
         <NodeCard
           title="Recursive Resolver"
           subtitle="ISP/Public resolver"
           icon={<Server className="w-5 h-5" />}
           active={nodeActive("Recursive Resolver")}
+          disabled={cacheScenario === "local"}
           accent={
             withDNSSEC ? (
               <Pill color="bg-violet-600">DO=1</Pill>
@@ -975,9 +1006,8 @@ const App = () => {
         />
       </div>
 
-      {/* Arrow down */}
       <ChevronDown
-        className={`w-8 h-8 ${
+        className={`w-8 h-8 transition-colors ${
           nodeActive("Recursive Resolver") || nodeActive("Root")
             ? theme === "dark"
               ? "text-emerald-400"
@@ -985,16 +1015,16 @@ const App = () => {
             : theme === "dark"
             ? "text-slate-600"
             : "text-slate-300"
-        }`}
+        } ${cacheScenario !== "cold" ? "opacity-20" : ""}`}
       />
 
-      {/* 4. Root */}
       <div className="w-full">
         <NodeCard
           title="Root"
           subtitle="Root NS referral"
           icon={<Layers className="w-5 h-5" />}
           active={nodeActive("Root")}
+          disabled={cacheScenario !== "cold"}
           accent={<Pill color="bg-amber-600">NS</Pill>}
           theme={theme}
           color="bg-amber-500"
@@ -1002,9 +1032,8 @@ const App = () => {
         />
       </div>
 
-      {/* Arrow down */}
       <ChevronDown
-        className={`w-8 h-8 ${
+        className={`w-8 h-8 transition-colors ${
           nodeActive("Root") || nodeActive("TLD")
             ? theme === "dark"
               ? "text-emerald-400"
@@ -1012,16 +1041,16 @@ const App = () => {
             : theme === "dark"
             ? "text-slate-600"
             : "text-slate-300"
-        }`}
+        } ${cacheScenario !== "cold" ? "opacity-20" : ""}`}
       />
 
-      {/* 5. TLD */}
       <div className="w-full">
         <NodeCard
           title="TLD"
           subtitle="TLD NS referral"
           icon={<Layers className="w-5 h-5" />}
           active={nodeActive("TLD")}
+          disabled={cacheScenario !== "cold"}
           accent={<Pill color="bg-orange-600">NS</Pill>}
           theme={theme}
           color="bg-orange-500"
@@ -1029,9 +1058,8 @@ const App = () => {
         />
       </div>
 
-      {/* Arrow down */}
       <ChevronDown
-        className={`w-8 h-8 ${
+        className={`w-8 h-8 transition-colors ${
           nodeActive("TLD") || nodeActive("Authoritative")
             ? theme === "dark"
               ? "text-emerald-400"
@@ -1039,16 +1067,16 @@ const App = () => {
             : theme === "dark"
             ? "text-slate-600"
             : "text-slate-300"
-        }`}
+        } ${cacheScenario !== "cold" ? "opacity-20" : ""}`}
       />
 
-      {/* 6. Authoritative */}
       <div className="w-full">
         <NodeCard
           title="Authoritative"
           subtitle="Holds final RRset"
           icon={<Server className="w-5 h-5" />}
           active={nodeActive("Authoritative")}
+          disabled={cacheScenario !== "cold"}
           accent={
             withDNSSEC ? (
               <div className="flex items-center gap-1 flex-wrap">
@@ -1065,7 +1093,6 @@ const App = () => {
         />
       </div>
 
-      {/* Arrow down */}
       <ChevronDown
         className={`w-8 h-8 ${
           nodeActive("Authoritative") || nodeActive("Return")
@@ -1078,7 +1105,6 @@ const App = () => {
         }`}
       />
 
-      {/* 7. Return */}
       <div className="w-full">
         <NodeCard
           title="Return"
@@ -1121,7 +1147,6 @@ const App = () => {
           : "bg-slate-50 text-slate-800"
       }`}
     >
-      {/* Header */}
       <div
         className={`border-b ${
           theme === "dark"
@@ -1177,7 +1202,6 @@ const App = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
-        {/* Controls */}
         <Section
           title="Controls"
           icon={<Activity className="w-4 h-4" />}
@@ -1425,26 +1449,18 @@ const App = () => {
                   Cache
                 </label>
                 <button
-                  onClick={() => setCacheWarm((v) => !v)}
-                  className={[
-                    "w-full inline-flex items-center justify-center gap-1 rounded-md px-3 py-2 text-sm border font-mono",
-                    cacheWarm
-                      ? theme === "dark"
-                        ? "bg-emerald-600 text-white border-emerald-700"
-                        : "bg-emerald-600 text-white border-emerald-700"
-                      : theme === "dark"
-                      ? "bg-slate-700 text-slate-300 border-slate-600"
-                      : "bg-white text-slate-700 border-slate-300",
-                  ].join(" ")}
+                  onClick={handleCacheCycle}
+                  className={`w-full inline-flex items-center justify-center gap-1 rounded-md px-3 py-2 text-sm border font-mono transition-colors ${
+                    cacheButtonConfig[cacheScenario].style
+                  }`}
                 >
                   <Database className="w-4 h-4" />
-                  {cacheWarm ? "Warm" : "Cold"}
+                  {cacheButtonConfig[cacheScenario].text}
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Performance Metrics */}
           {showPerformance && (
             <div
               className={`mt-4 p-3 rounded-lg ${
@@ -1519,7 +1535,7 @@ const App = () => {
                       theme === "dark" ? "text-slate-200" : "text-slate-800"
                     }`}
                   >
-                    {cacheWarm ? "Hit" : "Miss"}
+                    {cacheScenario === "cold" ? "Miss" : "Hit"}
                   </div>
                 </div>
                 <div
@@ -1547,7 +1563,6 @@ const App = () => {
           )}
         </Section>
 
-        {/* Diagram */}
         <Section
           title="Resolution Path"
           icon={<Search className="w-4 h-4" />}
@@ -1568,7 +1583,6 @@ const App = () => {
           </div>
         </Section>
 
-        {/* Inspector and Logs */}
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
           <Section
             title="Packet Inspector"
@@ -1598,7 +1612,6 @@ const App = () => {
           <LogPanel logs={logs} theme={theme} />
         </div>
 
-        {/* Help */}
         <Section
           title="Documentation"
           icon={<Info className="w-4 h-4" />}
@@ -1687,7 +1700,6 @@ const App = () => {
           )}
         </Section>
 
-        {/* NEW: Glossary Section */}
         <Section
           title="Glossary"
           icon={<BookOpen className="w-4 h-4" />}
@@ -1719,8 +1731,8 @@ const App = () => {
               </GlossaryEntry>
               <GlossaryEntry term="DNSSEC">
                 DNS Security Extensions. Adds security by enabling DNS responses
-                to be cryptographically signed, protecting against data spoofing
-                (cache poisoning).
+                to be cryptographically signed, protecting against data
+                spoofing (cache poisoning).
               </GlossaryEntry>
               <GlossaryEntry term="Stub Resolver">
                 A simple DNS client on a user's machine (part of the OS) that
@@ -1732,13 +1744,13 @@ const App = () => {
                 process to find the answer.
               </GlossaryEntry>
               <GlossaryEntry term="Root Server">
-                The first step in a DNS lookup. There are 13 logical root server
-                clusters that direct queries to the correct TLD servers.
+                The first step in a DNS lookup. There are 13 logical root
+                server clusters that direct queries to the correct TLD servers.
               </GlossaryEntry>
               <GlossaryEntry term="TLD Server">
-                Top-Level Domain server. Manages names for a specific TLD (e.g.,
-                .com, .org). It refers queries to the domain's authoritative
-                name server.
+                Top-Level Domain server. Manages names for a specific TLD
+                (e.g., .com, .org). It refers queries to the domain's
+                authoritative name server.
               </GlossaryEntry>
               <GlossaryEntry term="Authoritative Server">
                 The final authority for a specific domain. It holds the DNS
@@ -1755,8 +1767,8 @@ const App = () => {
                 again.
               </GlossaryEntry>
               <GlossaryEntry term="A Record">
-                An 'Address' record that maps a domain name to an IPv4 address
-                (e.g., 93.184.216.34).
+                An 'Address' record that maps a domain name to an IPv4
+                address (e.g., 93.184.216.34).
               </GlossaryEntry>
               <GlossaryEntry term="AAAA Record">
                 Maps a domain name to an IPv6 address (e.g.,
@@ -1799,7 +1811,6 @@ const App = () => {
   );
 };
 
-// SVG Icons
 const Sun = ({ className }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
